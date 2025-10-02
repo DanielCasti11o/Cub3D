@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/01 19:08:14 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/02 19:41:01 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,17 @@
 # include <stdlib.h>
 # include "libft_bonus/libft.h"
 # include <stdbool.h>
+# include <math.h>
+# include <stdio.h>
 
 typedef struct s_pos
 {
 	float	x;
 	float	y;
+	float	to_x;
+	float	to_y;
+	float	ray_x;
+	float	ray_y;
 	bool	is_inside; // algorithm bsp rectangle adaptation
 	int		value; // key in map
 }	t_pos;
@@ -44,6 +50,7 @@ typedef struct s_vision
 {
 	long	triangle; // triangle of vision in the map
 	bool	sphere_inside; // bsp triangule vision
+	float	angle;
 }	t_vision;
 
 typedef struct s_game
