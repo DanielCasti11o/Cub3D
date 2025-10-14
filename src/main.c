@@ -6,11 +6,11 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/02 20:48:29 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/14 19:10:48 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/cub3d.h"
+#include "cub3d.h"
 
 void	ray(t_game *game)
 {
@@ -53,7 +53,7 @@ void	loop_ray(t_game *game)
 
 // }
 
-int	main(int argc, char **argv)
+int	main()
 {
 	t_game	game;
 
