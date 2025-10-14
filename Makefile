@@ -32,9 +32,11 @@ $(MLX):
 
 clean:
 	$(RM) $(OBJ)
+	make clean -C $(LIBFT_DIR)
 
 fclean:
 	$(RM) $(OBJ) $(NAME)
+	make fclean -C $(LIBFT_DIR)
 
 re: fclean all
 
