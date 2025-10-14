@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/14 16:49:24 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/14 19:17:24 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # define HEIGHT 600
 
 # include <string.h>
-# include "../libs/minilibx-linux/mlx.h"
+# include "mlx.h"
 # include <stdlib.h>
-# include "../libs/libft_bonus/libft.h"
+# include "libft.h"
 # include <stdbool.h>
 # include <math.h>
 # include <stdio.h>

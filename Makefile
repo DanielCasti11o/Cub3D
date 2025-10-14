@@ -1,19 +1,26 @@
 NAME = cub3D
+
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g3 -lm -Lmlx -lmlx -lXext -lX11 -L$(MLX_A)
+CFLAGS = -Wall -Werror -Wextra $(INCLUDES) -g3
+
 SRC_DIR = ./src
 SRC = \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/init.c
+
 INC_DIR = ./inc
-LIBFT_DIR = ./libs/libft_bonus
-MLX_DIR = ./libs/minilibx-linux
-MLX_A = $(MLX_DIR)/libmlx.a
 INCLUDE = \
 	-I$(INC_DIR) \
 	-I$(MLX_DIR) \
-	-L$(MLX_DIR) \
 	-I$(LIBFT_DIR)
+INCLUDES = -L$(MLX_DIR) -lm -Lmlx -lmlx -lXext -lX11
+
+LIBFT_DIR = ./libs/libft_bonus
+
+MLX_DIR = ./libs/minilibx-linux
+MLX = $(MLX_DIR)/libmlx.a
+
+
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
@@ -33,10 +40,12 @@ $(MLX):
 clean:
 	$(RM) $(OBJ)
 	make clean -C $(LIBFT_DIR)
+	make clean -C $(MLX_DIR)
 
 fclean:
 	$(RM) $(OBJ) $(NAME)
 	make fclean -C $(LIBFT_DIR)
+	make clean -C $(MLX_DIR)
 
 re: fclean all
 
