@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/14 19:17:24 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/21 17:00:11 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,18 @@ typedef struct s_vision
 	float	angle;
 }	t_vision;
 
+typedef struct s_keys
+{
+	int	a;
+	int	w;
+	int	s;
+	int	d;
+	int	right;
+	int	left;
+	int	up;
+	int	down;
+}	t_keys;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -61,9 +73,13 @@ typedef struct s_game
 	t_pos		pos;
 	t_vision	vision;
 	t_texture	textures;
+	t_keys		keys;
 }	t_game;
 
 // int	parse(void);
 void	init_window(t_game *game);
+int		ft_events(t_game *game);
+int		ft_key_press(int keycode, t_game *game);
+int		ft_key_release(int keycode, t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/14 19:10:48 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/21 16:59:39 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,14 @@ void	loop_ray(t_game *game)
 // }
 
 
-// int	ft_events(void *game)
-// {
-
-// }
-
 int	main()
 {
 	t_game	game;
 
 	init_window(&game);
 	loop_ray(&game);
+	mlx_hook(game.win, 2, 1L << 0, ft_key_press, &game); // Save key pressed
+	mlx_hook(game.win, 3, 1L << 1, ft_key_release, &game); // Save key release
 	mlx_loop(game.mlx);
-	// mlx_loop_hook(game.mlx, ft_events(), (void &)game);
+	mlx_loop_hook(game.mlx, ft_events, &game);
 }
