@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/14 19:17:24 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/21 18:07:49 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,52 +16,24 @@
 # define WIDTH 700
 # define HEIGHT 600
 
-# include <string.h>
+# include "structs.h"
+
 # include "mlx.h"
-# include <stdlib.h>
 # include "libft.h"
+
+# include <string.h>
+# include <stdlib.h>
 # include <stdbool.h>
 # include <math.h>
 # include <stdio.h>
+# include <fcntl.h>
 
-typedef struct s_pos
-{
-	float	x;
-	float	y;
-	float	to_x;
-	float	to_y;
-	float	ray_x;
-	float	ray_y;
-	bool	is_inside; // algorithm bsp rectangle adaptation
-	int		value; // key in map
-}	t_pos;
+int		perror_malloc(void);
+int		perror_args(void);
+int		perror_filename(void);
+int		perror_open(char *filename);
 
-typedef struct s_textures
-{
-	void	*wall;
-	void	*flood;
-	void	*door;
-	void	*flash; // Is opcional.
-	void	*sphere; // Ray tracing
-	void	*mini_map;
-}	t_texture;
-
-typedef struct s_vision
-{
-	long	triangle; // triangle of vision in the map
-	bool	sphere_inside; // bsp triangule vision
-	float	angle;
-}	t_vision;
-
-typedef struct s_game
-{
-	void		*mlx;
-	void		*win;
-	void		*img;
-	t_pos		pos;
-	t_vision	vision;
-	t_texture	textures;
-}	t_game;
+int		parse_game(t_game *game, int argc, char **argv);
 
 // int	parse(void);
 void	init_window(t_game *game);
