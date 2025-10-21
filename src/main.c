@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/14 19:10:48 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/21 17:59:17 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ void	loop_ray(t_game *game)
 
 // }
 
-int	main()
+int	main(int argc, char *argv[])
 {
 	t_game	game;
 
+	if (parse_game(&game, argc, argv) == 1)
+		return (1);
 	init_window(&game);
 	loop_ray(&game);
 	mlx_loop(game.mlx);
