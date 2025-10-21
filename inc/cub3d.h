@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/21 17:00:11 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/21 17:29:47 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_game
 // int	parse(void);
 void	init_window(t_game *game);
 int		ft_events(t_game *game);
+void	loop_ray(t_game *game);
 int		ft_key_press(int keycode, t_game *game);
 int		ft_key_release(int keycode, t_game *game);
 
