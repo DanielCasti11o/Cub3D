@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/21 18:07:49 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:39:13 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ int		perror_open(char *filename);
 
 int		parse_game(t_game *game, int argc, char **argv);
 
-// int	parse(void);
 void	init_window(t_game *game);
+int		ft_events(t_game *game);
+void	loop_ray(t_game *game);
+int		ft_key_press(int keycode, t_game *game);
+int		ft_key_release(int keycode, t_game *game);
+void	loop_ray(t_game *game);
 
 #endif
