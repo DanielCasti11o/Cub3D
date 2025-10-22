@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/14 19:10:48 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/22 10:39:20 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ray(t_game *game)
 {
 	game->pos.ray_x += game->pos.to_x * 0.1;
 	game->pos.ray_y += game->pos.to_y * 0.1;
-	printf("%f %f \n", game->pos.ray_y, game->pos.ray_x);
+	// printf("%f %f \n", game->pos.ray_y, game->pos.ray_x);
 }
 
 void	loop_ray(t_game *game)
@@ -25,20 +25,19 @@ void	loop_ray(t_game *game)
 	game->pos.y = 300;
 	game->pos.ray_x = game->pos.x;
 	game->pos.ray_y = game->pos.y;
-	game->vision.angle = 1.5708;
 	mlx_pixel_put(game->mlx, game->win, game->pos.x, game->pos.y, 0xFFFFFF);
 	game->pos.to_x = cos(game->vision.angle);
 	game->pos.to_y = sin(game->vision.angle);
 	while (1)
 	{
 		ray(game);
-		printf("o\n");
+		// printf("o\n");
 		mlx_pixel_put(game->mlx, game->win, game->pos.ray_x, game->pos.ray_y, 0xFF0000);
 		if (game->pos.ray_y >= HEIGHT || game->pos.ray_x >= WIDTH
 			|| game->pos.ray_x <= 0 || game->pos.ray_y <= 0)
 			break ;
 	}
-	printf("sale\n");
+	// printf("sale\n");
 }
 
 // void	print_ray(int x, int y, float angle, t_game *game)
@@ -48,17 +47,15 @@ void	loop_ray(t_game *game)
 // }
 
 
-// int	ft_events(void *game)
-// {
-
-// }
-
 int	main()
 {
 	t_game	game;
 
+	game.vision.angle = 4.71239;
 	init_window(&game);
 	loop_ray(&game);
+	mlx_hook(game.win, 2, 1L << 0, ft_key_press, &game); // Save key pressed
+	mlx_hook(game.win, 3, 1L << 1, ft_key_release, &game); // Save key release
+	mlx_loop_hook(game.mlx, ft_events, &game);
 	mlx_loop(game.mlx);
-	// mlx_loop_hook(game.mlx, ft_events(), (void &)game);
 }
