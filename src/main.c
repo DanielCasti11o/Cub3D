@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/21 17:32:07 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/10/22 10:39:20 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main()
 {
 	t_game	game;
 
-	game.vision.angle = 1.5708;
+	game.vision.angle = 4.71239;
 	init_window(&game);
 	loop_ray(&game);
 	mlx_hook(game.win, 2, 1L << 0, ft_key_press, &game); // Save key pressed
