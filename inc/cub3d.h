@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/22 16:35:04 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:42:16 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,17 @@ int		perror_filename(void);
 int		perror_open(char *filename);
 int		perror_gnl(char *filename);
 
+int		perror_unexpectedchar(char unexpected);
+int		perror_alreadydefined(t_elemfile elem);
+int		perror_overflow(void);
+
+t_color	color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+
+int		parse_color(char *str, t_color *color);
+
 int		parse_game(t_game *game, int argc, char **argv);
 
+void	preinit_game(t_game *game);
 void	init_window(t_game *game);
 int		ft_events(t_game *game);
 void	loop_ray(t_game *game);

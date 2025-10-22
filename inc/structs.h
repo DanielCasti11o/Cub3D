@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/22 15:38:41 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/22 20:18:47 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef enum e_elemfile
 	E_EA,
 	E_F,
 	E_C,
+	E_MAP,
 	E_INVALID
 }	t_elemfile;
 
@@ -68,6 +69,35 @@ typedef struct s_keys
 	int	down;
 }	t_keys;
 
+typedef struct s_color
+{
+	uint8_t	b;
+	uint8_t	g;
+	uint8_t	r;
+	uint8_t	a; // alpha channel, probably not used
+}	t_color;
+
+// This is only an initial simple example
+typedef struct s_map
+{
+	int		width;
+	int		height;
+	char	**grid;
+	int		player_start_x; // Can be an 2d vector
+	int		player_start_y;
+}	t_map;
+
+typedef struct s_infile
+{
+	t_map	map;
+	t_color	f;
+	t_color	c;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+}	t_infile;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -77,6 +107,7 @@ typedef struct s_game
 	t_vision	vision;
 	t_texture	textures;
 	t_keys		keys;
+	t_infile	parse;
 }	t_game;
 
 #endif

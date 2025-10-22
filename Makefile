@@ -7,7 +7,9 @@ COPT ?= -O2
 
 SRC_DIR = ./src
 SRC = \
+	$(SRC_DIR)/color.c \
 	$(SRC_DIR)/errors.c \
+	$(SRC_DIR)/errors2.c \
 	$(SRC_DIR)/events.c \
 	$(SRC_DIR)/init.c \
 	$(SRC_DIR)/main.c \
