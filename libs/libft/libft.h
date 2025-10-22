@@ -3,20 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:32:21 by dacastil          #+#    #+#             */
-/*   Updated: 2024/12/13 16:31:25 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:48:00 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
-# include "libft.h"
+
+// No canonical libft functions
+# include "get_next_line.h"
+
+char	*ft_freestr(char **str);
+int		ft_isspace(int c);
+
+// Canonical libft functions
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
