@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 20:15:31 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/22 20:36:53 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/23 22:25:57 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,26 @@ int	perror_alreadydefined(t_elemfile elem)
 int	perror_overflow(void)
 {
 	write(2, "Error\nColor value must be between 0 and 255\n", 44);
+	return (1);
+}
+
+int	perror_missingelements(char solved[7])
+{
+	write(2, "Error\nMissing elements in .cub file: ", 37);
+	if (!solved[E_NO])
+		write(2, "NO ", 3);
+	if (!solved[E_SO])
+		write(2, "SO ", 3);
+	if (!solved[E_WE])
+		write(2, "WE ", 3);
+	if (!solved[E_EA])
+		write(2, "EA ", 3);
+	if (!solved[E_F])
+		write(2, "F ", 2);
+	if (!solved[E_C])
+		write(2, "C ", 2);
+	if (!solved[E_MAP])
+		write(2, "MAP ", 4);
+	write(2, "\n", 1);
 	return (1);
 }

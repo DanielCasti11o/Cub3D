@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:37:34 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/22 20:58:49 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/23 22:28:24 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,30 @@ static t_elemfile	identify_element(char *line)
 		return (E_MAP);
 }
 
-static int	parse_texture(t_game *game, t_elemfile elem, char *line)
+static int	parse_textpath(t_game *game, t_elemfile elem, char *line)
 {
-	// TODO
-	(void)game;
-	(void)elem;
-	(void)line;
+	size_t	len;
+	char	*path;
+
+	while (ft_isspace(*line))
+		line++;
+	len = 0;
+	while (line[len] != '\0' && line[len] != '\n')
+		len++;
+	while (len > 0 && ft_isspace(line[len - 1]))
+		len--;
+	// TODO: must check if file is .xpm? Or let mlx handle it later?
+	path = ft_substr(line, 0, len);
+	if (path == NULL)
+		return (perror_malloc());
+	if (elem == E_NO)
+		game->parse.no = path;
+	else if (elem == E_SO)
+		game->parse.so = path;
+	else if (elem == E_WE)
+		game->parse.we = path;
+	else if (elem == E_EA)
+		game->parse.ea = path;
 	return (0);
 }
 
@@ -96,6 +114,7 @@ static int	parse_line(t_game *game, t_list **file_lines, char *line)
 	elem = identify_element(line);
 	if (elem == E_MAP)
 		return (parse_map(game, file_lines, line));
+	// TODO: can be simplified with solved array int save_info
 	if ((elem == E_C && game->parse.c.a != 0)
 		|| (elem == E_F && game->parse.f.a != 0)
 		|| (elem == E_NO && game->parse.no != NULL)
@@ -109,17 +128,16 @@ static int	parse_line(t_game *game, t_list **file_lines, char *line)
 		line += 2;
 	if (!ft_isspace(*line))
 		return (perror_unexpectedchar(*line));
-	while (ft_isspace(*line))
-		line++;
 	if (elem == E_C)
 		return (parse_color(line, &game->parse.c));
 	else if (elem == E_F)
 		return (parse_color(line, &game->parse.f));
-	return (parse_texture(game, elem, line));
+	return (parse_textpath(game, elem, line));
 }
 
 static int	save_info(t_game *game, t_list **file_lines)
 {
+	char	solved[7];
 	t_list	*tmp;
 
 	while (*file_lines != NULL)
@@ -127,11 +145,21 @@ static int	save_info(t_game *game, t_list **file_lines)
 		tmp = (*file_lines)->next;
 		if (parse_line(game, file_lines, (*file_lines)->content) == 1)
 			return (ft_lstclear(file_lines, free), 1);
+		// TODO: can save here the value of t_elemfile, and delete parse_line function
 		free((*file_lines)->content);
 		free(*file_lines);
 		*file_lines = tmp;
 	}
-	// TODO: Check if all required elements are defined: map, textures, colors
+	solved[E_NO] = (game->parse.no != NULL);
+	solved[E_SO] = (game->parse.so != NULL);
+	solved[E_WE] = (game->parse.we != NULL);
+	solved[E_EA] = (game->parse.ea != NULL);
+	solved[E_F] = (game->parse.f.a != 0);
+	solved[E_C] = (game->parse.c.a != 0);
+	solved[E_MAP] = 1; // (game->parse.map.grid != NULL);
+	if (!solved[E_NO] || !solved[E_SO] || !solved[E_WE] || !solved[E_EA]
+		|| !solved[E_F] || !solved[E_C] || !solved[E_MAP])
+		return (perror_missingelements(solved), 1);
 	return (0);
 }
 
@@ -157,5 +185,4 @@ int	parse_game(t_game *game, int argc, char **argv)
 	if (save_info(game, &file_lines) == 1)
 		return (1);
 	return (0);
-	(void)game;
 }
