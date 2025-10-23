@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:23:04 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/22 10:38:09 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/23 14:52:36 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,17 @@ int	ft_key_release(int keycode, t_game *game)
 int	ft_events(t_game *game)
 {
 	if (game->keys.left == 1)
-		game->vision.angle -= 0.0005;
+		game->vision.angle -= 0.0004;
 	if (game->keys.right == 1)
-		game->vision.angle += 0.0005;
+		game->vision.angle += 0.0004;
+	if (game->keys.d == 1)
+		game->pos.x += 0.05;
+	if (game->keys.a == 1)
+		game->pos.x -= 0.05;
+	if (game->keys.w == 1)
+		game->pos.y -= 0.05;
+	if (game->keys.s == 1)
+		game->pos.y += 0.05;
 	mlx_clear_window(game->mlx, game->win);
 	loop_ray(game);
 	return (0);

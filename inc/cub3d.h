@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/22 10:39:31 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/23 18:26:20 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@
 # include <stdbool.h>
 # include <math.h>
 # include <stdio.h>
+
+// This structure draws everything in an invisible buffer
+//  that stores all the information about everything that will later
+// be drawn on the screen, thus avoiding flickering.
+
+// < This concept is called "Double Buffering." >
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_pos
 {
