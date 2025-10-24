@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/23 18:26:20 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/23 20:32:04 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_game
 	t_vision	vision;
 	t_texture	textures;
 	t_keys		keys;
+	t_img		img_w;
 }	t_game;
 
 // int	parse(void);
@@ -97,5 +98,7 @@ void	loop_ray(t_game *game);
 int		ft_key_press(int keycode, t_game *game);
 int		ft_key_release(int keycode, t_game *game);
 void	loop_ray(t_game *game);
+void	pixel_image(t_img *img, int x, int y, double color);
+void	clear_image(t_img *img);
 
 #endif

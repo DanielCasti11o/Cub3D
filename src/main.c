@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/23 18:49:55 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/23 20:39:17 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	ray(t_game *game)
 	{
 		game->pos.ray_x += game->pos.to_x * 0.1;
 		game->pos.ray_y += game->pos.to_y * 0.1;
-		mlx_pixel_put(game->mlx, game->win, game->pos.ray_x, game->pos.ray_y, 0xFF0000);
-
+		pixel_image(&game->img_w, game->pos.ray_x, game->pos.ray_y, 0xFF0000);
 		if (game->pos.ray_y >= HEIGHT || game->pos.ray_x >= WIDTH
 			|| game->pos.ray_x <= 0 || game->pos.ray_y <= 0)
 			break ;
@@ -36,10 +35,9 @@ void	loop_ray(t_game *game)
 
 	limit = game->vision.angle;
 	complete = false;
-	mlx_pixel_put(game->mlx, game->win, game->pos.x, game->pos.y, 0xFFFFFF);
+	pixel_image(&game->img_w, game->pos.x, game->pos.y, 0xFFFFFF);
 	game->pos.to_x = cos(game->vision.angle);
 	game->pos.to_y = sin(game->vision.angle);
-
 	ray(game);
 	while (game->vision.angle > (limit - 0.523599))
 	{
@@ -64,6 +62,7 @@ void	loop_ray(t_game *game)
 		ray(game);
 	}
 	printf("sale");
+	mlx_put_image_to_window(game->mlx, game->win, game->img_w.img, 0, 0);
 	game->vision.angle = limit;
 	// printf("sale\n");
 }
@@ -82,6 +81,8 @@ int	main()
 	game.vision.angle = 4.71239;
 	game.pos.x = 350;
 	game.pos.y = 300;
+	game.keys.s = 0;
+	game.keys.a = 0;
 	init_window(&game);
 	loop_ray(&game);
 	mlx_hook(game.win, 2, 1L << 0, ft_key_press, &game); // Save key pressed

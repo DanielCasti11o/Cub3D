@@ -9,7 +9,8 @@ SRC_DIR = ./src
 SRC = \
 	$(SRC_DIR)/main.c \
 	$(SRC_DIR)/init.c \
-	$(SRC_DIR)/events.c
+	$(SRC_DIR)/events.c \
+	$(SRC_DIR)/doublebuff.c
 OBJ = $(SRC:.c=.o)
 
 INC_DIR = ./inc
