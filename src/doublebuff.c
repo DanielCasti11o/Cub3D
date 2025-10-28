@@ -6,11 +6,13 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 18:52:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/23 20:31:54 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/28 20:25:07 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// Print pixels in the image to print this image in the window
 
 void	pixel_image(t_img *img, int x, int y, double color)
 {
@@ -28,4 +30,14 @@ void	clear_image(t_img *img)
 
 	total_bytes = HEIGHT * img->line_length;
 	memset(img->addr, 0, total_bytes);
+}
+
+// The best way of representation: degrees
+
+double	degrees(double grad)
+{
+	double	rad;
+
+	rad = grad * (PI / 180);
+	return (rad);
 }

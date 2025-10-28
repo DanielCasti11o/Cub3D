@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/23 20:39:17 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/28 20:26:07 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ray(t_game *game)
 			|| game->pos.ray_x <= 0 || game->pos.ray_y <= 0)
 			break ;
 	}
-	// printf("%f %f \n", game->pos.ray_y, game->pos.ray_x);
 }
 
 void	loop_ray(t_game *game)
@@ -39,46 +38,34 @@ void	loop_ray(t_game *game)
 	game->pos.to_x = cos(game->vision.angle);
 	game->pos.to_y = sin(game->vision.angle);
 	ray(game);
-	while (game->vision.angle > (limit - 0.523599))
+	while (game->vision.angle > (limit - degrees(30)))
 	{
 		while (complete == false)
 		{
-			printf("aaa\n");
-			game->vision.angle += 0.00174533; // Menos de un grado
+			game->vision.angle += degrees(0.1); // Menos de un grado
 			game->pos.to_x = cos(game->vision.angle);
 			game->pos.to_y = sin(game->vision.angle);
 			ray(game);
-			if (game->vision.angle > (limit + 0.523599))
+			if (game->vision.angle > (limit + degrees(30)))
 			{
-				printf("bb\n");
 				complete = true;
 				game->vision.angle =limit;
 			}
 		}
-		printf("ss\n");
-		game->vision.angle -= 0.00174533;
+		game->vision.angle -= degrees(0.1);
 		game->pos.to_x = cos(game->vision.angle);
 		game->pos.to_y = sin(game->vision.angle);
 		ray(game);
 	}
-	printf("sale");
 	mlx_put_image_to_window(game->mlx, game->win, game->img_w.img, 0, 0);
 	game->vision.angle = limit;
-	// printf("sale\n");
 }
 
-// void	print_ray(int x, int y, float angle, t_game *game)
-// {
-// 	game->pos.to_x = (x * cos(angle)) - (y * sin(angle));
-// 	game->pos.to_y = (x * sin(angle)) + (y * cos(angle));
-// }
-
-
-int	main()
+int	main(void)
 {
 	t_game	game;
 
-	game.vision.angle = 4.71239;
+	game.vision.angle = degrees(270);
 	game.pos.x = 350;
 	game.pos.y = 300;
 	game.keys.s = 0;

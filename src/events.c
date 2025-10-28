@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:23:04 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/23 20:39:35 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/28 20:25:50 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,12 @@ int	ft_key_release(int keycode, t_game *game)
 	return (0);
 }
 
-
 int	ft_events(t_game *game)
 {
 	if (game->keys.left == 1)
-		game->vision.angle -= 0.04;
+		game->vision.angle -= degrees(2);
 	if (game->keys.right == 1)
-		game->vision.angle += 0.04;
+		game->vision.angle += degrees(2);
 	if (game->keys.d == 1)
 		game->pos.x += 0.8;
 	if (game->keys.a == 1)

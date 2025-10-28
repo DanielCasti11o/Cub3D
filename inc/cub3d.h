@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/23 20:32:04 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/28 20:25:55 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIDTH 700
 # define HEIGHT 600
+# define PI 3.1415926535
 
 # include <string.h>
 # include "mlx.h"
@@ -100,5 +101,8 @@ int		ft_key_release(int keycode, t_game *game);
 void	loop_ray(t_game *game);
 void	pixel_image(t_img *img, int x, int y, double color);
 void	clear_image(t_img *img);
+
+// Math functions
+double	degrees(double grad);
 
 #endif
