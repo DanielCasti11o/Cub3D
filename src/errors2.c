@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 20:15:31 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/23 22:25:57 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/30 22:00:13 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	perror_alreadydefined(t_elemfile elem)
 		write(2, "F\n", 2);
 	else if (elem == E_C)
 		write(2, "C\n", 2);
+	else if (elem == E_MAP)
+		write(2, "MAP\n", 4);
 	return (1);
 }
 
@@ -44,23 +46,29 @@ int	perror_overflow(void)
 	return (1);
 }
 
-int	perror_missingelements(char solved[7])
+int	perror_missingelements(uint8_t seen)
 {
-	write(2, "Error\nMissing elements in .cub file: ", 37);
-	if (!solved[E_NO])
-		write(2, "NO ", 3);
-	if (!solved[E_SO])
-		write(2, "SO ", 3);
-	if (!solved[E_WE])
-		write(2, "WE ", 3);
-	if (!solved[E_EA])
-		write(2, "EA ", 3);
-	if (!solved[E_F])
-		write(2, "F ", 2);
-	if (!solved[E_C])
-		write(2, "C ", 2);
-	if (!solved[E_MAP])
-		write(2, "MAP ", 4);
+	write(2, "Error\nMissing elements in .cub file:", 36);
+	if ((seen & E_NO) == 0)
+		write(2, " NO", 3);
+	if ((seen & E_SO) == 0)
+		write(2, " SO", 3);
+	if ((seen & E_WE) == 0)
+		write(2, " WE", 3);
+	if ((seen & E_EA) == 0)
+		write(2, " EA", 3);
+	if ((seen & E_F) == 0)
+		write(2, " F", 2);
+	if ((seen & E_C) == 0)
+		write(2, " C", 2);
+	if ((seen & E_MAP) == 0)
+		write(2, " MAP", 4);
 	write(2, "\n", 1);
+	return (1);
+}
+
+int	perror_emptylineinmap(void)
+{
+	write(2, "Error\nEmpty line found in map definition\n", 41);
 	return (1);
 }

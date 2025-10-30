@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/22 20:18:47 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/30 21:58:58 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,8 @@
 
 # include <stdbool.h> // bool
 # include <stdint.h> // int, uint types
-
-typedef enum e_elemfile
-{
-	E_NO,
-	E_SO,
-	E_WE,
-	E_EA,
-	E_F,
-	E_C,
-	E_MAP,
-	E_INVALID
-}	t_elemfile;
+# include <stddef.h> // size_t
+# include "libft.h" // t_list
 
 typedef struct s_pos
 {
@@ -77,15 +67,43 @@ typedef struct s_color
 	uint8_t	a; // alpha channel, probably not used
 }	t_color;
 
+typedef enum e_elemfile
+{
+	E_NO = 1 << 0,
+	E_SO = 1 << 1,
+	E_WE = 1 << 2,
+	E_EA = 1 << 3,
+	E_F = 1 << 4,
+	E_C = 1 << 5,
+	E_MAP = 1 << 6,
+	E_EMPTY = 1 << 7,
+	E_INVALID = 1 << 8
+}	t_elemfile;
+
+typedef enum e_stateparse
+{
+	SP_HEADER,
+	SP_MAP,
+	SP_DONE
+}	t_stateparse;
+
 // This is only an initial simple example
 typedef struct s_map
 {
-	int		width;
-	int		height;
+	size_t	width;
+	size_t	height;
 	char	**grid;
-	int		player_start_x; // Can be an 2d vector
+	int		player_start_x; // x & y can be 2d vector
 	int		player_start_y;
 }	t_map;
+
+typedef struct s_parse
+{
+	t_list			*head_map;
+	t_list			*tail_map;
+	uint8_t			seen;
+	t_stateparse	state;
+}	t_parse;
 
 typedef struct s_infile
 {
