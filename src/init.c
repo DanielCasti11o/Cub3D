@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/30 21:42:06 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 20:11:46 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	init_window(t_game *game)
 {
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "");
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "The best cub in the world");
+	// game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->img_w.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->img_w.addr = mlx_get_data_addr(game->img_w.img, &game->img_w.bits_per_pixel, &game->img_w.line_length, &game->img_w.endian);
 }

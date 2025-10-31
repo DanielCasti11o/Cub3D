@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/31 17:34:27 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:12:48 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 # include <stdint.h> // int, uint types
 # include <stddef.h> // size_t
 # include "libft.h" // t_list
+
+// This structure draws everything in an invisible buffer
+//  that stores all the information about everything that will later
+// be drawn on the screen, thus avoiding flickering.
+
+// < This concept is called "Double Buffering." >
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_pos
 {
@@ -128,6 +142,7 @@ typedef struct s_game
 	t_texture	textures;
 	t_keys		keys;
 	t_infile	parse;
+	t_img		img_w;
 }	t_game;
 
 #endif

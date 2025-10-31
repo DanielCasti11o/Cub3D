@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/31 19:38:16 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 20:13:45 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIDTH 700
 # define HEIGHT 600
+# define PI 3.1415926535
 
 # include "structs.h"
 
@@ -51,11 +52,17 @@ int		parse_map(t_game *game, t_parse *parse);
 
 int		parse_game(t_game *game, int argc, char **argv);
 
+// int	parse(void);
 void	init_window(t_game *game);
 int		ft_events(t_game *game);
 void	loop_ray(t_game *game);
 int		ft_key_press(int keycode, t_game *game);
 int		ft_key_release(int keycode, t_game *game);
 void	loop_ray(t_game *game);
+void	pixel_image(t_img *img, int x, int y, double color);
+void	clear_image(t_img *img);
+
+// Math functions
+double	degrees(double grad);
 
 #endif
