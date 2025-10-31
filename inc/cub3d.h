@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/30 22:00:26 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 17:06:59 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int		perror_alreadydefined(t_elemfile elem);
 int		perror_overflow(void);
 int		perror_missingelements(uint8_t seen);
 int		perror_emptylineinmap(void);
+
+int		perror_emptyarg(t_elemfile elem);
 
 t_color	color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 

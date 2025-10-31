@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/30 21:58:58 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 17:34:27 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ typedef struct s_parse
 	t_list			*tail_map;
 	uint8_t			seen;
 	t_stateparse	state;
+	ssize_t		first_v_char;
+	ssize_t		last_v_char;
 }	t_parse;
 
 typedef struct s_infile

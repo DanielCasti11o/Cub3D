@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:37:34 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/30 22:08:07 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 17:52:50 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ static int	save_mapline(t_game *game, t_parse *parse, char *line, ssize_t len)
 	parse->tail_map = new_node;
 	while (len > 0 && (ft_isspace(line[len - 1]) || line[len - 1] == '\n'))
 		len--;
-	if (game->parse.map.width < (size_t)len)
-		game->parse.map.width = (size_t)len;
-	game->parse.map.height++;
-	return (0);
+	if (parse->first_v_char == -1 || i < (size_t)parse->first_v_char)
+		parse->first_v_char = i;
+	if (len > parse->last_v_char)
+		parse->last_v_char = len;
+	return (game->parse.map.height++, 0);
 }
 
 static int	parse_textpath(t_game *game, t_elemfile elem, char *line)
@@ -60,6 +61,8 @@ static int	parse_textpath(t_game *game, t_elemfile elem, char *line)
 		len++;
 	while (len > 0 && ft_isspace(line[start + len - 1]))
 		len--;
+	if (len == 0)
+		return (perror_emptyarg(elem));
 	// TODO: must check if file is .xpm? Or let mlx handle it later? (for different formats)
 	path = ft_substr(line, start, len);
 	if (path == NULL)
@@ -126,34 +129,38 @@ static int	parse_color(t_game *game, t_elemfile type, char *line)
 }
 
 // TODO: Should we skip empty start in header lines?
-static t_elemfile	identify_element(char *line)
+static t_elemfile	identify_element(char **line)
 {
-	if (line[0] == 'N' && line[1] == 'O')
-		return (E_NO);
-	else if (line[0] == 'S' && line[1] == 'O')
-		return (E_SO);
-	else if (line[0] == 'W' && line[1] == 'E')
-		return (E_WE);
-	else if (line[0] == 'E' && line[1] == 'A')
-		return (E_EA);
-	else if (line[0] == 'F')
-		return (E_F);
-	else if (line[0] == 'C')
-		return (E_C);
-	while (ft_isspace(*line))
-		line++;
-	if (line[0] == '1' || line[0] == '0' || line[0] == 'N'
-		|| line[0] == 'S' || line[0] == 'E' || line[0] == 'W')
+	while (ft_isspace(**line))
+		(*line)++;
+	if ((*line)[0] == 'N' && (*line)[1] == 'O')
+		return (*line += 2, E_NO);
+	else if ((*line)[0] == 'S' && (*line)[1] == 'O')
+		return (*line += 2, E_SO);
+	else if ((*line)[0] == 'W' && (*line)[1] == 'E')
+		return (*line += 2, E_WE);
+	else if ((*line)[0] == 'E' && (*line)[1] == 'A')
+		return (*line += 2, E_EA);
+	else if ((*line)[0] == 'F')
+		return (*line += 1, E_F);
+	else if ((*line)[0] == 'C')
+		return (*line += 1, E_C);
+	if ((*line)[0] == '1' || (*line)[0] == '0' || (*line)[0] == 'N'
+		|| (*line)[0] == 'S' || (*line)[0] == 'E' || (*line)[0] == 'W')
 		return (E_MAP);
-	return (E_EMPTY);
+	else if (**line == '\0' || **line == '\n')
+		return (E_EMPTY);
+	return (E_INVALID);
 }
 
 static int	parse_header(t_game *game, char	*line, t_parse	*parse)
 {
 	t_elemfile	type;
 
-	type = identify_element(line);
-	if (type == E_EMPTY)
+	type = identify_element(&line);
+	if (type == E_INVALID)
+		return (perror_unexpectedchar(*line));
+	else if (type == E_EMPTY)
 		return (0);
 	else if (type == E_MAP)
 	{
@@ -165,10 +172,6 @@ static int	parse_header(t_game *game, char	*line, t_parse	*parse)
 	if (parse->seen & type)
 		return (perror_alreadydefined(type));
 	parse->seen |= type;
-	if (type == E_C || type == E_F)
-		line += 1;
-	else
-		line += 2;
 	if (!ft_isspace(*line))
 		return (perror_unexpectedchar(*line));
 	if (type == E_C || type == E_F)
@@ -181,6 +184,7 @@ int	parse_stream(t_game *game, t_parse *parse, int fd, char *filename)
 	char		*line;
 	ssize_t		bytes_read;
 
+	parse->seen = 0;
 	while (1)
 	{
 		line = NULL;
@@ -197,19 +201,20 @@ int	parse_stream(t_game *game, t_parse *parse, int fd, char *filename)
 				ft_freestr(&line);
 		}
 		if (parse->state == SP_MAP || parse->state == SP_DONE)
-		{
 			if (save_mapline(game, parse, line, bytes_read) == 1)
 				return (ft_freestr(&line), 1);
-		}
 	}
 	return (0);
 }
 
-int	parse_map(t_game *game, t_list **file_lines)
+int	parse_map(t_game *game, t_parse *parse)
 {
+	game->parse.map.width = parse->last_v_char - parse->first_v_char;
+	printf("Size of map to parse: width %zu, height %zu\n" , game->parse.map.width, game->parse.map.height);
+
 	// TODO
 	(void)game;
-	ft_lstclear(file_lines, free);
+	ft_lstclear(&parse->head_map, free);
 	return (0);
 }
 
@@ -227,16 +232,16 @@ int	parse_game(t_game *game, int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (perror_open(argv[1]));
-	game->parse.map.width = 0;
 	game->parse.map.height = 0;
 	parse.head_map = NULL;
 	parse.tail_map = NULL;
-	parse.seen = 0;
+	parse.first_v_char = -1;
+	parse.last_v_char = 0;
 	parse.state = SP_HEADER;
 	if (parse_stream(game, &parse, fd, argv[1]) == 1)
 		return (close(fd), ft_lstclear(&parse.head_map, free), 1);
 	close(fd);
-	if (parse_map(game, &parse.head_map) == 1)
+	if (parse_map(game, &parse) == 1)
 		return (ft_lstclear(&parse.head_map, free), 1);
 	if (parse.seen != (E_NO | E_SO | E_WE | E_EA | E_F | E_C | E_MAP))
 		return (perror_missingelements(parse.seen),

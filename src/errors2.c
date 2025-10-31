@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 20:15:31 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/30 22:00:13 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 17:07:17 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,23 @@ int	perror_missingelements(uint8_t seen)
 int	perror_emptylineinmap(void)
 {
 	write(2, "Error\nEmpty line found in map definition\n", 41);
+	return (1);
+}
+
+int	perror_emptyarg(t_elemfile elem)
+{
+	write(2, "Error\nEmpty argument for element in .cub file: ", 47);
+	if (elem == E_NO)
+		write(2, "NO\n", 3);
+	else if (elem == E_SO)
+		write(2, "SO\n", 3);
+	else if (elem == E_WE)
+		write(2, "WE\n", 3);
+	else if (elem == E_EA)
+		write(2, "EA\n", 3);
+	else if (elem == E_F)
+		write(2, "F\n", 2);
+	else if (elem == E_C)
+		write(2, "C\n", 2);
 	return (1);
 }
