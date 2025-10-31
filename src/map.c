@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:45:49 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/31 19:38:08 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:34:17 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static int	save_mapline(t_game *game, t_parse *parse, const char *line, size_t i
 	return (0);
 }
 
-// TODO: allocate grid, copy lines from linked list to grid, check only one character and check if '0' is enclosed by '1's
 int	parse_map(t_game *game, t_parse *parse)
 {
 	t_list	*tmp;
@@ -98,14 +97,14 @@ int	parse_map(t_game *game, t_parse *parse)
 	while (i < game->parse.map.height)
 	{
 		if (save_mapline(game, parse, parse->head_map->content, i) == 1)
-			return (1); // free grid
+			return (ft_freestrarr(&game->parse.map.grid), 1);
 		tmp = parse->head_map->next;
 		ft_lstdelone(&parse->head_map, free);
 		parse->head_map = tmp;
 		i++;
 	}
 	if (game->parse.map.player_start_x == -1 || game->parse.map.player_start_y == -1)
-		return (perror_noplayerstart(), 1);
+		return (perror_noplayerstart(), ft_freestrarr(&game->parse.map.grid), 1);
 	parse->seen |= E_MAP;
 	return (0);
 }

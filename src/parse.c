@@ -6,17 +6,11 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:37:34 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/31 19:33:08 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:38:02 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// TODO: Idea is: store state, read line by line, parse depending on state, when map starts, parse map until end of file
-
-// TODO: For map parsing, I can store lines in a linked list, checking only the max size, and being sure that not empty lines are in the middle
-
-// * If len is lower than 1, it's an empty line, if it's an empty line state must be SP_DONE, but if after that there is a non empty line, it's an error
 
 static int	save_mapline(t_game *game, t_parse *parse, char *line, ssize_t len)
 {
@@ -128,7 +122,6 @@ static int	parse_color(t_game *game, t_elemfile type, char *line)
 	return (0);
 }
 
-// TODO: Should we skip empty start in header lines?
 static t_elemfile	identify_element(char **line)
 {
 	while (ft_isspace(**line))
@@ -207,6 +200,7 @@ int	parse_stream(t_game *game, t_parse *parse, int fd, char *filename)
 	return (0);
 }
 
+// TODO: free paths in case of error, with a clear function, can add clear of grid, and others elements too
 int	parse_game(t_game *game, int argc, char **argv)
 {
 	t_parse		parse;
