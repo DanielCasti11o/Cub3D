@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/31 17:06:59 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 19:38:16 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,16 @@ int		perror_missingelements(uint8_t seen);
 int		perror_emptylineinmap(void);
 
 int		perror_emptyarg(t_elemfile elem);
+int		perror_unclosedmap(void);
+int		perror_multipleplayerstart(void);
+int		perror_noplayerstart(void);
 
 t_color	color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
+int		parse_map(t_game *game, t_parse *parse);
+
 int		parse_game(t_game *game, int argc, char **argv);
 
-void	preinit_game(t_game *game);
 void	init_window(t_game *game);
 int		ft_events(t_game *game);
 void	loop_ray(t_game *game);

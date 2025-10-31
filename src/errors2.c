@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 20:15:31 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/31 17:07:17 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/10/31 19:37:31 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,23 @@ int	perror_emptyarg(t_elemfile elem)
 		write(2, "F\n", 2);
 	else if (elem == E_C)
 		write(2, "C\n", 2);
+	return (1);
+}
+
+int	perror_unclosedmap(void)
+{
+	write(2, "Error\nMap is not closed/surrounded by walls\n", 44);
+	return (1);
+}
+
+int	perror_noplayerstart(void)
+{
+	write(2, "Error\nNo player start position in map\n", 38);
+	return (1);
+}
+
+int	perror_multipleplayerstart(void)
+{
+	write(2, "Error\nMultiple player start positions in map\n", 45);
 	return (1);
 }

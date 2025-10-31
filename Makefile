@@ -13,6 +13,7 @@ SRC = \
 	$(SRC_DIR)/events.c \
 	$(SRC_DIR)/init.c \
 	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/map.c \
 	$(SRC_DIR)/parse.c
 OBJ = $(SRC:.c=.o)
 
