@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_freestrarr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 21:03:51 by dacastil          #+#    #+#             */
-/*   Updated: 2025/10/30 22:02:46 by migugar2         ###   ########.fr       */
+/*   Created: 2024/10/24 20:14:20 by migugar2          #+#    #+#             */
+/*   Updated: 2025/10/31 22:27:54 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list **node, void (*del)(void *))
+char	**ft_freestrarr(char ***arr)
 {
-	if (node != NULL && *node != NULL)
+	size_t	i;
+
+	if (arr == NULL || *arr == NULL)
+		return (NULL);
+	i = 0;
+	while ((*arr)[i] != NULL)
 	{
-		if (del != NULL)
-			del((*node)->content);
-		free(*node);
-		*node = NULL;
+		ft_freestr(&(*arr)[i]);
+		i++;
 	}
+	free(*arr);
+	*arr = NULL;
+	return (NULL);
 }

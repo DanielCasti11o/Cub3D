@@ -1,0 +1,110 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/22 20:15:31 by migugar2          #+#    #+#             */
+/*   Updated: 2025/10/31 19:37:31 by migugar2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+int	perror_unexpectedchar(char unexpected)
+{
+	write(2, "Error\nUnexpected character in .cub file: ", 41);
+	write(2, &unexpected, 1);
+	write(2, "\n", 1);
+	return (1);
+}
+
+int	perror_alreadydefined(t_elemfile elem)
+{
+	write(2, "Error\nElement redefinition in .cub file: ", 41);
+	if (elem == E_NO)
+		write(2, "NO\n", 3);
+	else if (elem == E_SO)
+		write(2, "SO\n", 3);
+	else if (elem == E_WE)
+		write(2, "WE\n", 3);
+	else if (elem == E_EA)
+		write(2, "EA\n", 3);
+	else if (elem == E_F)
+		write(2, "F\n", 2);
+	else if (elem == E_C)
+		write(2, "C\n", 2);
+	else if (elem == E_MAP)
+		write(2, "MAP\n", 4);
+	return (1);
+}
+
+int	perror_overflow(void)
+{
+	write(2, "Error\nColor value must be between 0 and 255\n", 44);
+	return (1);
+}
+
+int	perror_missingelements(uint8_t seen)
+{
+	write(2, "Error\nMissing elements in .cub file:", 36);
+	if ((seen & E_NO) == 0)
+		write(2, " NO", 3);
+	if ((seen & E_SO) == 0)
+		write(2, " SO", 3);
+	if ((seen & E_WE) == 0)
+		write(2, " WE", 3);
+	if ((seen & E_EA) == 0)
+		write(2, " EA", 3);
+	if ((seen & E_F) == 0)
+		write(2, " F", 2);
+	if ((seen & E_C) == 0)
+		write(2, " C", 2);
+	if ((seen & E_MAP) == 0)
+		write(2, " MAP", 4);
+	write(2, "\n", 1);
+	return (1);
+}
+
+int	perror_emptylineinmap(void)
+{
+	write(2, "Error\nEmpty line found in map definition\n", 41);
+	return (1);
+}
+
+int	perror_emptyarg(t_elemfile elem)
+{
+	write(2, "Error\nEmpty argument for element in .cub file: ", 47);
+	if (elem == E_NO)
+		write(2, "NO\n", 3);
+	else if (elem == E_SO)
+		write(2, "SO\n", 3);
+	else if (elem == E_WE)
+		write(2, "WE\n", 3);
+	else if (elem == E_EA)
+		write(2, "EA\n", 3);
+	else if (elem == E_F)
+		write(2, "F\n", 2);
+	else if (elem == E_C)
+		write(2, "C\n", 2);
+	return (1);
+}
+
+int	perror_unclosedmap(void)
+{
+	write(2, "Error\nMap is not closed/surrounded by walls\n", 44);
+	return (1);
+}
+
+int	perror_noplayerstart(void)
+{
+	write(2, "Error\nNo player start position in map\n", 38);
+	return (1);
+}
+
+int	perror_multipleplayerstart(void)
+{
+	write(2, "Error\nMultiple player start positions in map\n", 45);
+	return (1);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/28 20:25:55 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/10/31 20:13:45 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,80 +17,40 @@
 # define HEIGHT 600
 # define PI 3.1415926535
 
-# include <string.h>
+# include "structs.h"
+
 # include "mlx.h"
-# include <stdlib.h>
 # include "libft.h"
+
+# include <string.h>
+# include <stdlib.h>
 # include <stdbool.h>
 # include <math.h>
 # include <stdio.h>
+# include <fcntl.h>
 
-// This structure draws everything in an invisible buffer
-//  that stores all the information about everything that will later
-// be drawn on the screen, thus avoiding flickering.
+int		perror_malloc(void);
+int		perror_args(void);
+int		perror_filename(void);
+int		perror_open(char *filename);
+int		perror_gnl(char *filename);
 
-// < This concept is called "Double Buffering." >
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
+int		perror_unexpectedchar(char unexpected);
+int		perror_alreadydefined(t_elemfile elem);
+int		perror_overflow(void);
+int		perror_missingelements(uint8_t seen);
+int		perror_emptylineinmap(void);
 
-typedef struct s_pos
-{
-	float	x;
-	float	y;
-	float	to_x;
-	float	to_y;
-	float	ray_x;
-	float	ray_y;
-	bool	is_inside; // algorithm bsp rectangle adaptation
-	int		value; // key in map
-}	t_pos;
+int		perror_emptyarg(t_elemfile elem);
+int		perror_unclosedmap(void);
+int		perror_multipleplayerstart(void);
+int		perror_noplayerstart(void);
 
-typedef struct s_textures
-{
-	void	*wall;
-	void	*flood;
-	void	*door;
-	void	*flash; // Is opcional.
-	void	*sphere; // Ray tracing
-	void	*mini_map;
-}	t_texture;
+t_color	color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
-typedef struct s_vision
-{
-	long	triangle; // triangle of vision in the map
-	bool	sphere_inside; // bsp triangule vision
-	float	angle;
-}	t_vision;
+int		parse_map(t_game *game, t_parse *parse);
 
-typedef struct s_keys
-{
-	int	a;
-	int	w;
-	int	s;
-	int	d;
-	int	right;
-	int	left;
-	int	up;
-	int	down;
-}	t_keys;
-
-typedef struct s_game
-{
-	void		*mlx;
-	void		*win;
-	void		*img;
-	t_pos		pos;
-	t_vision	vision;
-	t_texture	textures;
-	t_keys		keys;
-	t_img		img_w;
-}	t_game;
+int		parse_game(t_game *game, int argc, char **argv);
 
 // int	parse(void);
 void	init_window(t_game *game);

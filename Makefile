@@ -7,10 +7,15 @@ COPT ?= -O2
 
 SRC_DIR = ./src
 SRC = \
-	$(SRC_DIR)/main.c \
-	$(SRC_DIR)/init.c \
+	$(SRC_DIR)/color.c \
+	$(SRC_DIR)/doublebuff.c \
+	$(SRC_DIR)/errors.c \
+	$(SRC_DIR)/errors2.c \
 	$(SRC_DIR)/events.c \
-	$(SRC_DIR)/doublebuff.c
+	$(SRC_DIR)/init.c \
+	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/map.c \
+	$(SRC_DIR)/parse.c
 OBJ = $(SRC:.c=.o)
 
 INC_DIR = ./inc
@@ -27,7 +32,7 @@ LDLIBS = -lm -lmlx -lXext -lX11
 all: $(NAME)
 
 $(NAME): $(OBJ) $(MLX) $(LIBFT)
-	$(CC) $(OBJ) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+	$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	 $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
