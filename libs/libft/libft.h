@@ -3,20 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:32:21 by dacastil          #+#    #+#             */
-/*   Updated: 2024/12/13 16:31:25 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:28:35 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
-# include "libft.h"
+
+// No canonical libft functions
+# include "get_next_line.h"
+
+char	*ft_freestr(char **str);
+char	**ft_freestrarr(char ***arr);
+int		ft_isspace(int c);
+
+// Canonical libft functions
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -61,12 +70,12 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-t_list	*ft_lstnew(void const *content);
+t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstdelone(t_list **lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));

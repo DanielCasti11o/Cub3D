@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:49:07 by dacastil          #+#    #+#             */
-/*   Updated: 2024/12/13 16:04:10 by dacastil         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:23:15 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-t_list	*ft_lstnew(void const *content)
+t_list	*ft_lstnew(void *content)
 {
 	t_list	*new_node;
 
@@ -23,7 +23,7 @@ t_list	*ft_lstnew(void const *content)
 		free(new_node);
 		return (NULL);
 	}
-	new_node->content = (void *)content;
+	new_node->content = content;
 	new_node->next = NULL;
 	return (new_node);
 }

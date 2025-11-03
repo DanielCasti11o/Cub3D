@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 21:03:51 by dacastil          #+#    #+#             */
-/*   Updated: 2025/10/30 22:02:46 by migugar2         ###   ########.fr       */
+/*   Created: 2024/10/27 13:02:57 by migugar2          #+#    #+#             */
+/*   Updated: 2025/10/22 15:44:43 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_lstdelone(t_list **node, void (*del)(void *))
-{
-	if (node != NULL && *node != NULL)
-	{
-		if (del != NULL)
-			del((*node)->content);
-		free(*node);
-		*node = NULL;
-	}
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+# ifndef MAX_FD
+#  define MAX_FD 1024
+# endif
+
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include "libft.h"
+
+char	*read_until_eol_eof(int fd, char **saved, char **buffer);
+
+ssize_t	get_next_line(int fd, char **empty);
+
+#endif
