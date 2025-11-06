@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   errors3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/21 17:38:26 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/06 20:40:57 by migugar2         ###   ########.fr       */
+/*   Created: 2025/11/06 20:43:58 by migugar2          #+#    #+#             */
+/*   Updated: 2025/11/06 20:44:05 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <errno.h>
 
-int	perror_malloc(void)
+int	perror_unclosedmap(void)
 {
-	write(2, "Error\nMalloc error\n", 19);
-	return (1);
-}
-
-int	perror_open(char *filename)
-{
-	write(2, "Error\nCould not open file: ", 27);
-	perror(filename);
-	return (1);
-}
-
-int	perror_gnl(char *filename)
-{
-	if (errno == 0)
-		return (perror_malloc());
-	write(2, "Error\nCould not read file: ", 27);
-	perror(filename);
+	write(2, "Error\nMap is not closed/surrounded by walls\n", 44);
 	return (1);
 }

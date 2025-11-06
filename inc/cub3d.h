@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/31 20:13:45 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/06 21:22:21 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,43 @@
 # include <fcntl.h>
 
 int		perror_malloc(void);
-int		perror_args(void);
-int		perror_filename(void);
 int		perror_open(char *filename);
 int		perror_gnl(char *filename);
+
+int		perror_args(void);
+int		perror_filename(void);
+
+// parse
 
 int		perror_unexpectedchar(char unexpected);
 int		perror_alreadydefined(t_elemfile elem);
 int		perror_overflow(void);
 int		perror_missingelements(uint8_t seen);
 int		perror_emptylineinmap(void);
-
 int		perror_emptyarg(t_elemfile elem);
 int		perror_unclosedmap(void);
 int		perror_multipleplayerstart(void);
 int		perror_noplayerstart(void);
 
+void	free_infile(t_game *game);
+void	free_parse(t_game *game, t_parse *parse);
+
 t_color	color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+
+void	preinit_parse(t_game *game, t_parse *parse);
+
+int		is_player_char(char c);
+int		is_map_char(char c);
+int		is_void_char(char c);
+
+int		parse_header(t_game *game, char	*line, t_parse	*parse);
 
 int		parse_map(t_game *game, t_parse *parse);
 
 int		parse_game(t_game *game, int argc, char **argv);
 
-// int	parse(void);
+// ...
+
 void	init_window(t_game *game);
 int		ft_events(t_game *game);
 void	loop_ray(t_game *game);
@@ -63,6 +77,7 @@ void	pixel_image(t_img *img, int x, int y, double color);
 void	clear_image(t_img *img);
 
 // Math functions
+
 double	degrees(double grad);
 
 #endif
