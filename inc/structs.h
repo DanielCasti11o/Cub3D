@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/31 22:26:18 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/06 19:35:08 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,27 @@
 # include <stdint.h> // int, uint types
 # include <stddef.h> // size_t
 # include "libft.h" // t_list
+
+// Point struct in 2D space
+typedef struct s_p2d
+{
+	float	x;
+	float	y;
+}	t_p2d;
+
+typedef struct s_vec
+{
+	t_p2d	start;
+	t_p2d	end;
+}	t_vec;
+
+typedef struct s_color
+{
+	uint8_t	b;
+	uint8_t	g;
+	uint8_t	r;
+	uint8_t	a;
+}	t_color;
 
 // This structure draws everything in an invisible buffer
 //  that stores all the information about everything that will later
@@ -32,8 +53,19 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_map
+{
+	char	**grid;
+	size_t	width;
+	size_t	height;
+}	t_map;
+
 typedef struct s_pos
 {
+	t_map	map;
+	t_vec	dir;
+
+	// TODO
 	float	x;
 	float	y;
 	float	to_x;
@@ -73,14 +105,6 @@ typedef struct s_keys
 	int	down;
 }	t_keys;
 
-typedef struct s_color
-{
-	uint8_t	b;
-	uint8_t	g;
-	uint8_t	r;
-	uint8_t	a; // alpha channel, probably not used
-}	t_color;
-
 typedef enum e_elemfile
 {
 	E_NO = 1 << 0,
@@ -101,16 +125,6 @@ typedef enum e_stateparse
 	SP_DONE
 }	t_stateparse;
 
-// This is only an initial simple example
-typedef struct s_map
-{
-	size_t	width;
-	size_t	height;
-	char	**grid;
-	int		player_start_x; // x & y can be 2d vector
-	int		player_start_y;
-}	t_map;
-
 typedef struct s_parse
 {
 	t_list			*head_map;
@@ -123,7 +137,6 @@ typedef struct s_parse
 
 typedef struct s_infile
 {
-	t_map	map;
 	t_color	f;
 	t_color	c;
 	char	*no;
@@ -141,7 +154,7 @@ typedef struct s_game
 	t_vision	vision;
 	t_texture	textures;
 	t_keys		keys;
-	t_infile	parse;
+	t_infile	infile;
 	t_img		img_w;
 }	t_game;
 
