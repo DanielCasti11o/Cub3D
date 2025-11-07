@@ -6,22 +6,11 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 20:35:50 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/06 21:14:24 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/07 21:52:47 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_color	color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
-{
-	t_color	out;
-
-	out.r = r;
-	out.g = g;
-	out.b = b;
-	out.a = a;
-	return (out);
-}
 
 void	preinit_parse(t_game *game, t_parse *parse)
 {
@@ -54,38 +43,10 @@ int	is_void_char(char c)
 	return (c == ' ' || c == '\0' || c == '\n');
 }
 
-/*
-uint32_t	pack_color(int endian, t_color color)
+int	check_mapspacechar(t_game *game, size_t row, size_t col)
 {
-	uint32_t	packed;
-
-	if (endian == 0)
-		packed = (((uint32_t)color.a << 24)
-				| (color.r << 16) | (color.g << 8) | color.b);
-	else
-		packed = ((color.a) | (color.r << 8) | (color.g << 16)
-				| ((uint32_t)color.b << 24));
-	return (packed);
+	if (row > 0 && (game->pos.map.grid[row - 1][col] == '0'
+		|| is_player_char(game->pos.map.grid[row - 1][col])))
+		return (0);
+	return (1);
 }
-
-t_color	unpack_color(int endian, uint32_t packed)
-{
-	t_color	color;
-
-	if (endian == 0)
-	{
-		color.a = (packed >> 24) & 0xFF;
-		color.r = (packed >> 16) & 0xFF;
-		color.g = (packed >> 8) & 0xFF;
-		color.b = packed & 0xFF;
-	}
-	else
-	{
-		color.a = packed & 0xFF;
-		color.r = (packed >> 8) & 0xFF;
-		color.g = (packed >> 16) & 0xFF;
-		color.b = (packed >> 24) & 0xFF;
-	}
-	return (color);
-}
-*/

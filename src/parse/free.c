@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 20:50:03 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/06 21:00:57 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/07 22:11:01 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ void	free_parse(t_game *game, t_parse *parse)
 		ft_lstclear(&parse->head_map, free);
 		parse->tail_map = NULL;
 	}
+	free_infile(game);
+	if (game->pos.map.grid)
+		ft_freestrarr(&game->pos.map.grid);
+}
+
+// TODO: temporal function, must free more, and probably must not free some info because is already freed
+void	free_end(t_game *game)
+{
+	if (game == NULL)
+		return ;
 	free_infile(game);
 	if (game->pos.map.grid)
 		ft_freestrarr(&game->pos.map.grid);

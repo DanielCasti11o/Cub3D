@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/31 19:52:23 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/07 22:17:20 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 3, 1L << 1, ft_key_release, &game); // Save key release
 	mlx_loop_hook(game.mlx, ft_events, &game);
 	mlx_loop(game.mlx);
+	// free_end(&game); // TODO: free all allocated memory
 }

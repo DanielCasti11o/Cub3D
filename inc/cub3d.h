@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/06 21:22:21 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/07 22:09:37 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int		perror_noplayerstart(void);
 void	free_infile(t_game *game);
 void	free_parse(t_game *game, t_parse *parse);
 
+void	free_end(t_game *game);
+
 t_color	color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
 void	preinit_parse(t_game *game, t_parse *parse);
@@ -58,6 +60,8 @@ void	preinit_parse(t_game *game, t_parse *parse);
 int		is_player_char(char c);
 int		is_map_char(char c);
 int		is_void_char(char c);
+
+int		check_mapspacechar(t_game *game, size_t row, size_t col);
 
 int		parse_header(t_game *game, char	*line, t_parse	*parse);
 

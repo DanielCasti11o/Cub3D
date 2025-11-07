@@ -15,6 +15,7 @@ SRC = \
 	$(SRC_DIR)/parse/map.c \
 	$(SRC_DIR)/parse/parse.c \
 	$(SRC_DIR)/parse/utils.c \
+	$(SRC_DIR)/color.c \
 	$(SRC_DIR)/doublebuff.c \
 	$(SRC_DIR)/errors.c \
 	$(SRC_DIR)/events.c \
