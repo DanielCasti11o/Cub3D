@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/06 21:13:28 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/07 22:42:46 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@
 # include <stddef.h> // size_t
 # include "libft.h" // t_list
 
-// Point struct in 2D space
+// * 2D point in float coordinates
 typedef struct s_p2d
 {
 	float	x;
 	float	y;
 }	t_p2d;
 
+// * 2D vector represented by two points
 typedef struct s_vec
 {
 	t_p2d	start;
 	t_p2d	end;
 }	t_vec;
 
+// * 32-bit color in blue-green-red-alpha byte order (little-endian)
 typedef struct s_color
 {
 	uint8_t	b;
@@ -53,6 +55,12 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+/*
+ * Tile map stored as a grid of valid characters
+ * - grid: array of characters, null-terminated array of null-terminated strings
+ * - width: number of columns in the map
+ * - height: number of rows in the map (excluding the null terminator)
+ */
 typedef struct s_map
 {
 	char	**grid;
@@ -60,6 +68,15 @@ typedef struct s_map
 	size_t	height;
 }	t_map;
 
+/*
+ * Player position and direction in the game world
+ * - map: the tile map
+ * - dir: the direction vector of the player:
+ *   - start: player's current position
+ *   - end: point of the direction the player is facing, in a unit circle
+ *
+ * // TODO
+ */
 typedef struct s_pos
 {
 	t_map	map;
@@ -76,6 +93,7 @@ typedef struct s_pos
 	int		value; // key in map
 }	t_pos;
 
+// TODO, joint with info?
 typedef struct s_textures
 {
 	void	*wall;
@@ -105,6 +123,18 @@ typedef struct s_keys
 	int	down;
 }	t_keys;
 
+/*
+ * Bitmask enum to track which elements have been seen in the input file
+ * - E_NO: North texture
+ * - E_SO: South texture
+ * - E_WE: West texture
+ * - E_EA: East texture
+ * - E_F: Floor color
+ * - E_C: Ceiling color
+ * - E_MAP: Map data
+ * - E_EMPTY: Empty line (not marked in bitmask)
+ * - E_INVALID: Invalid element (not marked in bitmask)
+ */
 typedef enum e_elemfile
 {
 	E_NO = 1 << 0,
@@ -118,6 +148,15 @@ typedef enum e_elemfile
 	E_INVALID = 1 << 8
 }	t_elemfile;
 
+/*
+ * Input file data structure parsed
+ * - f: floor color
+ * - c: ceiling color
+ * - no: path to north texture
+ * - so: path to south texture
+ * - we: path to west texture
+ * - ea: path to east texture
+ */
 typedef struct s_infile
 {
 	t_color	f;
@@ -128,6 +167,7 @@ typedef struct s_infile
 	char	*ea;
 }	t_infile;
 
+// TODO
 typedef struct s_game
 {
 	void		*mlx;
@@ -141,7 +181,7 @@ typedef struct s_game
 	t_img		img_w;
 }	t_game;
 
-
+// * Parser state machine
 typedef enum e_stateparse
 {
 	SP_HEADER,
@@ -149,6 +189,15 @@ typedef enum e_stateparse
 	SP_DONE
 }	t_stateparse;
 
+/*
+ * Parser structure to hold parsing state and data
+ * - head_map/tail_map: linked list of map lines, with O(1) append
+ * - seen: bitmask of seen elements, using t_elemfile
+ * - state: current state of the parser, using t_stateparse
+ * - first_v_char: index of leftmost non-void column in the map
+ * - last_v_char: index of rightmost non-void/exclusive column in the map
+ * - player_start_(x/y): grid coordinates of the player spawn, -1 if not set
+ */
 typedef struct s_parse
 {
 	t_list			*head_map;
