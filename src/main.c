@@ -6,59 +6,59 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/08 14:41:53 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/08 15:43:56 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ray(t_game *game)
+void	ray(t_game *game, t_vec dir)
 {
-	game->pos.ray_x = game->pos.x;
-	game->pos.ray_y = game->pos.y;
+	game->pos.ray.x = dir.start.x;
+	game->pos.ray.y = dir.start.y;
 	while (1)
 	{
-		game->pos.ray_x += game->pos.to_x * 0.1;
-		game->pos.ray_y += game->pos.to_y * 0.1;
-		pixel_image(&game->img_w, game->pos.ray_x, game->pos.ray_y, 0xFF0000);
-		if (game->pos.ray_y >= HEIGHT || game->pos.ray_x >= WIDTH
-			|| game->pos.ray_x <= 0 || game->pos.ray_y <= 0)
+		game->pos.ray.x += dir.end.x * 0.1;
+		game->pos.ray.y += dir.end.y * 0.1;
+		pixel_image(&game->img_w, game->pos.ray.x, game->pos.ray.y, 0xFF0000);
+		if (game->pos.ray.y >= HEIGHT || game->pos.ray.x >= WIDTH
+			|| game->pos.ray.x <= 0 || game->pos.ray.y <= 0)
 			break ;
 	}
 }
 
-void	loop_ray(t_game *game)
+void	loop_ray(t_vec dir, t_game *game)
 {
 	double	limit;
 	bool	complete;
 
-	limit = game->vision.angle;
+	limit = game->pos.angle;
 	complete = false;
-	pixel_image(&game->img_w, game->pos.x, game->pos.y, 0xFFFFFF);
-	game->pos.to_x = cos(game->vision.angle);
-	game->pos.to_y = sin(game->vision.angle);
-	ray(game);
-	while (game->vision.angle > (limit - degrees(30)))
+	pixel_image(&game->img_w, dir.start.x, dir.start.y, 0xFFFFFF);
+	dir.end.x = cos(game->pos.angle);
+	dir.end.y = sin(game->pos.angle);
+	ray(game, dir);
+	while (game->pos.angle > (limit - degrees(30)))
 	{
 		while (complete == false)
 		{
-			game->vision.angle += degrees(0.1); // Menos de un grado
-			game->pos.to_x = cos(game->vision.angle);
-			game->pos.to_y = sin(game->vision.angle);
-			ray(game);
-			if (game->vision.angle > (limit + degrees(30)))
+			game->pos.angle += degrees(0.1); // Menos de un grado
+			dir.end.x = cos(game->pos.angle);
+			dir.end.y = sin(game->pos.angle);
+			ray(game, dir);
+			if (game->pos.angle > (limit + degrees(30)))
 			{
 				complete = true;
-				game->vision.angle =limit;
+				game->pos.angle = limit;
 			}
 		}
-		game->vision.angle -= degrees(0.1);
-		game->pos.to_x = cos(game->vision.angle);
-		game->pos.to_y = sin(game->vision.angle);
-		ray(game);
+		game->pos.angle -= degrees(0.1);
+		dir.end.x = cos(game->pos.angle);
+		dir.end.y = sin(game->pos.angle);
+		ray(game, dir);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img_w.img, 0, 0);
-	game->vision.angle = limit;
+	game->pos.angle = limit;
 }
 
 int	main(int argc, char **argv)
@@ -69,13 +69,13 @@ int	main(int argc, char **argv)
 	(void)argv;
 	// if (parse_game(&game, argc, argv) == 1)
 	// 	return (1);
-	game.vision.angle = degrees(270);
-	game.pos.x = 350;
-	game.pos.y = 300;
+	game.pos.angle = degrees(270);
+	game.pos.dir.start.x = 350;
+	game.pos.dir.start.y = 300;
 	game.keys.s = 0;
 	game.keys.a = 0;
 	init_window(&game);
-	loop_ray(&game);
+	loop_ray(game.pos.dir, &game);
 	mlx_hook(game.win, 2, 1L << 0, ft_key_press, &game); // Save key pressed
 	mlx_hook(game.win, 3, 1L << 1, ft_key_release, &game); // Save key release
 	mlx_loop_hook(game.mlx, ft_events, &game);

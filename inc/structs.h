@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/08 13:58:24 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/08 15:22:58 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ typedef struct s_pos
 {
 	t_map	map;
 	t_vec	dir;
+	float	angle;
+	t_p2d	ray; // Point on the map where the ray is drawn
 
 	// TODO
-	float	x;
-	float	y;
-	float	to_x;
-	float	to_y;
-	float	ray_x;
-	float	ray_y;
+	// float	x;
+	// float	y;
+	// float	to_x;
+	// float	to_y;
 	bool	is_inside; // algorithm bsp rectangle adaptation
 	int		value; // key in map
 }	t_pos;
@@ -103,13 +103,6 @@ typedef struct s_textures
 	void	*sphere; // Ray tracing
 	void	*mini_map;
 }	t_texture;
-
-typedef struct s_vision
-{
-	long	triangle; // triangle of vision in the map
-	bool	sphere_inside; // bsp triangule vision
-	float	angle;
-}	t_vision;
 
 typedef struct s_keys
 {
@@ -174,7 +167,6 @@ typedef struct s_game
 	void		*win;
 	void		*img;
 	t_pos		pos;
-	t_vision	vision;
 	t_texture	textures;
 	t_keys		keys;
 	t_infile	infile;
