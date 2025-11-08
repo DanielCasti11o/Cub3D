@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/07 22:09:37 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:53:02 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,13 @@ int		parse_map(t_game *game, t_parse *parse);
 
 int		parse_game(t_game *game, int argc, char **argv);
 
+// Inits
+
+void	init_player(t_game *game);
+void	init_window(t_game *game);
+
 // ...
 
-void	init_window(t_game *game);
 int		ft_events(t_game *game);
 void	loop_ray(t_game *game);
 int		ft_key_press(int keycode, t_game *game);

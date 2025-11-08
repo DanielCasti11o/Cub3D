@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/31 20:11:46 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/08 14:39:31 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,3 +20,4 @@ void	init_window(t_game *game)
 	game->img_w.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->img_w.addr = mlx_get_data_addr(game->img_w.img, &game->img_w.bits_per_pixel, &game->img_w.line_length, &game->img_w.endian);
 }
+

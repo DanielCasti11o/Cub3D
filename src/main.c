@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/07 22:17:20 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/08 14:41:53 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (parse_game(&game, argc, argv) == 1)
-		return (1);
+	(void)argc;
+	(void)argv;
+	// if (parse_game(&game, argc, argv) == 1)
+	// 	return (1);
 	game.vision.angle = degrees(270);
 	game.pos.x = 350;
 	game.pos.y = 300;
