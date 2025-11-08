@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/08 15:22:58 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/08 17:26:02 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ typedef struct s_pos
 	t_vec	dir;
 	float	angle;
 	t_p2d	ray; // Point on the map where the ray is drawn
-
 	// TODO
 	// float	x;
 	// float	y;
