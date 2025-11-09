@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/09 00:58:48 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/09 11:28:15 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,20 @@ void	fpredrawing(t_game *game, t_vec dir, t_dda dda)
 	dda.line_height = (int)(HEIGHT / dda.ppdist_wall);
 }
 
+void	limdrawing(t_game *game, t_vec dir, t_dda dda)
+{
+	int	draw_start;
+	int	draw_end;
+
+	draw_start = HEIGHT / 2 - dda.line_height / 2; // Inicia en = (mitad de la altura de pantalla) - (mitad de la altura de la pared)
+
+	if (draw_start < 0) // Guardarrail
+		draw_start = 0;
+	draw_end = HEIGHT / 2 + dda.line_height / 2; // Termina en = (mitad de la altura de pantalla) + (mitad de la altura de la pared)
+	if (draw_end >= HEIGHT) // Guardarraíl
+		draw_end = HEIGHT - 1;
+}
+
 void	raycasting(t_game *game, t_vec dir)
 {
 	t_dda	dda;
@@ -82,12 +96,16 @@ void	raycasting(t_game *game, t_vec dir)
 	dda.map.y = (int)dir.start.y;
 	dda.deltax = 1.0 / fabs(dir.end.x);
 	dda.deltay = 1.0 / fabs(dir.end.y);
+	dir.end.x = cos(game->pos.angle);
+	dir.end.y = sin(game->pos.angle);
 	steps(dda, game, dir);
 	// Proyección 3D
 	// Conversión de la distancia en linea recta del recorrido del rayo en la altura de la pared cuando choca.
 	dda_loop(game, dir, dda);
 	fpredrawing(game, dir, dda); // Aquí hacemos las ecuaciones que apunte
-	// Limites de dibujado pendiente...
+	lim_drawing(game, dir, dda); // Definimos limites de dibujado
+	// pendiente loop de dibujado...
+	mlx_put_image_to_window(game->mlx, game->win, game->img_w.img, 0, 0); // poner la imagen ya dibujada en el buffering.
 }
 
 void	dda_loop(t_game *game, t_vec dir, t_dda dda)
@@ -108,12 +126,4 @@ void	dda_loop(t_game *game, t_vec dir, t_dda dda)
 		}
 		check_hit(game, dir, dda);
 	}
-}
-
-void	loop_ray(t_vec dir, t_game *game)
-{
-	dir.end.x = cos(game->pos.angle);
-	dir.end.y = sin(game->pos.angle);
-	raycasting(game, dir);
-	mlx_put_image_to_window(game->mlx, game->win, game->img_w.img, 0, 0);
 }

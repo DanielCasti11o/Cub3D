@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/09 00:46:17 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/09 11:12:04 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ void	init_window(t_game *game);
 
 // RayCasting
 
-void	loop_ray(t_vec dir, t_game *game);
 void	raycasting(t_game *game, t_vec dir);
 void	steps(t_dda dda, t_game *game, t_vec dir);
 void	dda_loop(t_game *game, t_vec dir, t_dda dda);
 int		check_hit(t_game *game, t_vec dir, t_dda dda);
 void	fpredrawing(t_game *game, t_vec dir, t_dda dda);
+void	limdrawing(t_game *game, t_vec dir, t_dda dda);
 
 
 // Events
