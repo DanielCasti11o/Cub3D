@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/08 15:21:31 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/09 00:46:17 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,19 @@ int		parse_game(t_game *game, int argc, char **argv);
 void	init_player(t_game *game);
 void	init_window(t_game *game);
 
-// ...
+// RayCasting
+
+void	loop_ray(t_vec dir, t_game *game);
+void	raycasting(t_game *game, t_vec dir);
+void	steps(t_dda dda, t_game *game, t_vec dir);
+void	dda_loop(t_game *game, t_vec dir, t_dda dda);
+int		check_hit(t_game *game, t_vec dir, t_dda dda);
+void	fpredrawing(t_game *game, t_vec dir, t_dda dda);
+
+
+// Events
 
 int		ft_events(t_game *game);
-void	loop_ray(t_vec dir, t_game *game);
 int		ft_key_press(int keycode, t_game *game);
 int		ft_key_release(int keycode, t_game *game);
 void	pixel_image(t_img *img, int x, int y, double color);

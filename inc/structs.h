@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/08 17:26:02 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/09 00:57:42 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ typedef struct s_p2d
 	float	x;
 	float	y;
 }	t_p2d;
+
+// point in {x, y} in INT.
+
+typedef struct s_ptint
+{
+	int	x;
+	int	y;
+}	t_ptint;
 
 // * 2D vector represented by two points
 typedef struct s_vec
@@ -158,6 +166,19 @@ typedef struct s_infile
 	char	*we;
 	char	*ea;
 }	t_infile;
+
+typedef struct s_dda
+{
+	t_ptint	map; // punto dónde estamos parados sin float
+	t_ptint	step; // Dirección
+	double	deltax;
+	double	deltay; // deltas de {x, y}, Distancia para cruzar desde la posición dentro de la unidad en la que estoy hasta el fin de la unidad.
+	t_p2d	side_dist; // Recta de la distancia IMPORTANTE el concepto = RECTA.
+	int		hit;
+	int		side;	// Esto será una flag que lo que haga es indicar la linea de choque 0=Vertical {Norte, Sur} y 1=Horizontal {Este, Oeste}
+	double	ppdist_wall; // Correción del ojo de pez (Distancia perpendicular)
+	int		line_height; // Altura de la pared en píxeles.
+}	t_dda;
 
 // TODO
 typedef struct s_game
