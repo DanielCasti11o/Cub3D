@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:23:04 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/08 15:21:13 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/11 20:51:22 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,34 @@ int	ft_key_release(int keycode, t_game *game)
 
 int	ft_events(t_game *game)
 {
+	double	speed;
+
+	speed = 0.2;
 	if (game->keys.left == 1)
 		game->pos.angle -= degrees(2);
 	if (game->keys.right == 1)
 		game->pos.angle += degrees(2);
 	if (game->keys.d == 1)
-		game->pos.dir.start.x += 0.8;
+	{
+		game->pos.dir.start.x += cos(game->pos.angle + degrees(90)) * speed;
+		game->pos.dir.start.y += sin(game->pos.angle + degrees(90)) * speed;
+	}
 	if (game->keys.a == 1)
-		game->pos.dir.start.x -= 0.8;
+	{
+		game->pos.dir.start.x -= cos(game->pos.angle + degrees(90)) * speed;
+		game->pos.dir.start.y -= sin(game->pos.angle + degrees(90)) * speed;
+	}
 	if (game->keys.w == 1)
-		game->pos.dir.start.y -= 0.8;
+	{
+		game->pos.dir.start.x += cos(game->pos.angle) * speed;
+		game->pos.dir.start.y += sin(game->pos.angle) * speed;
+	}
 	if (game->keys.s == 1)
-		game->pos.dir.start.y += 0.8;
+	{
+		game->pos.dir.start.x -= cos(game->pos.angle) * speed;
+		game->pos.dir.start.y -= sin(game->pos.angle) * speed;
+	}
 	clear_image(&game->img_w);
-	loop_ray(game->pos.dir, game);
+	raycasting(game, game->pos.dir);
 	return (0);
 }

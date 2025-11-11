@@ -20,6 +20,7 @@ SRC = \
 	$(SRC_DIR)/errors.c \
 	$(SRC_DIR)/events.c \
 	$(SRC_DIR)/init.c \
+	$(SRC_DIR)/ray.c \
 	$(SRC_DIR)/main.c
 OBJ = $(SRC:.c=.o)
 
