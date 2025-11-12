@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:23:04 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/11 20:51:22 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/12 18:07:27 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,18 @@ int	ft_events(t_game *game)
 
 	speed = 0.2;
 	if (game->keys.left == 1)
-		game->pos.angle -= degrees(2);
-	if (game->keys.right == 1)
 		game->pos.angle += degrees(2);
+	if (game->keys.right == 1)
+		game->pos.angle -= degrees(2);
 	if (game->keys.d == 1)
 	{
-		game->pos.dir.start.x += cos(game->pos.angle + degrees(90)) * speed;
-		game->pos.dir.start.y += sin(game->pos.angle + degrees(90)) * speed;
+		game->pos.dir.end.x += cos(game->pos.angle + degrees(90)) * speed;
+		game->pos.dir.end.y += sin(game->pos.angle + degrees(90)) * speed;
 	}
 	if (game->keys.a == 1)
 	{
-		game->pos.dir.start.x -= cos(game->pos.angle + degrees(90)) * speed;
-		game->pos.dir.start.y -= sin(game->pos.angle + degrees(90)) * speed;
+		game->pos.dir.end.x -= cos(game->pos.angle + degrees(90)) * speed;
+		game->pos.dir.end.y -= sin(game->pos.angle + degrees(90)) * speed;
 	}
 	if (game->keys.w == 1)
 	{

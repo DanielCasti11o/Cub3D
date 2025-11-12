@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/11 20:55:39 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/12 18:08:22 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	check_hit(t_game *game, t_dda *dda)
 {
-	if (game->pos.map.grid[dda->map.y][dda->map.x] == '1') // Sí en la celda que estoy es 1 = pared choca.
-		return (printf("sa\n"), 1);
 	if (dda->map.x < 0 || dda->map.x >= game->pos.map.width
 		|| dda->map.y < 0 || dda->map.y >= game->pos.map.height)
 		return (1); // con esto si el rayo se sale del mapa, se detiene.
+	if (game->pos.map.grid[dda->map.y][dda->map.x] == '1') // Sí en la celda que estoy es 1 = pared choca.
+		return (printf("sa\n"), 1);
 	return (0);
 }
 
@@ -113,8 +113,8 @@ void	raycasting(t_game *game, t_vec dir)
 		dda.map.x = (int)dir.start.x; // Aqui aproximamos el flotante a la unidad como tal para indicar la posición de la celda completa.
 		dda.map.y = (int)dir.start.y;
 		printf ("x= %zu, y= %zu\n", dda.map.x, dda.map.y);
-		dir.end.x = cos(game->pos.angle);
-		dir.end.y = sin(game->pos.angle);
+		dir.end.x = cos(game->pos.angle) * dda.camera_x;
+		dir.end.y = sin(game->pos.angle) * dda.camera_x;
 		dda.deltax = 1.0 / fabs(dir.end.x);
 		dda.deltay = 1.0 / fabs(dir.end.y);
 		steps(&dda, dir);
