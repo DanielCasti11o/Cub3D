@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/11 20:36:35 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/12 21:14:18 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ typedef struct s_pos
 	t_vec	dir;
 	float	angle;
 	t_p2d	ray; // Point on the map where the ray is drawn
+	t_p2d	plane;
+	t_p2d	rdir;
 	// TODO
 	// float	x;
 	// float	y;
@@ -177,11 +179,12 @@ typedef struct s_dda
 	int		hit;
 	int		side;	// Esto será una flag que lo que haga es indicar la linea de choque 0=Vertical Norte, Sur y 1=Horizontal {Este, Oeste}
 	double	ppdist_wall; // Correción del ojo de pez (Distancia perpendicular)
-	int		line_height; // Altura de la pared en píxeles.
-	size_t	draw_start;
-	size_t	draw_end;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 	t_ptint	pdraw;
 	double	camera_x;
+	double	fov;
 }	t_dda;
 
 // TODO
