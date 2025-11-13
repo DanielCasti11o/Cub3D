@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/13 18:18:57 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:09:09 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_pos
 	// float	to_y;
 	bool	is_inside; // algorithm bsp rectangle adaptation
 	int		value; // key in map
+	int		pitch;
 }	t_pos;
 
 typedef struct s_textures
@@ -188,6 +189,7 @@ typedef struct s_dda
 	t_ptint	pdraw;
 	double	camera_x;
 	double	fov;
+
 }	t_dda;
 
 // TODO

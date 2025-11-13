@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/13 18:18:36 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:08:48 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,13 @@ void	fpredrawing(t_vec dir, t_dda *dda, t_game *game)
 
 void	render_frame(t_game *game, t_dda *dda)
 {
-	dda->draw_start = HEIGHT / 2 - dda->line_height / 2;
+	int	center;
+
+	center = HEIGHT / 2 + game->pos.pitch;
+	dda->draw_start = center - dda->line_height / 2;
 	if (dda->draw_start < 0)
 		dda->draw_start = 0;
-	dda->draw_end = HEIGHT / 2 + dda->line_height / 2;
+	dda->draw_end = center + dda->line_height / 2;
 	if (dda->draw_end >= HEIGHT)
 		dda->draw_end = HEIGHT - 1;
 	render_column(game, dda);
@@ -110,8 +113,8 @@ void	raycasting(t_game *game, t_vec dir)
 	dda.fov = tanf(degrees(33));
 	game->pos.rdir.x = cosf(game->pos.angle);
 	game->pos.rdir.y = sinf(game->pos.angle);
-	game->pos.plane.x = game->pos.rdir.y * dda.fov;
-	game->pos.plane.y = -game->pos.rdir.x * dda.fov;
+	game->pos.plane.x = -game->pos.rdir.y * dda.fov;
+	game->pos.plane.y = game->pos.rdir.x * dda.fov;
 	while (dda.pdraw.x < WIDTH)
 	{
 		dda.camera_x = 2 * dda.pdraw.x / (double)WIDTH - 1;
