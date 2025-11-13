@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/10/31 22:26:18 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/12 21:14:18 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,37 @@
 # include <stdint.h> // int, uint types
 # include <stddef.h> // size_t
 # include "libft.h" // t_list
+
+// * 2D point in float coordinates
+typedef struct s_p2d
+{
+	float	x;
+	float	y;
+}	t_p2d;
+
+// point in {x, y} in INT.
+
+typedef struct s_ptint
+{
+	size_t	x;
+	size_t	y;
+}	t_ptint;
+
+// * 2D vector represented by two points
+typedef struct s_vec
+{
+	t_p2d	start;
+	t_p2d	end;
+}	t_vec;
+
+// * 32-bit color in blue-green-red-alpha byte order (little-endian)
+typedef struct s_color
+{
+	uint8_t	b;
+	uint8_t	g;
+	uint8_t	r;
+	uint8_t	a;
+}	t_color;
 
 // This structure draws everything in an invisible buffer
 //  that stores all the information about everything that will later
@@ -32,18 +63,46 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+/*
+ * Tile map stored as a grid of valid characters
+ * - grid: array of characters, null-terminated array of null-terminated strings
+ * - width: number of columns in the map
+ * - height: number of rows in the map (excluding the null terminator)
+ */
+typedef struct s_map
+{
+	char	**grid;
+	size_t	width;
+	size_t	height;
+}	t_map;
+
+/*
+ * Player position and direction in the game world
+ * - map: the tile map
+ * - dir: the direction vector of the player:
+ *   - start: player's current position
+ *   - end: point of the direction the player is facing, in a unit circle
+ *
+ * // TODO
+ */
 typedef struct s_pos
 {
-	float	x;
-	float	y;
-	float	to_x;
-	float	to_y;
-	float	ray_x;
-	float	ray_y;
+	t_map	map;
+	t_vec	dir;
+	float	angle;
+	t_p2d	ray; // Point on the map where the ray is drawn
+	t_p2d	plane;
+	t_p2d	rdir;
+	// TODO
+	// float	x;
+	// float	y;
+	// float	to_x;
+	// float	to_y;
 	bool	is_inside; // algorithm bsp rectangle adaptation
 	int		value; // key in map
 }	t_pos;
 
+// TODO, joint with info?
 typedef struct s_textures
 {
 	void	*wall;
@@ -53,13 +112,6 @@ typedef struct s_textures
 	void	*sphere; // Ray tracing
 	void	*mini_map;
 }	t_texture;
-
-typedef struct s_vision
-{
-	long	triangle; // triangle of vision in the map
-	bool	sphere_inside; // bsp triangule vision
-	float	angle;
-}	t_vision;
 
 typedef struct s_keys
 {
@@ -73,14 +125,18 @@ typedef struct s_keys
 	int	down;
 }	t_keys;
 
-typedef struct s_color
-{
-	uint8_t	b;
-	uint8_t	g;
-	uint8_t	r;
-	uint8_t	a; // alpha channel, probably not used
-}	t_color;
-
+/*
+ * Bitmask enum to track which elements have been seen in the input file
+ * - E_NO: North texture
+ * - E_SO: South texture
+ * - E_WE: West texture
+ * - E_EA: East texture
+ * - E_F: Floor color
+ * - E_C: Ceiling color
+ * - E_MAP: Map data
+ * - E_EMPTY: Empty line (not marked in bitmask)
+ * - E_INVALID: Invalid element (not marked in bitmask)
+ */
 typedef enum e_elemfile
 {
 	E_NO = 1 << 0,
@@ -94,36 +150,17 @@ typedef enum e_elemfile
 	E_INVALID = 1 << 8
 }	t_elemfile;
 
-typedef enum e_stateparse
-{
-	SP_HEADER,
-	SP_MAP,
-	SP_DONE
-}	t_stateparse;
-
-// This is only an initial simple example
-typedef struct s_map
-{
-	size_t	width;
-	size_t	height;
-	char	**grid;
-	int		player_start_x; // x & y can be 2d vector
-	int		player_start_y;
-}	t_map;
-
-typedef struct s_parse
-{
-	t_list			*head_map;
-	t_list			*tail_map;
-	uint8_t			seen;
-	t_stateparse	state;
-	ssize_t			first_v_char;
-	ssize_t			last_v_char;
-}	t_parse;
-
+/*
+ * Input file data structure parsed
+ * - f: floor color
+ * - c: ceiling color
+ * - no: path to north texture
+ * - so: path to south texture
+ * - we: path to west texture
+ * - ea: path to east texture
+ */
 typedef struct s_infile
 {
-	t_map	map;
 	t_color	f;
 	t_color	c;
 	char	*no;
@@ -132,17 +169,64 @@ typedef struct s_infile
 	char	*ea;
 }	t_infile;
 
+typedef struct s_dda
+{
+	t_ptint	map; // punto dónde estamos parados sin float
+	t_ptint	step; // Dirección
+	double	deltax;
+	double	deltay; // deltas de x, y, Distancia para cruzar desde la posición dentro de la unidad en la que estoy hasta el fin de la unidad.
+	t_p2d	side_dist; // Recta de la distancia IMPORTANTE el concepto = RECTA.
+	int		hit;
+	int		side;	// Esto será una flag que lo que haga es indicar la linea de choque 0=Vertical Norte, Sur y 1=Horizontal {Este, Oeste}
+	double	ppdist_wall; // Correción del ojo de pez (Distancia perpendicular)
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	t_ptint	pdraw;
+	double	camera_x;
+	double	fov;
+}	t_dda;
+
+// TODO
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	void		*img;
 	t_pos		pos;
-	t_vision	vision;
 	t_texture	textures;
 	t_keys		keys;
-	t_infile	parse;
+	t_infile	infile;
 	t_img		img_w;
 }	t_game;
+
+// * Parser state machine
+typedef enum e_stateparse
+{
+	SP_HEADER,
+	SP_MAP,
+	SP_DONE
+}	t_stateparse;
+
+/*
+ * Parser structure to hold parsing state and data
+ * - head_map/tail_map: linked list of map lines, with O(1) append
+ * - seen: bitmask of seen elements, using t_elemfile
+ * - state: current state of the parser, using t_stateparse
+ * - first_v_char: index of leftmost non-void column in the map
+ * - last_v_char: index of rightmost non-void/exclusive column in the map
+ * - player_start_(x/y): grid coordinates of the player spawn, -1 if not set
+ */
+typedef struct s_parse
+{
+	t_list			*head_map;
+	t_list			*tail_map;
+	uint8_t			seen;
+	t_stateparse	state;
+	ssize_t			first_v_char;
+	ssize_t			last_v_char;
+	ssize_t			player_start_x;
+	ssize_t			player_start_y;
+}	t_parse;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:23:04 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/28 20:25:50 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/12 20:48:42 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,70 @@ int	ft_key_release(int keycode, t_game *game)
 	return (0);
 }
 
+void	rotate_left(t_game *game, double speed)
+{
+	float	oldir_x;
+	float	oldpl_x;
+
+	oldir_x = game->pos.rdir.x;
+	oldpl_x = game->pos.plane.x;
+	game->pos.rdir.x
+		= game->pos.rdir.x * cosf(-speed) - game->pos.rdir.y * sinf(-speed);
+	game->pos.rdir.y
+		= oldir_x * sinf(-speed) + game->pos.rdir.y * cosf(-speed);
+	game->pos.plane.x = game->pos.plane.x * cosf(-speed)
+		- game->pos.plane.y * sinf(-speed);
+	game->pos.plane.y = oldpl_x * sin(-speed)
+		+ game->pos.plane.y * cos(-speed);
+}
+
+void	rotate_right(t_game *game, double speed)
+{
+	float	oldir_x;
+	float	oldpl_x;
+
+	oldir_x = game->pos.rdir.x;
+	oldpl_x = game->pos.plane.x;
+	game->pos.rdir.x
+		= game->pos.rdir.x * cosf(speed) - game->pos.rdir.y * sinf(speed);
+	game->pos.rdir.y
+		= oldir_x * sinf(speed) + game->pos.rdir.y * cosf(speed);
+	game->pos.plane.x = game->pos.plane.x * cosf(speed)
+		- game->pos.plane.y * sinf(speed);
+	game->pos.plane.y = oldpl_x * sin(speed)
+		+ game->pos.plane.y * cos(speed);
+}
+
 int	ft_events(t_game *game)
 {
+	double	speed;
+
+	speed = 0.2;
 	if (game->keys.left == 1)
-		game->vision.angle -= degrees(2);
+		game->pos.angle += degrees(2);
 	if (game->keys.right == 1)
-		game->vision.angle += degrees(2);
+		game->pos.angle -= degrees(2);
 	if (game->keys.d == 1)
-		game->pos.x += 0.8;
+	{
+		game->pos.dir.start.x += cos(game->pos.angle - degrees(90)) * speed;
+		game->pos.dir.start.y += sin(game->pos.angle - degrees(90)) * speed;
+	}
 	if (game->keys.a == 1)
-		game->pos.x -= 0.8;
+	{
+		game->pos.dir.start.x += cos(game->pos.angle + degrees(90)) * speed;
+		game->pos.dir.start.y += sin(game->pos.angle + degrees(90)) * speed;
+	}
 	if (game->keys.w == 1)
-		game->pos.y -= 0.8;
+	{
+		game->pos.dir.start.x += cos(game->pos.angle) * speed;
+		game->pos.dir.start.y += sin(game->pos.angle) * speed;
+	}
 	if (game->keys.s == 1)
-		game->pos.y += 0.8;
+	{
+		game->pos.dir.start.x -= cos(game->pos.angle) * speed;
+		game->pos.dir.start.y -= sin(game->pos.angle) * speed;
+	}
 	clear_image(&game->img_w);
-	loop_ray(game);
+	raycasting(game, game->pos.dir);
 	return (0);
 }

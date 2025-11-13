@@ -1,21 +1,27 @@
 NAME = cub3D
 
-CC = cc
+CC = clang
 CFLAGS = -Wall -Werror -Wextra $(COPT)
 CPPFLAGS = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
 COPT ?= -O2
 
 SRC_DIR = ./src
 SRC = \
+	$(SRC_DIR)/parse/errors.c \
+	$(SRC_DIR)/parse/errors2.c \
+	$(SRC_DIR)/parse/errors3.c \
+	$(SRC_DIR)/parse/free.c \
+	$(SRC_DIR)/parse/headers.c \
+	$(SRC_DIR)/parse/map.c \
+	$(SRC_DIR)/parse/parse.c \
+	$(SRC_DIR)/parse/utils.c \
 	$(SRC_DIR)/color.c \
 	$(SRC_DIR)/doublebuff.c \
 	$(SRC_DIR)/errors.c \
-	$(SRC_DIR)/errors2.c \
 	$(SRC_DIR)/events.c \
 	$(SRC_DIR)/init.c \
-	$(SRC_DIR)/main.c \
-	$(SRC_DIR)/map.c \
-	$(SRC_DIR)/parse.c
+	$(SRC_DIR)/ray.c \
+	$(SRC_DIR)/main.c
 OBJ = $(SRC:.c=.o)
 
 INC_DIR = ./inc
@@ -31,7 +37,7 @@ LDLIBS = -lm -lmlx -lXext -lX11
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(MLX) $(LIBFT)
+$(NAME): $(MLX) $(LIBFT) $(OBJ)
 	$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
