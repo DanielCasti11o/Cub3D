@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/12 21:14:36 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/13 18:37:40 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (parse_game(&game, argc, argv) == 1)
 		return (1);
-	game.pos.angle = degrees(0);
 	printf("startx = %f starty= %f", game.pos.dir.start.x, game.pos.dir.start.y);
 	game.keys.s = 0;
 	game.keys.a = 0;

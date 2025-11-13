@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:45:49 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/07 22:05:38 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/13 18:37:25 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ static void	map_setplayer(t_game *game, t_parse *parse)
 	game->pos.dir.start.x = parse->player_start_x + 0.5f;
 	game->pos.dir.start.y = parse->player_start_y + 0.5f;
 	dir = game->pos.map.grid[parse->player_start_y][parse->player_start_x];
+	/*
 	if (dir == 'N')
 	{
 		game->pos.dir.end.x = 0.0f;
@@ -120,6 +121,15 @@ static void	map_setplayer(t_game *game, t_parse *parse)
 		game->pos.dir.end.x = -1.0f;
 		game->pos.dir.end.y = 0.0f;
 	}
+	*/
+	if (dir == 'N')
+		game->pos.angle = degrees(270);
+	else if (dir == 'S')
+		game->pos.angle = degrees(90);
+	else if (dir == 'E')
+		game->pos.angle = degrees(0);
+	else if (dir == 'W')
+		game->pos.angle = degrees(180);
 }
 
 int	parse_map(t_game *game, t_parse *parse)
