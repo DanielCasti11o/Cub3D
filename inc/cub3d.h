@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/13 18:24:14 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/13 21:19:40 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define WIDTH 700
 # define HEIGHT 600
 # define PI 3.1415926535
+
+# define ANGLE_FOV 66.0
 
 # include "structs.h"
 
@@ -76,11 +78,11 @@ void		init_window(t_game *game);
 
 // RayCasting
 
-void		raycasting(t_game *game, t_vec dir);
-void		steps(t_dda *dda, t_vec dir);
+void		raycasting(t_game *game);
+void		steps_init(t_game *game, t_dda *dda);
 void		dda_loop(t_game *game, t_dda *dda);
 int			check_hit(t_game *game, t_dda *dda);
-void		fpredrawing(t_vec dir, t_dda *dda, t_game *game);
+void		fpredrawing(t_game *game, t_dda *dda);
 void		render_frame(t_game *game, t_dda *dda);
 void		render_column(t_game *game, t_dda *dda);
 

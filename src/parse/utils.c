@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 20:35:50 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/07 21:52:47 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:14:20 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	preinit_parse(t_game *game, t_parse *parse)
 {
-	game->pos.map.height = 0;
+	game->map.height = 0;
 	parse->first_v_char = -1;
 	parse->last_v_char = 0;
 	parse->head_map = NULL;
@@ -45,8 +45,8 @@ int	is_void_char(char c)
 
 int	check_mapspacechar(t_game *game, size_t row, size_t col)
 {
-	if (row > 0 && (game->pos.map.grid[row - 1][col] == '0'
-		|| is_player_char(game->pos.map.grid[row - 1][col])))
+	if (row > 0 && (game->map.grid[row - 1][col] == '0'
+		|| is_player_char(game->map.grid[row - 1][col])))
 		return (0);
 	return (1);
 }

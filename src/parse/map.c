@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:45:49 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/13 18:37:25 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:31:22 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ static int	map_alloc(t_game *game, t_parse *parse)
 {
 	size_t	i;
 
-	game->pos.map.width = parse->last_v_char - parse->first_v_char;
-	game->pos.map.grid = malloc(sizeof(char *) * (game->pos.map.height + 1));
-	if (game->pos.map.grid == NULL)
+	game->map.width = parse->last_v_char - parse->first_v_char;
+	game->map.grid = malloc(sizeof(char *) * (game->map.height + 1));
+	if (game->map.grid == NULL)
 		return (perror_malloc());
-	game->pos.map.grid[game->pos.map.height] = NULL;
+	game->map.grid[game->map.height] = NULL;
 	i = 0;
-	while (i < game->pos.map.height)
+	while (i < game->map.height)
 	{
-		game->pos.map.grid[i] = malloc(sizeof(char) * (game->pos.map.width
+		game->map.grid[i] = malloc(sizeof(char) * (game->map.width
 					+ 1));
-		if (game->pos.map.grid[i] == NULL)
+		if (game->map.grid[i] == NULL)
 			return (perror_malloc());
-		game->pos.map.grid[i][0] = '\0';
-		game->pos.map.grid[i][game->pos.map.width] = '\0';
+		game->map.grid[i][0] = '\0';
+		game->map.grid[i][game->map.width] = '\0';
 		i++;
 	}
 	parse->player_start_x = -1;
@@ -55,10 +55,10 @@ static int	map_charcheck(t_game *game, t_parse *parse, size_t row, size_t cur)
 	}
 	if (line[cur] == '0' || is_player_char(line[cur]))
 	{
-		if (row == 0 || is_void_char(game->pos.map.grid[row - 1][col])
+		if (row == 0 || is_void_char(game->map.grid[row - 1][col])
 			|| col == 0 || is_void_char(line[cur - 1])
-			|| col == game->pos.map.width - 1 || is_void_char(line[cur + 1])
-			|| row == game->pos.map.height - 1)
+			|| col == game->map.width - 1 || is_void_char(line[cur + 1])
+			|| row == game->map.height - 1)
 			return (perror_unclosedmap());
 	}
 	if (line[cur] == ' ' && check_mapspacechar(game, row, col) == 0)
@@ -79,13 +79,13 @@ static int	map_buildrow(t_game *game, t_parse *parse, size_t row)
 		if (map_charcheck(game, parse, row, cur) == 1)
 			return (1);
 		col = cur - parse->first_v_char;
-		game->pos.map.grid[row][col] = line[cur];
+		game->map.grid[row][col] = line[cur];
 		cur++;
 	}
 	while (cur < parse->last_v_char)
 	{
 		col = cur - parse->first_v_char;
-		game->pos.map.grid[row][col] = ' ';
+		game->map.grid[row][col] = ' ';
 		if (check_mapspacechar(game, row, col) == 0)
 			return (perror_unclosedmap());
 		cur++;
@@ -97,39 +97,17 @@ static void	map_setplayer(t_game *game, t_parse *parse)
 {
 	char	dir;
 
-	game->pos.dir.start.x = parse->player_start_x + 0.5f;
-	game->pos.dir.start.y = parse->player_start_y + 0.5f;
-	dir = game->pos.map.grid[parse->player_start_y][parse->player_start_x];
-	/*
+	game->player.pos.x = parse->player_start_x + 0.5f;
+	game->player.pos.y = parse->player_start_y + 0.5f;
+	dir = game->map.grid[parse->player_start_y][parse->player_start_x];
 	if (dir == 'N')
-	{
-		game->pos.dir.end.x = 0.0f;
-		game->pos.dir.end.y = -1.0f;
-	}
+		game->player.angle = degrees(270);
 	else if (dir == 'S')
-	{
-		game->pos.dir.end.x = 0.0f;
-		game->pos.dir.end.y = 1.0f;
-	}
+		game->player.angle = degrees(90);
 	else if (dir == 'E')
-	{
-		game->pos.dir.end.x = 1.0f;
-		game->pos.dir.end.y = 0.0f;
-	}
+		game->player.angle = degrees(0);
 	else if (dir == 'W')
-	{
-		game->pos.dir.end.x = -1.0f;
-		game->pos.dir.end.y = 0.0f;
-	}
-	*/
-	if (dir == 'N')
-		game->pos.angle = degrees(270);
-	else if (dir == 'S')
-		game->pos.angle = degrees(90);
-	else if (dir == 'E')
-		game->pos.angle = degrees(0);
-	else if (dir == 'W')
-		game->pos.angle = degrees(180);
+		game->player.angle = degrees(180);
 }
 
 int	parse_map(t_game *game, t_parse *parse)
@@ -142,10 +120,10 @@ int	parse_map(t_game *game, t_parse *parse)
 	if (map_alloc(game, parse) == 1)
 		return (1);
 	row = 0;
-	while (row < game->pos.map.height)
+	while (row < game->map.height)
 	{
 		if (map_buildrow(game, parse, row) == 1)
-			return (ft_freestr(&game->pos.map.grid[row]), 1);
+			return (ft_freestr(&game->map.grid[row]), 1);
 		next = parse->head_map->next;
 		ft_lstdelone(&parse->head_map, free);
 		parse->head_map = next;
