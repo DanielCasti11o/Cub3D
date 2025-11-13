@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/12 21:14:18 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/13 18:18:57 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,18 @@ typedef struct s_pos
 	int		value; // key in map
 }	t_pos;
 
-// TODO, joint with info?
 typedef struct s_textures
 {
+	uint32_t	c;
+	uint32_t	f;
+	/*
 	void	*wall;
 	void	*flood;
 	void	*door;
 	void	*flash; // Is opcional.
 	void	*sphere; // Ray tracing
 	void	*mini_map;
+	*/
 }	t_texture;
 
 typedef struct s_keys

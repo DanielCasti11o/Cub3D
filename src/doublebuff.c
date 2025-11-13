@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doublebuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 18:52:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/10/28 20:25:07 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/13 18:23:53 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Print pixels in the image to print this image in the window
 
-void	pixel_image(t_img *img, int x, int y, double color)
+void	pixel_image(t_img *img, int x, int y, uint32_t color)
 {
 	char	*dst;
 

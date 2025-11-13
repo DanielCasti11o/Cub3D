@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/12 21:16:39 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/13 18:18:36 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	render_column(t_game *game, t_dda *dda)
 	printf("DEBUG: draw_start = %d\n", dda->draw_start);
 	while ((int)dda->pdraw.y < dda->draw_start)
 	{
-		pixel_image(&game->img_w, dda->pdraw.x, dda->pdraw.y, 0xFFFFFF);
+		pixel_image(&game->img_w, dda->pdraw.x, dda->pdraw.y, game->textures.c);
 		dda->pdraw.y++;
 	}
 	printf("sss\n");
@@ -97,7 +97,7 @@ void	render_column(t_game *game, t_dda *dda)
 	}
 	while ((int)dda->pdraw.y < HEIGHT)
 	{
-		pixel_image(&game->img_w, dda->pdraw.x, dda->pdraw.y, 0x444444);
+		pixel_image(&game->img_w, dda->pdraw.x, dda->pdraw.y, game->textures.f);
 		dda->pdraw.y++;
 	}
 }

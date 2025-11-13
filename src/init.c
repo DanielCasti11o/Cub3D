@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/12 21:14:31 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/13 18:19:08 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ void	init_window(t_game *game)
 	game->img_w.addr = mlx_get_data_addr(game->img_w.img,
 			&game->img_w.bits_per_pixel,
 			&game->img_w.line_length, &game->img_w.endian);
+	game->textures.c = pack_color(game->img_w.endian, game->infile.c);
+	game->textures.f = pack_color(game->img_w.endian, game->infile.f);
 }
 
