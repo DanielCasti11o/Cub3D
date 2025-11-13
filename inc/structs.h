@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/12 21:14:18 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/13 11:05:01 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_pos
 	// float	to_y;
 	bool	is_inside; // algorithm bsp rectangle adaptation
 	int		value; // key in map
+	int		pitch;
 }	t_pos;
 
 // TODO, joint with info?
@@ -185,6 +186,7 @@ typedef struct s_dda
 	t_ptint	pdraw;
 	double	camera_x;
 	double	fov;
+
 }	t_dda;
 
 // TODO
