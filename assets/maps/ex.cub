@@ -2,10 +2,10 @@
 C 199, 37, 217
 F 105, 50, 112
 
-NO ../textures/TODO
-WE ../textures/TODO
-EA ../textures/TODO
-SO ../textures/TODO
+EA ./assets/textures/east_sample.xpm
+NO ./assets/textures/north_sample.xpm
+SO ./assets/textures/south_sample.xpm
+WE ./assets/textures/west_sample.xp
 
  1111111
 100101001

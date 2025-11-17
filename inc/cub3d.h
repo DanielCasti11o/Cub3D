@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/13 21:19:40 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:55:03 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ int			perror_malloc(void);
 int			perror_open(char *filename);
 int			perror_gnl(char *filename);
 
-int			perror_args(void);
-int			perror_filename(void);
+int			perror_texture(char *filename);
 
 // parse
 
+int			perror_args(void);
+
+int			perror_filename(void);
 int			perror_unexpectedchar(char unexpected);
 int			perror_alreadydefined(t_elemfile elem);
 int			perror_overflow(void);
@@ -74,7 +76,8 @@ int			parse_game(t_game *game, int argc, char **argv);
 
 // Inits
 
-void		init_window(t_game *game);
+int			init_window(t_game *game);
+int			init_game(t_game *game);
 
 // RayCasting
 
@@ -91,8 +94,8 @@ void		render_column(t_game *game, t_dda *dda);
 int			ft_events(t_game *game);
 int			ft_key_press(int keycode, t_game *game);
 int			ft_key_release(int keycode, t_game *game);
-void		pixel_image(t_img *img, int x, int y, uint32_t color);
-void		clear_image(t_img *img);
+void		pixel_image(t_buf *img, int x, int y, uint32_t color);
+void		clear_image(t_buf *img);
 
 // Math functions
 

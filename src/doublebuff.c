@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 18:52:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/13 21:15:11 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:38:35 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 // Print pixels in the image to print this image in the window
 
-void	pixel_image(t_img *img, int x, int y, uint32_t color)
+void	pixel_image(t_buf *img, int x, int y, uint32_t color)
 {
 	char	*dst;
 
 	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)
 		return ;
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
-void	clear_image(t_img *img)
+void	clear_image(t_buf *img)
 {
 	int	total_bytes;
 
-	total_bytes = HEIGHT * img->line_length;
+	total_bytes = HEIGHT * img->size_line;
 	memset(img->addr, 0, total_bytes);
 }
 

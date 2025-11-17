@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/13 21:24:52 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:40:49 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,22 @@ typedef struct s_color
 // < This concept is called "Double Buffering." >
 typedef struct s_img
 {
-	void	*buffer;
+	void	*ptr;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
+	int		bpp;
+	int		size_line;
+	int		width;
+	int		height;
+}	t_buf;
 
 typedef struct s_textures
 {
 	uint32_t	c;
 	uint32_t	f;
+	t_buf		no;
+	t_buf		so;
+	t_buf		we;
+	t_buf		ea;
 	/*
 	void	*wall;
 	void	*flood;
@@ -100,7 +105,6 @@ typedef struct s_player
 	t_vec2f	dir;
 	t_vec2f	plane;
 	int		pitch;
-	double	fov_tan;
 	// t_vec2f	ray; // Point on the map where the ray is drawn
 	// bool	is_inside; // algorithm bsp rectangle adaptation
 	// int		value; // key in map
@@ -171,7 +175,9 @@ typedef struct s_game
 	t_map		map;
 	t_keys		keys;
 	t_infile	infile;
-	t_img		img;
+	t_buf		img;
+	double		fov_tan;
+	int			endian;
 }	t_game;
 
 typedef struct s_dda

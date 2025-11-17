@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/13 21:23:27 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 19:26:05 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ void	raycasting(t_game *game)
 	dda.pdraw.x = 0;
 	game->player.dir.x = cosf(game->player.angle);
 	game->player.dir.y = sinf(game->player.angle);
-	game->player.plane.x = -game->player.dir.y * game->player.fov_tan;
-	game->player.plane.y = game->player.dir.x * game->player.fov_tan;
+	game->player.plane.x = -game->player.dir.y * game->fov_tan;
+	game->player.plane.y = game->player.dir.x * game->fov_tan;
 	while (dda.pdraw.x < WIDTH)
 	{
 		dda.camera_x = 2 * dda.pdraw.x / (double)WIDTH - 1;
@@ -140,7 +140,7 @@ void	raycasting(t_game *game)
 		render_frame(game, &dda);
 		dda.pdraw.x++;
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->img.buffer, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 }
 
 void	dda_loop(t_game *game, t_dda *dda)
