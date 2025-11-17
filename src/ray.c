@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 21:38:59 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/18 00:31:34 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,55 @@ void	render_frame(t_game *game, t_dda *dda)
 	// printf("hi start %d \n", dda->draw_start);
 }
 
+void	render_image_column(t_game *game, t_dda *dda)
+{
+	float	dec;
+	float	step;
+	int		tex_x;
+	float	impact;
+	float	tex_pos;
+	t_buf	*texture;
+
+	if (dda->side == SIDE_VERTICAL)
+		impact = (game->player.pos.y + dda->ppdist_wall * dda->rdir.y);
+	else
+		impact = (game->player.pos.x + dda->ppdist_wall * dda->rdir.x);
+	dec = impact - floorf(impact);
+	if (dda->side == SIDE_VERTICAL && dda->rdir.x > 0)
+	{
+		texture = &game->map.tex.ea;
+		tex_x = (int)(dec * (float)game->map.tex.ea.width);
+		step = 1.0 * (float)(game->map.tex.ea.height) / (float)(dda->line_height);
+	}
+	else if (dda->side == SIDE_VERTICAL && dda->rdir.x < 0)
+	{
+		texture = &game->map.tex.we;
+		tex_x = (int)((1.0 - dec) * (float)game->map.tex.we.width);
+		step = 1.0 * (float)(game->map.tex.we.height) / (float)(dda->line_height);
+	}
+	else if (dda->side == SIDE_HORIZONTAL && dda->rdir.y > 0)
+	{
+		texture = &game->map.tex.so;
+		tex_x = (int)(dec * (float)game->map.tex.so.width);
+		step = 1.0 * (float)(game->map.tex.so.height) / (float)(dda->line_height);
+	}
+	else
+	{
+		texture = &game->map.tex.no;
+		tex_x = (int)((1.0 - dec) * (float)game->map.tex.no.width);
+		step = 1.0 * (float)(game->map.tex.no.height) / (float)(dda->line_height);
+	}
+	tex_pos = (dda->draw_start - (HEIGHT / 2 + game->player.pitch)
+			+ dda->line_height / 2) * step;
+	while ((int)dda->pdraw.y <= dda->draw_end)
+	{
+		pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y,
+			get_pixel(texture, tex_x, (int)tex_pos));
+		tex_pos += step;
+		dda->pdraw.y++;
+	}
+}
+
 void	render_column(t_game *game, t_dda *dda)
 {
 	dda->pdraw.y = 0;
@@ -95,26 +144,7 @@ void	render_column(t_game *game, t_dda *dda)
 		pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, game->map.tex.c);
 		dda->pdraw.y++;
 	}
-	// printf("sss\n");
-	while ((int)dda->pdraw.y <= dda->draw_end)
-	{
-		// pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0x0000FF);
-		if (dda->side == SIDE_VERTICAL)
-		{
-			if (dda->rdir.x > 0) // Derecha, Este
-				pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0xFFFF00);
-			else // Izquierda, Oeste
-				pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0x00FFFF);
-		}
-		else
-		{
-			if (dda->rdir.y > 0) // Abajo, Sur
-				pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0xFF00FF);
-			else // Arriba, Norte
-				pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0xFFFFFF);
-		}
-		dda->pdraw.y++;
-	}
+	render_image_column(game, dda);
 	while ((int)dda->pdraw.y < HEIGHT)
 	{
 		pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, game->map.tex.f);
@@ -138,7 +168,7 @@ void	raycasting(t_game *game)
 		dda.hit = 0;
 		dda.map.x = (size_t)game->player.pos.x;
 		dda.map.y = (size_t)game->player.pos.y;
-		printf ("x= %zu, y= %zu\n", dda.map.x, dda.map.y);
+		// printf ("x= %zu, y= %zu\n", dda.map.x, dda.map.y);
 		dda.rdir.x = game->player.dir.x + game->player.plane.x * dda.camera_x;
 		dda.rdir.y = game->player.dir.y + game->player.plane.y * dda.camera_x;
 		if (fabsf(dda.rdir.x) < 1e-6)
