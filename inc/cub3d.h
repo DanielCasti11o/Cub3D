@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 19:55:03 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 20:36:07 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # define ANGLE_FOV 66.0
 
+# define WIN_TITLE "The best cub in the world"
+
 # include "structs.h"
 
 # include "mlx.h"
@@ -30,6 +32,9 @@
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>
+
+# include <X11/X.h> // X11 interface, events, masks
+# include <X11/keysym.h> // XK_* (keysyms)
 
 int			perror_malloc(void);
 int			perror_open(char *filename);
@@ -52,14 +57,6 @@ int			perror_unclosedmap(void);
 int			perror_multipleplayerstart(void);
 int			perror_noplayerstart(void);
 
-void		free_infile(t_game *game);
-void		free_parse(t_game *game, t_parse *parse);
-
-void		free_end(t_game *game);
-
-t_color		color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-uint32_t	pack_color(int endian, t_color color);
-
 void		preinit_parse(t_game *game, t_parse *parse);
 
 int			is_player_char(char c);
@@ -74,12 +71,26 @@ int			parse_map(t_game *game, t_parse *parse);
 
 int			parse_game(t_game *game, int argc, char **argv);
 
-// Inits
+// free
+
+void		free_infile(t_game *game);
+void		free_parse(t_game *game, t_parse *parse);
+
+void		ft_destroy_image(t_game *game, t_buf *image);
+
+void		free_end(t_game *game);
+
+// color
+
+t_color		color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+uint32_t	pack_color(int endian, t_color color);
+
+// inits
 
 int			init_window(t_game *game);
 int			init_game(t_game *game);
 
-// RayCasting
+// raycasting
 
 void		raycasting(t_game *game);
 void		steps_init(t_game *game, t_dda *dda);
@@ -89,15 +100,17 @@ void		fpredrawing(t_game *game, t_dda *dda);
 void		render_frame(t_game *game, t_dda *dda);
 void		render_column(t_game *game, t_dda *dda);
 
-// Events
+// events
 
 int			ft_events(t_game *game);
 int			ft_key_press(int keycode, t_game *game);
 int			ft_key_release(int keycode, t_game *game);
+int			ft_close(t_game *game);
+
 void		pixel_image(t_buf *img, int x, int y, uint32_t color);
 void		clear_image(t_buf *img);
 
-// Math functions
+// math functions
 
 double		degrees(double grad);
 

@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 20:35:50 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/13 20:14:20 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 20:59:22 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	preinit_parse(t_game *game, t_parse *parse)
 {
+	game->map.grid = NULL;
 	game->map.height = 0;
 	parse->first_v_char = -1;
 	parse->last_v_char = 0;

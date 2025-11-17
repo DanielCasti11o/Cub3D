@@ -6,14 +6,23 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:23:04 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/13 21:16:34 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:14:16 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	ft_close(t_game *game)
+{
+	free_end(game);
+	exit(0);
+	return (0);
+}
+
 int	ft_key_press(int keycode, t_game *game)
 {
+	if (keycode == XK_Escape)
+		return (ft_close(game));
 	if (keycode == 'w') // W
 		game->keys.w = 1;
 	if (keycode == 's') // S
@@ -22,13 +31,13 @@ int	ft_key_press(int keycode, t_game *game)
 		game->keys.a = 1;
 	if (keycode == 'd') // D
 		game->keys.d = 1;
-	if (keycode == 65361) // Left
+	if (keycode == XK_Left) // Left
 		game->keys.left = 1;
-	if (keycode == 65363) // Right
+	if (keycode == XK_Right) // Right
 		game->keys.right = 1;
-	if (keycode == 65362) // Up
+	if (keycode == XK_Up) // Up
 		game->keys.up = 1;
-	if (keycode == 65364) // Down
+	if (keycode == XK_Down) // Down
 		game->keys.down = 1;
 	return (0);
 }
@@ -43,13 +52,13 @@ int	ft_key_release(int keycode, t_game *game)
 		game->keys.a = 0;
 	if (keycode == 'd') // D
 		game->keys.d = 0;
-	if (keycode == 65361) // Left
+	if (keycode == XK_Left) // Left
 		game->keys.left = 0;
-	if (keycode == 65363) // Right
+	if (keycode == XK_Right) // Right
 		game->keys.right = 0;
-	if (keycode == 65362) // Up
+	if (keycode == XK_Up) // Up
 		game->keys.up = 0;
-	if (keycode == 65364) // Down
+	if (keycode == XK_Down) // Down
 		game->keys.down = 0;
 	return (0);
 }

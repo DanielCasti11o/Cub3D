@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:37:34 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/13 20:14:20 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 20:52:07 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ static int	save_linemap(t_game *game, t_parse *parse, char *line, ssize_t len)
 	while (ft_isspace(line[i]))
 		i++;
 	if (len == 0 || line[i] == '\0' || line[i] == '\n')
-		return (parse->state = SP_DONE, 0);
+	{
+		free(line);
+		parse->state = SP_DONE;
+		return (0);
+	}
 	else if (parse->state == SP_DONE)
 		return (perror_emptylineinmap(), 1);
 	if (push_linemap(parse, line) == 1)

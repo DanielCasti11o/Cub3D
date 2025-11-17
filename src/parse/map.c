@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:45:49 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/13 20:31:22 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 20:56:49 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	parse_map(t_game *game, t_parse *parse)
 	while (row < game->map.height)
 	{
 		if (map_buildrow(game, parse, row) == 1)
-			return (ft_freestr(&game->map.grid[row]), 1);
+			return (1);
 		next = parse->head_map->next;
 		ft_lstdelone(&parse->head_map, free);
 		parse->head_map = next;
