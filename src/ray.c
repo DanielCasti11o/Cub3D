@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 21:11:35 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:38:59 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	fpredrawing(t_game *game, t_dda *dda)
 {
 	double	proj_cos;
 
-	if (dda->side == 0)
+	if (dda->side == SIDE_VERTICAL)
 	{
 		dda->ppdist_wall = (dda->map.x - game->player.pos.x + (1 - dda->step.x)
 				/ 2.0) / dda->rdir.x;
@@ -83,22 +83,36 @@ void	render_frame(t_game *game, t_dda *dda)
 	if (dda->draw_end >= HEIGHT)
 		dda->draw_end = HEIGHT - 1;
 	render_column(game, dda);
-	printf("hi start %d \n", dda->draw_start);
+	// printf("hi start %d \n", dda->draw_start);
 }
 
 void	render_column(t_game *game, t_dda *dda)
 {
 	dda->pdraw.y = 0;
-	printf("DEBUG: draw_start = %d\n", dda->draw_start);
+	// printf("DEBUG: draw_start = %d\n", dda->draw_start);
 	while ((int)dda->pdraw.y < dda->draw_start)
 	{
 		pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, game->map.tex.c);
 		dda->pdraw.y++;
 	}
-	printf("sss\n");
+	// printf("sss\n");
 	while ((int)dda->pdraw.y <= dda->draw_end)
 	{
-		pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0x0000FF);
+		// pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0x0000FF);
+		if (dda->side == SIDE_VERTICAL)
+		{
+			if (dda->rdir.x > 0) // Derecha, Este
+				pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0xFFFF00);
+			else // Izquierda, Oeste
+				pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0x00FFFF);
+		}
+		else
+		{
+			if (dda->rdir.y > 0) // Abajo, Sur
+				pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0xFF00FF);
+			else // Arriba, Norte
+				pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0xFFFFFF);
+		}
 		dda->pdraw.y++;
 	}
 	while ((int)dda->pdraw.y < HEIGHT)
@@ -152,13 +166,13 @@ void	dda_loop(t_game *game, t_dda *dda)
 		{
 			dda->side_dist.x += dda->delta.x;
 			dda->map.x += dda->step.x;
-			dda->side = 0;
+			dda->side = SIDE_VERTICAL;
 		}
 		else
 		{
 			dda->side_dist.y += dda->delta.y;
 			dda->map.y += dda->step.y;
-			dda->side = 1;
+			dda->side = SIDE_HORIZONTAL;
 		}
 		dda->hit = check_hit(game, dda);
 	}

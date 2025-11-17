@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/17 18:40:49 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:36:21 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,12 @@ typedef struct s_game
 	int			endian;
 }	t_game;
 
+typedef enum e_side
+{
+	SIDE_VERTICAL, // 0 = {Norte, Sur}
+	SIDE_HORIZONTAL // 1 = {Este, Oeste}
+}	t_side;
+
 typedef struct s_dda
 {
 	t_vec2f	rdir;
@@ -188,7 +194,7 @@ typedef struct s_dda
 	t_vec2d	delta; // deltas de x, y, Distancia para cruzar desde la posición dentro de la unidad en la que estoy hasta el fin de la unidad.
 	t_vec2f	side_dist; // Recta de la distancia IMPORTANTE el concepto = RECTA.
 	int		hit;
-	int		side;	// Esto será una flag que lo que haga es indicar la linea de choque 0=Vertical Norte, Sur y 1=Horizontal {Este, Oeste}
+	t_side	side;
 	double	ppdist_wall; // Correción del ojo de pez (Distancia perpendicular)
 	int		line_height;
 	int		draw_start;

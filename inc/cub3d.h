@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 20:36:07 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/17 21:22:14 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int			ft_key_press(int keycode, t_game *game);
 int			ft_key_release(int keycode, t_game *game);
 int			ft_close(t_game *game);
 
+uint32_t	get_pixel(t_buf *img, int x, int y);
 void		pixel_image(t_buf *img, int x, int y, uint32_t color);
 void		clear_image(t_buf *img);
 
