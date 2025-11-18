@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 21:51:11 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/07 21:51:37 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:55:41 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_color	color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 	return (out);
 }
 
-/*
 uint32_t	pack_color(int endian, t_color color)
 {
 	uint32_t	packed;
@@ -37,6 +36,7 @@ uint32_t	pack_color(int endian, t_color color)
 	return (packed);
 }
 
+/*
 t_color	unpack_color(int endian, uint32_t packed)
 {
 	t_color	color;

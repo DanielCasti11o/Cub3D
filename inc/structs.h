@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/13 11:05:01 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/17 21:36:21 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,23 @@
 # include <stddef.h> // size_t
 # include "libft.h" // t_list
 
-// * 2D point in float coordinates
-typedef struct s_p2d
+typedef struct s_vec2f
 {
 	float	x;
 	float	y;
-}	t_p2d;
+}	t_vec2f;
 
-// point in {x, y} in INT.
-
-typedef struct s_ptint
+typedef struct s_vec2i
 {
-	size_t	x;
-	size_t	y;
-}	t_ptint;
+	int	x;
+	int	y;
+}	t_vec2i;
 
-// * 2D vector represented by two points
-typedef struct s_vec
+typedef struct s_vec2d
 {
-	t_p2d	start;
-	t_p2d	end;
-}	t_vec;
+	double	x;
+	double	y;
+}	t_vec2d;
 
 // * 32-bit color in blue-green-red-alpha byte order (little-endian)
 typedef struct s_color
@@ -56,12 +52,31 @@ typedef struct s_color
 // < This concept is called "Double Buffering." >
 typedef struct s_img
 {
-	void	*img;
+	void	*ptr;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
+	int		bpp;
+	int		size_line;
+	int		width;
+	int		height;
+}	t_buf;
+
+typedef struct s_textures
+{
+	uint32_t	c;
+	uint32_t	f;
+	t_buf		no;
+	t_buf		so;
+	t_buf		we;
+	t_buf		ea;
+	/*
+	void	*wall;
+	void	*flood;
+	void	*door;
+	void	*flash; // Is opcional.
+	void	*sphere; // Ray tracing
+	void	*mini_map;
+	*/
+}	t_textures;
 
 /*
  * Tile map stored as a grid of valid characters
@@ -71,59 +86,40 @@ typedef struct s_img
  */
 typedef struct s_map
 {
-	char	**grid;
-	size_t	width;
-	size_t	height;
+	char		**grid;
+	size_t		width;
+	size_t		height;
+	t_textures	tex;
 }	t_map;
 
 /*
  * Player position and direction in the game world
  * - map: the tile map
- * - dir: the direction vector of the player:
- *   - start: player's current position
- *   - end: point of the direction the player is facing, in a unit circle
  *
  * // TODO
  */
-typedef struct s_pos
+typedef struct s_player
 {
-	t_map	map;
-	t_vec	dir;
+	t_vec2f	pos;
 	float	angle;
-	t_p2d	ray; // Point on the map where the ray is drawn
-	t_p2d	plane;
-	t_p2d	rdir;
-	// TODO
-	// float	x;
-	// float	y;
-	// float	to_x;
-	// float	to_y;
-	bool	is_inside; // algorithm bsp rectangle adaptation
-	int		value; // key in map
+	t_vec2f	dir;
+	t_vec2f	plane;
 	int		pitch;
-}	t_pos;
-
-// TODO, joint with info?
-typedef struct s_textures
-{
-	void	*wall;
-	void	*flood;
-	void	*door;
-	void	*flash; // Is opcional.
-	void	*sphere; // Ray tracing
-	void	*mini_map;
-}	t_texture;
+	// t_vec2f	ray; // Point on the map where the ray is drawn
+	// bool	is_inside; // algorithm bsp rectangle adaptation
+	// int		value; // key in map
+}	t_player;
 
 typedef struct s_keys
 {
-	int	a;
-	int	w;
-	int	s;
-	int	d;
-	int	right;
-	int	left;
-	int	up;
-	int	down;
+	uint8_t	a;
+	uint8_t	w;
+	uint8_t	s;
+	uint8_t	d;
+	uint8_t	right;
+	uint8_t	left;
+	uint8_t	up;
+	uint8_t	down;
 }	t_keys;
 
 /*
@@ -170,37 +166,42 @@ typedef struct s_infile
 	char	*ea;
 }	t_infile;
 
-typedef struct s_dda
-{
-	t_ptint	map; // punto dónde estamos parados sin float
-	t_ptint	step; // Dirección
-	double	deltax;
-	double	deltay; // deltas de x, y, Distancia para cruzar desde la posición dentro de la unidad en la que estoy hasta el fin de la unidad.
-	t_p2d	side_dist; // Recta de la distancia IMPORTANTE el concepto = RECTA.
-	int		hit;
-	int		side;	// Esto será una flag que lo que haga es indicar la linea de choque 0=Vertical Norte, Sur y 1=Horizontal {Este, Oeste}
-	double	ppdist_wall; // Correción del ojo de pez (Distancia perpendicular)
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	t_ptint	pdraw;
-	double	camera_x;
-	double	fov;
-
-}	t_dda;
-
 // TODO
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	void		*img;
-	t_pos		pos;
-	t_texture	textures;
+	t_player	player;
+	t_map		map;
 	t_keys		keys;
 	t_infile	infile;
-	t_img		img_w;
+	t_buf		img;
+	double		fov_tan;
+	int			endian;
 }	t_game;
+
+typedef enum e_side
+{
+	SIDE_VERTICAL, // 0 = {Norte, Sur}
+	SIDE_HORIZONTAL // 1 = {Este, Oeste}
+}	t_side;
+
+typedef struct s_dda
+{
+	t_vec2f	rdir;
+	t_vec2i	map; // punto dónde estamos parados sin float
+	t_vec2i	step; // Dirección
+	t_vec2d	delta; // deltas de x, y, Distancia para cruzar desde la posición dentro de la unidad en la que estoy hasta el fin de la unidad.
+	t_vec2f	side_dist; // Recta de la distancia IMPORTANTE el concepto = RECTA.
+	int		hit;
+	t_side	side;
+	double	ppdist_wall; // Correción del ojo de pez (Distancia perpendicular)
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	t_vec2i	pdraw;
+	double	camera_x;
+}	t_dda;
 
 // * Parser state machine
 typedef enum e_stateparse

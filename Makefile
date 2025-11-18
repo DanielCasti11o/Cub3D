@@ -10,7 +10,6 @@ SRC = \
 	$(SRC_DIR)/parse/errors.c \
 	$(SRC_DIR)/parse/errors2.c \
 	$(SRC_DIR)/parse/errors3.c \
-	$(SRC_DIR)/parse/free.c \
 	$(SRC_DIR)/parse/headers.c \
 	$(SRC_DIR)/parse/map.c \
 	$(SRC_DIR)/parse/parse.c \
@@ -19,6 +18,7 @@ SRC = \
 	$(SRC_DIR)/doublebuff.c \
 	$(SRC_DIR)/errors.c \
 	$(SRC_DIR)/events.c \
+	$(SRC_DIR)/free.c \
 	$(SRC_DIR)/init.c \
 	$(SRC_DIR)/ray.c \
 	$(SRC_DIR)/main.c
