@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:23:04 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 21:14:16 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/20 23:17:02 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,49 +63,15 @@ int	ft_key_release(int keycode, t_game *game)
 	return (0);
 }
 
-void	rotate_left(t_game *game, double speed)
-{
-	float	oldir_x;
-	float	oldpl_x;
-
-	oldir_x = game->player.dir.x;
-	oldpl_x = game->player.plane.x;
-	game->player.dir.x
-		= game->player.dir.x * cosf(-speed) - game->player.dir.y * sinf(-speed);
-	game->player.dir.y
-		= oldir_x * sinf(-speed) + game->player.dir.y * cosf(-speed);
-	game->player.plane.x = game->player.plane.x * cosf(-speed)
-		- game->player.plane.y * sinf(-speed);
-	game->player.plane.y = oldpl_x * sinf(-speed)
-		+ game->player.plane.y * cosf(-speed);
-}
-
-void	rotate_right(t_game *game, double speed)
-{
-	float	oldir_x;
-	float	oldpl_x;
-
-	oldir_x = game->player.dir.x;
-	oldpl_x = game->player.plane.x;
-	game->player.dir.x
-		= game->player.dir.x * cosf(speed) - game->player.dir.y * sinf(speed);
-	game->player.dir.y
-		= oldir_x * sinf(speed) + game->player.dir.y * cosf(speed);
-	game->player.plane.x = game->player.plane.x * cosf(speed)
-		- game->player.plane.y * sinf(speed);
-	game->player.plane.y = oldpl_x * sinf(speed)
-		+ game->player.plane.y * cosf(speed);
-}
-
 int	ft_events(t_game *game)
 {
 	double	speed;
 
-	speed = 0.2;
+	speed = 0.03;
 	if (game->keys.left == 1)
-		game->player.angle -= degrees(2);
+		game->player.angle -= degrees(0.5);
 	if (game->keys.right == 1)
-		game->player.angle += degrees(2);
+		game->player.angle += degrees(0.5);
 	if (game->keys.d == 1)
 	{
 		game->player.pos.x += cosf(game->player.angle + degrees(90)) * speed;
@@ -127,10 +93,12 @@ int	ft_events(t_game *game)
 		game->player.pos.y -= sinf(game->player.angle) * speed;
 	}
 	if (game->keys.up == 1)
-		game->player.pitch += 10;
+		game->player.pitch += 5;
 	if (game->keys.down == 1)
-		game->player.pitch -= 10;
+		game->player.pitch -= 5;
 	clear_image(&game->img);
 	raycasting(game);
+	mini_map(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 	return (0);
 }

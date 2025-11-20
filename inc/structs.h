@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/17 21:36:21 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/20 21:58:46 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,19 @@ typedef enum e_elemfile
  * - we: path to west texture
  * - ea: path to east texture
  */
+
+ // STRUCT FOR MINI_MAP
+
+typedef struct s_minmap
+{
+	int	scale; // El tamaño de cada cuadradito
+	int	edge_x; // Margen desde la izquierda de la ventana
+	int	edge_y; // Margen desde el techo de la ventana
+	int	color_wall; // Color de la pared en el mini_mapa
+	int	color_floor;// Color del suelo en el mini mapa
+	int	color_player; // Color del puntito del jugador
+}	t_minmap;
+
 typedef struct s_infile
 {
 	t_color	f;
@@ -178,6 +191,9 @@ typedef struct s_game
 	t_buf		img;
 	double		fov_tan;
 	int			endian;
+	int			valgrind_mode;
+	int			frame_count;
+	t_minmap	mp; // estructura de mini mapa
 }	t_game;
 
 typedef enum e_side

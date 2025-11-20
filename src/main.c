@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 21:08:11 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/20 23:17:20 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	if (init_game(&game) == 1)
 		return (free_end(&game), 1);
 	raycasting(&game);
+	mini_map(&game);
 	mlx_loop(game.mlx);
 	free_end(&game);
 	return (0);

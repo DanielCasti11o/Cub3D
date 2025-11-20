@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/18 00:31:34 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/20 23:16:50 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ void	raycasting(t_game *game)
 		render_frame(game, &dda);
 		dda.pdraw.x++;
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
+	// mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 }
 
 void	dda_loop(t_game *game, t_dda *dda)

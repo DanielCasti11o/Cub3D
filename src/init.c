@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 21:06:45 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/18 18:04:00 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int	init_game(t_game *game)
 	game->map.tex.we.addr = NULL;
 	game->map.tex.ea.ptr = NULL;
 	game->map.tex.ea.addr = NULL;
+	game->valgrind_mode = 1;
+	game->frame_count = 0;
 	if (init_window(game) == 1)
 		return (1);
 	game->fov_tan = tan(degrees(ANGLE_FOV / 2));

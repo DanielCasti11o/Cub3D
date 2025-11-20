@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 22:08:54 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/20 23:20:03 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define WIDTH 700
 # define HEIGHT 600
 # define PI 3.1415926535
+# define M_SIZE 200 // Mini map size
 
 # define ANGLE_FOV 66.0
 
@@ -114,5 +115,13 @@ void		clear_image(t_buf *img);
 // math functions
 
 double		degrees(double grad);
+
+// BONUS:
+
+// Minimap
+void		init_map_(t_minmap *map);
+void		draw_square(t_game *game, int x, int y, uint32_t color); //1und grid
+void		render_minmap(t_game *game);
+void		mini_map(t_game *game);
 
 #endif
