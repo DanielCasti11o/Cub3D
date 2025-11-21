@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:37:18 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/20 23:19:53 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/21 13:59:49 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,36 @@ void	render_minmap(t_game *game)
 	// mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 }
 
+void	render_player(t_game *game)
+{
+	t_vec2f	pos_float;
+	t_vec2i	player_px;
+	t_vec2i	count;
+	int		scale_player;
+	int		center;
+
+	pos_float.x = game->player.pos.x;
+	pos_float.y = game->player.pos.y;
+	player_px.x = game->mp.edge_x + (int)(pos_float.x * game->mp.scale);
+	player_px.y = game->mp.edge_y + (int)(pos_float.y * game->mp.scale);
+	scale_player = 5;
+	center = scale_player / 2;
+	count.y = 0;
+	while (count.y < scale_player)
+	{
+		count.x = 0;
+		while (count.x < scale_player)
+		{
+			pixel_image(&game->img, player_px.x + count.x - center, player_px.y + count.y - center, 0xFFFF00);
+			count.x++;
+		}
+		count.y++;
+	}
+}
+
 void	mini_map(t_game *game)
 {
 	init_minmap(&game->mp);
 	render_minmap(game);
+	render_player(game);
 }
