@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/20 23:20:03 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/22 18:16:47 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,13 @@ void		init_map_(t_minmap *map);
 void		draw_square(t_game *game, int x, int y, uint32_t color); //1und grid
 void		render_minmap(t_game *game);
 void		mini_map(t_game *game);
+
+// Functions to textures.
+
+// Collisions
+
+
+
+
 
 #endif

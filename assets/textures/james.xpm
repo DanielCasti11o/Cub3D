@@ -1,0 +1,78 @@
+/* XPM */
+static char *pibe_valderrama_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"32 32 40 1",
+/* colors */
+"  c #000000", /* Negro / Transparencia */
+". c #FFFFFF", /* Blanco */
+"X c #FFD700", /* Oro (Cabello) */
+"o c #DAA520", /* Dorado oscuro (Cabello) */
+"O c #E9C97C", /* Rubio claro (Cabello) */
+"+ c #F0E68C", /* Caqui claro (Cabello) */
+"@ c #8B4513", /* Marrón oscuro (Sombra piel) */
+"# c #CD853F", /* Perú (Tono de piel) */
+"$ c #D2B48C", /* Trigo (Tono de piel claro) */
+"% c #F4A460", /* Naranja arena (Iluminación piel) */
+"& c #483D8B", /* Azul pizarra oscuro (Detalle) */
+"* c #4682B4", /* Acero azul (Uniforme) */
+"= c #DC143C", /* Carmesí (Uniforme, Rojo) */
+"- c #FF4500", /* Naranja rojo (Uniforme, Amarillo/Detalle) */
+"; c #0000FF", /* Azul brillante (Uniforme, Azul) */
+": c #1E90FF", /* Azul esquivo */
+"> c #FF0000", /* Rojo puro */
+", c #000080", /* Azul oscuro */
+"< c #FFC0CB", /* Rosa claro */
+"1 c #008000", /* Verde oscuro */
+"2 c #00FFFF", /* Cyan */
+"3 c #800080", /* Púrpura */
+"4 c #808080", /* Gris */
+"5 c #C0C0C0", /* Plata */
+"6 c #FFA500", /* Naranja */
+"7 c #9ACD32", /* Verde amarillento */
+"8 c #3CB371", /* Verde mar mediano */
+"9 c #2E8B57", /* Verde mar oscuro */
+"A c #32CD32", /* Verde lima */
+"B c #7FFF00", /* Verde Chartreuse */
+"C c #00FF7F", /* Verde primavera mediano */
+"D c #00FFC0", /* Cyan claro */
+"E c #E0FFFF", /* Azul celeste claro */
+"F c #7FFFD4", /* Aguamarina */
+"G c #66CDAA", /* Verde mar mediano */
+"H c #48D1CC", /* Turquesa mediano */
+"I c #20B2AA", /* Verde mar claro */
+"J c #008B8B", /* Cyan oscuro */
+"K c #008080"  /* Verde azulado */
+/* pixels */
+" ++++++++++++++++++++++++++++++ ",
+" +XXXXXXXXXXXXXXXXXXXXXXXXXXXX+ ",
+" +XXXXXXXXooxooXXXXXXXXXXXXXXXX+ ",
+" +XXXXXXooXoXooXoXoXXXXXXXXXXXX+ ",
+" +XXXXXXooXXXXXoXooXoXXXXXXXXXX+ ",
+" +XXXXXoXXXXXXXXXXXXXXXXXXXXXX+ ",
+" +XXXXoXXXXXXXXXXoXXXXXXXXXXXX+ ",
+" +XXXoXXXXXXXXXXXXXoXXXXXXXXXX+ ",
+" +XXoo++++++++++++++oXoXXXXXXX+ ",
+" +Xoo+$$$%%%%%%%%%@oXoXXXXXXXX+ ",
+" +Xo+#$$#%##%#$#$@XoXXXXXXXXX+ ",
+" +oo#$$%###%##%###@XoXXXXXXXX+ ",
+" +o#%#$#$#%#$#$#$#$@XoXXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" +@#%#$#$#%#$#$#$#$#@oXXXXXX+ ",
+" ++++++++++++++++++++++++++++++ "
+};

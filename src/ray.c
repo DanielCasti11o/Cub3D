@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/20 23:16:50 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/22 19:13:21 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ void	render_column(t_game *game, t_dda *dda)
 }
 
 // TODO: check uninitialized values in dda struct
+
 void	raycasting(t_game *game)
 {
 	t_dda	dda;

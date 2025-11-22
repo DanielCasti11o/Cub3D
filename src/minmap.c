@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:37:18 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/21 13:59:49 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/22 18:00:13 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	init_minmap(t_minmap *map)
 {
 	map->color_floor = 0xFFFF00;
-	map->color_player = 0x00FF00;
 	map->color_wall = 0x0000FF;
 	map->color_floor = 0x000000;
 	map->edge_x = 20; // La margen será de dos cuadritos
@@ -90,7 +89,7 @@ void	render_player(t_game *game)
 		count.x = 0;
 		while (count.x < scale_player)
 		{
-			pixel_image(&game->img, player_px.x + count.x - center, player_px.y + count.y - center, 0xFFFF00);
+			pixel_image(&game->img, player_px.x + count.x - center, player_px.y + count.y - center, 0xff0000);
 			count.x++;
 		}
 		count.y++;

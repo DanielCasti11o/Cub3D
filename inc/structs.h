@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/20 21:58:46 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/22 18:16:22 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,12 +161,13 @@ typedef enum e_elemfile
 
 typedef struct s_minmap
 {
-	int	scale; // El tamaño de cada cuadradito
-	int	edge_x; // Margen desde la izquierda de la ventana
-	int	edge_y; // Margen desde el techo de la ventana
-	int	color_wall; // Color de la pared en el mini_mapa
-	int	color_floor;// Color del suelo en el mini mapa
-	int	color_player; // Color del puntito del jugador
+	int		scale; // Size of square
+	int		edge_x; // Size of edge X
+	int		edge_y; // Size of edge Y
+	int		color_floor;
+	int		color_wall; // Esta se eliminará
+	t_buf	wall; // Wall
+	t_buf	player; //player
 }	t_minmap;
 
 typedef struct s_infile
@@ -178,6 +179,16 @@ typedef struct s_infile
 	char	*we;
 	char	*ea;
 }	t_infile;
+
+// COLLISIONS
+
+typedef enum type_move
+{
+	FRONT,
+	BACK,
+	RIGHT,
+	LEFT
+}	t_type_move;
 
 // TODO
 typedef struct s_game
