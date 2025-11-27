@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/22 18:16:47 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/27 21:41:37 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ uint32_t	pack_color(int endian, t_color color);
 
 // inits
 
-int			init_window(t_game *game);
+int			init_mlx(t_game *game);
 int			init_game(t_game *game);
 
 // raycasting

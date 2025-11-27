@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 18:52:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 22:08:45 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/27 21:09:31 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	clear_image(t_buf *img)
 	int	total_bytes;
 
 	total_bytes = HEIGHT * img->size_line;
-	memset(img->addr, 0, total_bytes);
+	ft_memset(img->addr, 0, total_bytes);
 }
 
 // TODO: move to a utils or math file

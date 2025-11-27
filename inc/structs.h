@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/22 18:16:22 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/27 21:30:40 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,6 @@ typedef struct s_game
 	t_buf		img;
 	double		fov_tan;
 	int			endian;
-	int			valgrind_mode;
 	int			frame_count;
 	t_minmap	mp; // estructura de mini mapa
 }	t_game;
@@ -220,13 +219,13 @@ typedef struct s_dda
 	t_vec2i	step; // Dirección
 	t_vec2d	delta; // deltas de x, y, Distancia para cruzar desde la posición dentro de la unidad en la que estoy hasta el fin de la unidad.
 	t_vec2f	side_dist; // Recta de la distancia IMPORTANTE el concepto = RECTA.
+	t_vec2i	pdraw;
 	int		hit;
 	t_side	side;
 	double	ppdist_wall; // Correción del ojo de pez (Distancia perpendicular)
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	t_vec2i	pdraw;
 	double	camera_x;
 }	t_dda;
 
