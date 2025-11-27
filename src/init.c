@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/27 21:30:06 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/27 21:57:41 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	init_events(t_game *game)
 
 int	init_game(t_game *game)
 {
-	game->mlx = NULL;
 	game->win = NULL;
 	game->img.ptr = NULL;
 	game->img.addr = NULL;
@@ -105,9 +104,10 @@ int	init_game(t_game *game)
 	game->map.tex.we.addr = NULL;
 	game->map.tex.ea.ptr = NULL;
 	game->map.tex.ea.addr = NULL;
-	game->frame_count = 0;
+	game->frame_count = 0; // TODO: unused ??
 	if (init_mlx(game) == 1)
 		return (1);
+	game->player.pitch = 0;
 	game->fov_tan = tan(degrees(ANGLE_FOV / 2));
 	raycasting(game);
 	mini_map(game);

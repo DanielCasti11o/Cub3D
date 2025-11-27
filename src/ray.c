@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/27 21:40:21 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/27 21:47:24 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	raycasting(t_game *game)
 		dda.hit = 0;
 		dda.map.x = (size_t)game->player.pos.x;
 		dda.map.y = (size_t)game->player.pos.y;
-		// printf ("x= %zu, y= %zu\n", dda.map.x, dda.map.y);
 		dda.rdir.x = game->player.dir.x + game->player.plane.x * dda.camera_x;
 		dda.rdir.y = game->player.dir.y + game->player.plane.y * dda.camera_x;
 		if (fabsf(dda.rdir.x) < 1e-6)
@@ -124,5 +123,4 @@ void	raycasting(t_game *game)
 		render_frame(game, &dda);
 		dda.pdraw.x++;
 	}
-	// mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 }
