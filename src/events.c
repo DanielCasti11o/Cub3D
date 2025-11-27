@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:23:04 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/17 21:14:16 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:31:57 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,74 +63,73 @@ int	ft_key_release(int keycode, t_game *game)
 	return (0);
 }
 
-void	rotate_left(t_game *game, double speed)
+void	move_vector_view(int type, t_game *game)
 {
-	float	oldir_x;
-	float	oldpl_x;
+	t_vec2f	new_pos;
+	double	speed;
 
-	oldir_x = game->player.dir.x;
-	oldpl_x = game->player.plane.x;
-	game->player.dir.x
-		= game->player.dir.x * cosf(-speed) - game->player.dir.y * sinf(-speed);
-	game->player.dir.y
-		= oldir_x * sinf(-speed) + game->player.dir.y * cosf(-speed);
-	game->player.plane.x = game->player.plane.x * cosf(-speed)
-		- game->player.plane.y * sinf(-speed);
-	game->player.plane.y = oldpl_x * sinf(-speed)
-		+ game->player.plane.y * cosf(-speed);
+	speed = 0.03;
+	if (type == FRONT)
+	{
+		new_pos.x = game->player.pos.x + cosf(game->player.angle) * speed;
+		new_pos.y = game->player.pos.y + sinf(game->player.angle) * speed;
+	}
+	if (type == BACK)
+	{
+		new_pos.x = game->player.pos.x - cosf(game->player.angle) * speed;
+		new_pos.y = game->player.pos.y - sinf(game->player.angle) * speed;
+	}
+	if (game->map.grid[(int)new_pos.y][(int)new_pos.x] != '1')
+	{
+		game->player.pos.x = new_pos.x;
+		game->player.pos.y = new_pos.y;
+	}
 }
 
-void	rotate_right(t_game *game, double speed)
+void	lateral_transition(int type, t_game *game)
 {
-	float	oldir_x;
-	float	oldpl_x;
+	t_vec2f	new_pos;
+	double	speed;
 
-	oldir_x = game->player.dir.x;
-	oldpl_x = game->player.plane.x;
-	game->player.dir.x
-		= game->player.dir.x * cosf(speed) - game->player.dir.y * sinf(speed);
-	game->player.dir.y
-		= oldir_x * sinf(speed) + game->player.dir.y * cosf(speed);
-	game->player.plane.x = game->player.plane.x * cosf(speed)
-		- game->player.plane.y * sinf(speed);
-	game->player.plane.y = oldpl_x * sinf(speed)
-		+ game->player.plane.y * cosf(speed);
+	speed = 0.03;
+	if (type == RIGHT)
+	{
+		new_pos.x = game->player.pos.x + cosf(game->player.angle + degrees(90)) * speed;
+		new_pos.y = game->player.pos.y + sinf(game->player.angle + degrees(90)) * speed;
+	}
+	if (type == LEFT)
+	{
+		new_pos.x = game->player.pos.x + cosf(game->player.angle - degrees(90)) * speed;
+		new_pos.y = game->player.pos.y + sinf(game->player.angle - degrees(90)) * speed;
+	}
+	if (game->map.grid[(int)new_pos.y][(int)new_pos.x] != '1')
+	{
+		game->player.pos.x = new_pos.x;
+		game->player.pos.y = new_pos.y;
+	}
 }
 
 int	ft_events(t_game *game)
 {
-	double	speed;
-
-	speed = 0.2;
 	if (game->keys.left == 1)
-		game->player.angle -= degrees(2);
+		game->player.angle -= degrees(0.5);
 	if (game->keys.right == 1)
-		game->player.angle += degrees(2);
+		game->player.angle += degrees(0.5);
 	if (game->keys.d == 1)
-	{
-		game->player.pos.x += cosf(game->player.angle + degrees(90)) * speed;
-		game->player.pos.y += sinf(game->player.angle + degrees(90)) * speed;
-	}
+		lateral_transition(RIGHT, game);
 	if (game->keys.a == 1)
-	{
-		game->player.pos.x += cosf(game->player.angle - degrees(90)) * speed;
-		game->player.pos.y += sinf(game->player.angle - degrees(90)) * speed;
-	}
+		lateral_transition(LEFT, game);
 	if (game->keys.w == 1)
-	{
-		game->player.pos.x += cosf(game->player.angle) * speed;
-		game->player.pos.y += sinf(game->player.angle) * speed;
-	}
+		move_vector_view(FRONT, game);
 	if (game->keys.s == 1)
-	{
-		game->player.pos.x -= cosf(game->player.angle) * speed;
-		game->player.pos.y -= sinf(game->player.angle) * speed;
-	}
+		move_vector_view(BACK, game);
 	if (game->keys.up == 1)
-		game->player.pitch += 10;
+		game->player.pitch += 5;
 	if (game->keys.down == 1)
-		game->player.pitch -= 10;
+		game->player.pitch -= 5;
 	clear_image(&game->img);
 	raycasting(game);
+	mini_map(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 	return (0);
 }

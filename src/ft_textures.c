@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_textures.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/20 23:17:20 by daniel-cast      ###   ########.fr       */
+/*   Created: 2025/11/22 11:36:59 by daniel-cast       #+#    #+#             */
+/*   Updated: 2025/11/22 11:56:35 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+uint32_t	get_color_from_texture(t_buf *tex, int x, int y)
 {
-	t_game	game;
+	char	*dst;
 
-	if (parse_game(&game, argc, argv) == 1)
-		return (1);
-	printf("startx = %f starty= %f\n", game.player.pos.x, game.player.pos.y);
-	if (init_game(&game) == 1)
-		return (free_end(&game), 1);
-	raycasting(&game);
-	mini_map(&game);
-	mlx_loop(game.mlx);
-	free_end(&game);
-	return (0);
+	if (x < 0 || y < 0 || x >= tex->width || y >= tex->height)
+		return (0); // Fuera de límites
+	dst = tex->addr + (y * tex->size_line + x * (tex->bpp / 8));
+	return (*(uint32_t *)dst); // pasamos la dirección de la imagen como dirección de 32 bits
 }

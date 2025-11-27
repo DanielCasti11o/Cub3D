@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/18 00:31:34 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/22 19:13:21 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ void	render_column(t_game *game, t_dda *dda)
 }
 
 // TODO: check uninitialized values in dda struct
+
 void	raycasting(t_game *game)
 {
 	t_dda	dda;
@@ -185,7 +186,7 @@ void	raycasting(t_game *game)
 		render_frame(game, &dda);
 		dda.pdraw.x++;
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
+	// mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 }
 
 void	dda_loop(t_game *game, t_dda *dda)

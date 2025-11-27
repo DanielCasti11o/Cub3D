@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/17 21:36:21 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:16:22 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,20 @@ typedef enum e_elemfile
  * - we: path to west texture
  * - ea: path to east texture
  */
+
+ // STRUCT FOR MINI_MAP
+
+typedef struct s_minmap
+{
+	int		scale; // Size of square
+	int		edge_x; // Size of edge X
+	int		edge_y; // Size of edge Y
+	int		color_floor;
+	int		color_wall; // Esta se eliminará
+	t_buf	wall; // Wall
+	t_buf	player; //player
+}	t_minmap;
+
 typedef struct s_infile
 {
 	t_color	f;
@@ -165,6 +179,16 @@ typedef struct s_infile
 	char	*we;
 	char	*ea;
 }	t_infile;
+
+// COLLISIONS
+
+typedef enum type_move
+{
+	FRONT,
+	BACK,
+	RIGHT,
+	LEFT
+}	t_type_move;
 
 // TODO
 typedef struct s_game
@@ -178,6 +202,9 @@ typedef struct s_game
 	t_buf		img;
 	double		fov_tan;
 	int			endian;
+	int			valgrind_mode;
+	int			frame_count;
+	t_minmap	mp; // estructura de mini mapa
 }	t_game;
 
 typedef enum e_side
