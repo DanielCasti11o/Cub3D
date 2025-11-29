@@ -26,6 +26,7 @@ SRC = \
 	$(SRC_DIR)/ray.c \
 	$(SRC_DIR)/wall.c \
 	$(SRC_DIR)/main.c
+
 OBJ = $(SRC:.c=.o)
 
 INC_DIR = ./inc
@@ -39,10 +40,23 @@ MLX = $(MLX_DIR)/libmlx.a
 LDFLAGS = -L$(MLX_DIR) -L$(LIBFT_DIR)
 LDLIBS = -lm -lmlx -lXext -lX11
 
-all: $(NAME)
+NORMAL_FLAG = .all_build
+BONUS_FLAG = .bonus_build
+
+all: $(NORMAL_FLAG)
+
+bonus: $(BONUS_FLAG)
 
 $(NAME): $(MLX) $(LIBFT) $(OBJ)
 	$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+
+$(NORMAL_FLAG): $(NAME)
+	$(RM) $(BONUS_FLAG)
+	touch $@
+
+$(BONUS_FLAG): $(NAME)
+	$(RM) $(NORMAL_FLAG)
+	touch $@
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	 $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -57,6 +71,7 @@ clean:
 	$(RM) $(OBJ)
 	make fclean -C $(LIBFT_DIR)
 	make clean -C $(MLX_DIR)
+	$(RM) $(NORMAL_FLAG) $(BONUS_FLAG)
 
 fclean: clean
 	$(RM) $(OBJ) $(NAME)
@@ -71,4 +86,4 @@ dev: CFLAGS += -g3 -fno-omit-frame-pointer -fsanitize=address,undefined,leak
 dev: COPT = -Og
 dev: all
 
-.PHONY: all fclean clean re debug dev
+.PHONY: all bonus fclean clean re debug dev
