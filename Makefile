@@ -20,6 +20,7 @@ SRC = \
 	$(SRC_DIR)/events.c \
 	$(SRC_DIR)/free.c \
 	$(SRC_DIR)/init.c \
+	$(SRC_DIR)/move.c \
 	$(SRC_DIR)/ray_render.c \
 	$(SRC_DIR)/ray.c \
 	$(SRC_DIR)/minmap.c \

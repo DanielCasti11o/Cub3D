@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minmap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:37:18 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/22 18:00:13 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/29 17:00:47 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	render_player(t_game *game)
 	pos_float.y = game->player.pos.y;
 	player_px.x = game->mp.edge_x + (int)(pos_float.x * game->mp.scale);
 	player_px.y = game->mp.edge_y + (int)(pos_float.y * game->mp.scale);
-	scale_player = 5;
+	scale_player = M_PLAYER;
 	center = scale_player / 2;
 	count.y = 0;
 	while (count.y < scale_player)

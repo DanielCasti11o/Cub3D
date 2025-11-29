@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/27 21:41:37 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:01:33 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 # define WIDTH 700
 # define HEIGHT 600
 # define PI 3.1415926535
+
 # define M_SIZE 200 // Mini map size
+# define M_PLAYER 5 // Mini map size
+# define MARGIN 0.25
 
 # define ANGLE_FOV 66.0
 
@@ -101,6 +104,11 @@ void		fpredrawing(t_game *game, t_dda *dda);
 void		render_frame(t_game *game, t_dda *dda);
 void		render_column(t_game *game, t_dda *dda);
 
+// move
+
+void		move_vector_view(int type, t_game *game);
+void		lateral_transition(int type, t_game *game);
+
 // events
 
 int			ft_events(t_game *game);
@@ -119,7 +127,6 @@ double		degrees(double grad);
 // BONUS:
 
 // Minimap
-void		init_map_(t_minmap *map);
 void		draw_square(t_game *game, int x, int y, uint32_t color); //1und grid
 void		render_minmap(t_game *game);
 void		mini_map(t_game *game);
