@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   maths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 17:25:05 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/29 17:25:27 by migugar2         ###   ########.fr       */
+/*   Created: 2025/11/29 17:15:37 by migugar2          #+#    #+#             */
+/*   Updated: 2025/11/29 17:23:46 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+double	degrees(double grad)
 {
-	t_game	game;
+	double	rad;
 
-	if (parse_game(&game, argc, argv) == 1)
-		return (1);
-	if (init_game(&game) == 1)
-		return (free_end(&game), 1);
-	free_end(&game);
-	return (0);
+	rad = grad * (PI / 180);
+	return (rad);
+}
+
+double	get_delta_dist(float rdir)
+{
+	if (fabsf(rdir) < 1e-6)
+		return (1e30);
+	return (1.0 / fabsf(rdir));
 }

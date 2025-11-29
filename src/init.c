@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/18 18:04:00 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/27 21:57:41 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	init_textures(t_game *game)
 	return (0);
 }
 
-int	init_window(t_game *game)
+int	init_mlx(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
@@ -60,9 +60,6 @@ int	init_window(t_game *game)
 	game->img.width = WIDTH;
 	game->img.height = HEIGHT;
 	if (init_textures(game) == 1)
-		return (1);
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, WIN_TITLE);
-	if (game->win == NULL)
 		return (1);
 	return (0);
 }
@@ -96,7 +93,6 @@ void	init_events(t_game *game)
 
 int	init_game(t_game *game)
 {
-	game->mlx = NULL;
 	game->win = NULL;
 	game->img.ptr = NULL;
 	game->img.addr = NULL;
@@ -108,11 +104,18 @@ int	init_game(t_game *game)
 	game->map.tex.we.addr = NULL;
 	game->map.tex.ea.ptr = NULL;
 	game->map.tex.ea.addr = NULL;
-	game->valgrind_mode = 1;
-	game->frame_count = 0;
-	if (init_window(game) == 1)
+	game->frame_count = 0; // TODO: unused ??
+	if (init_mlx(game) == 1)
 		return (1);
+	game->player.pitch = 0;
 	game->fov_tan = tan(degrees(ANGLE_FOV / 2));
+	raycasting(game);
+	mini_map(game);
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, WIN_TITLE);
+	if (game->win == NULL)
+		return (1);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 	init_events(game);
+	mlx_loop(game->mlx);
 	return (0);
 }

@@ -20,8 +20,11 @@ SRC = \
 	$(SRC_DIR)/events.c \
 	$(SRC_DIR)/free.c \
 	$(SRC_DIR)/init.c \
-	$(SRC_DIR)/ray.c \
+	$(SRC_DIR)/maths.c \
 	$(SRC_DIR)/minmap.c \
+	$(SRC_DIR)/move.c \
+	$(SRC_DIR)/ray.c \
+	$(SRC_DIR)/wall.c \
 	$(SRC_DIR)/main.c
 OBJ = $(SRC:.c=.o)
 
