@@ -1,11 +1,11 @@
 
-C 199, 37, 217
-F 105, 50, 112
+C 0, 0, 0
+F 44, 92, 36
 
-EA ./assets/textures/east_sample.xpm
-NO ./assets/textures/north_sample.xpm
-SO ./assets/textures/south_sample.xpm
-WE ./assets/textures/west_sample.xpm
+EA ./assets/textures/colom.xpm
+NO ./assets/textures/angel.xpm
+SO ./assets/textures/daniel.xpm
+WE ./assets/textures/cool.xpm
 
 111111111
 100101001

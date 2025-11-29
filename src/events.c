@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 16:23:04 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/22 18:31:57 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/29 17:32:45 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,52 +63,6 @@ int	ft_key_release(int keycode, t_game *game)
 	return (0);
 }
 
-void	move_vector_view(int type, t_game *game)
-{
-	t_vec2f	new_pos;
-	double	speed;
-
-	speed = 0.03;
-	if (type == FRONT)
-	{
-		new_pos.x = game->player.pos.x + cosf(game->player.angle) * speed;
-		new_pos.y = game->player.pos.y + sinf(game->player.angle) * speed;
-	}
-	if (type == BACK)
-	{
-		new_pos.x = game->player.pos.x - cosf(game->player.angle) * speed;
-		new_pos.y = game->player.pos.y - sinf(game->player.angle) * speed;
-	}
-	if (game->map.grid[(int)new_pos.y][(int)new_pos.x] != '1')
-	{
-		game->player.pos.x = new_pos.x;
-		game->player.pos.y = new_pos.y;
-	}
-}
-
-void	lateral_transition(int type, t_game *game)
-{
-	t_vec2f	new_pos;
-	double	speed;
-
-	speed = 0.03;
-	if (type == RIGHT)
-	{
-		new_pos.x = game->player.pos.x + cosf(game->player.angle + degrees(90)) * speed;
-		new_pos.y = game->player.pos.y + sinf(game->player.angle + degrees(90)) * speed;
-	}
-	if (type == LEFT)
-	{
-		new_pos.x = game->player.pos.x + cosf(game->player.angle - degrees(90)) * speed;
-		new_pos.y = game->player.pos.y + sinf(game->player.angle - degrees(90)) * speed;
-	}
-	if (game->map.grid[(int)new_pos.y][(int)new_pos.x] != '1')
-	{
-		game->player.pos.x = new_pos.x;
-		game->player.pos.y = new_pos.y;
-	}
-}
-
 int	ft_events(t_game *game)
 {
 	if (game->keys.left == 1)
@@ -124,9 +78,9 @@ int	ft_events(t_game *game)
 	if (game->keys.s == 1)
 		move_vector_view(BACK, game);
 	if (game->keys.up == 1)
-		game->player.pitch += 5;
+		game->player.pitch = vertical_view(game, UP);
 	if (game->keys.down == 1)
-		game->player.pitch -= 5;
+		game->player.pitch = vertical_view(game, DOWN);
 	clear_image(&game->img);
 	raycasting(game);
 	mini_map(game);

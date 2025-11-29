@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/22 18:16:47 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/29 17:27:58 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ void		fpredrawing(t_game *game, t_dda *dda);
 void		render_frame(t_game *game, t_dda *dda);
 void		render_column(t_game *game, t_dda *dda);
 
+// moves
+int			vertical_view(t_game *game, int type);
+void		lateral_transition(int type, t_game *game);
+void		move_vector_view(int type, t_game *game);
+
 // events
 
 int			ft_events(t_game *game);
@@ -125,11 +130,5 @@ void		render_minmap(t_game *game);
 void		mini_map(t_game *game);
 
 // Functions to textures.
-
-// Collisions
-
-
-
-
 
 #endif

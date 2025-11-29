@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/22 18:16:22 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/11/29 17:28:31 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,9 @@ typedef enum type_move
 	FRONT,
 	BACK,
 	RIGHT,
-	LEFT
+	LEFT,
+	UP,
+	DOWN
 }	t_type_move;
 
 // TODO
