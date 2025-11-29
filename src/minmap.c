@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:37:18 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/29 17:00:47 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:11:28 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	init_minmap(t_minmap *map)
 	map->color_floor = 0xFFFF00;
 	map->color_wall = 0x0000FF;
 	map->color_floor = 0x000000;
-	map->edge_x = 20; // La margen será de dos cuadritos
+	map->edge_x = 20;
 	map->edge_y = 20;
-	map->scale = 10; // 10x10 sera el tamaño de una unidad del mapa
+	map->scale = 10;
 }
 
 void	draw_square(t_game *game, int x, int y, uint32_t color)
@@ -66,7 +66,6 @@ void	render_minmap(t_game *game)
 		}
 		vec.y++;
 	}
-	// mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 }
 
 void	render_player(t_game *game)
@@ -89,7 +88,8 @@ void	render_player(t_game *game)
 		count.x = 0;
 		while (count.x < scale_player)
 		{
-			pixel_image(&game->img, player_px.x + count.x - center, player_px.y + count.y - center, 0xff0000);
+			pixel_image(&game->img, player_px.x + count.x - center,
+				player_px.y + count.y - center, 0xff0000);
 			count.x++;
 		}
 		count.y++;

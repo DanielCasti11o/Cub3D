@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 18:52:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/27 21:09:31 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:15:48 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ uint32_t	get_pixel(t_buf *img, int x, int y)
 	dst = img->addr + (y * img->size_line + x * (img->bpp / 8));
 	return (*(unsigned int *)dst);
 }
-
-// Print pixels in the image to print this image in the window
 
 void	pixel_image(t_buf *img, int x, int y, uint32_t color)
 {
@@ -40,15 +38,4 @@ void	clear_image(t_buf *img)
 
 	total_bytes = HEIGHT * img->size_line;
 	ft_memset(img->addr, 0, total_bytes);
-}
-
-// TODO: move to a utils or math file
-// The best way of representation: degrees
-
-double	degrees(double grad)
-{
-	double	rad;
-
-	rad = grad * (PI / 180);
-	return (rad);
 }

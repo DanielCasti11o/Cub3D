@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/27 21:47:24 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:25:13 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	steps_init(t_game *game, t_dda *dda)
 	}
 }
 
-// TODO: check uninitialized values in dda struct
 void	raycasting(t_game *game)
 {
 	t_dda	dda;
@@ -109,14 +108,8 @@ void	raycasting(t_game *game)
 		dda.map.y = (size_t)game->player.pos.y;
 		dda.rdir.x = game->player.dir.x + game->player.plane.x * dda.camera_x;
 		dda.rdir.y = game->player.dir.y + game->player.plane.y * dda.camera_x;
-		if (fabsf(dda.rdir.x) < 1e-6)
-			dda.delta.x = 1e30;
-		else
-			dda.delta.x = 1.0 / fabs(dda.rdir.x);
-		if (fabsf(dda.rdir.y) < 1e-6)
-			dda.delta.y = 1e30;
-		else
-			dda.delta.y = 1.0 / fabs(dda.rdir.y);
+		dda.delta.x = get_delta_dist(dda.rdir.x);
+		dda.delta.y = get_delta_dist(dda.rdir.y);
 		steps_init(game, &dda);
 		dda_loop(game, &dda);
 		fpredrawing(game, &dda);

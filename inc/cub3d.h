@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/29 17:01:33 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:24:12 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void		clear_image(t_buf *img);
 // math functions
 
 double		degrees(double grad);
+double		get_delta_dist(float rdir);
 
 // BONUS:
 
