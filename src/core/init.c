@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/27 21:57:41 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:14:02 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	init_events(t_game *game)
 		ft_close,
 		game);
 	mlx_loop_hook(game->mlx,
-		ft_events,
+		ft_game_loop,
 		game);
 }
 
@@ -104,7 +104,6 @@ int	init_game(t_game *game)
 	game->map.tex.we.addr = NULL;
 	game->map.tex.ea.ptr = NULL;
 	game->map.tex.ea.addr = NULL;
-	game->frame_count = 0; // TODO: unused ??
 	if (init_mlx(game) == 1)
 		return (1);
 	game->player.pitch = 0;

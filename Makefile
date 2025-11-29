@@ -7,6 +7,10 @@ COPT ?= -O2
 
 SRC_DIR = ./src
 SRC = \
+	$(SRC_DIR)/core/init.c \
+	$(SRC_DIR)/core/loop.c \
+	$(SRC_DIR)/events/hooks.c \
+	$(SRC_DIR)/events/movement.c \
 	$(SRC_DIR)/parse/errors.c \
 	$(SRC_DIR)/parse/errors2.c \
 	$(SRC_DIR)/parse/errors3.c \
@@ -14,17 +18,14 @@ SRC = \
 	$(SRC_DIR)/parse/map.c \
 	$(SRC_DIR)/parse/parse.c \
 	$(SRC_DIR)/parse/utils.c \
-	$(SRC_DIR)/color.c \
-	$(SRC_DIR)/doublebuff.c \
-	$(SRC_DIR)/errors.c \
-	$(SRC_DIR)/events.c \
-	$(SRC_DIR)/free.c \
-	$(SRC_DIR)/init.c \
-	$(SRC_DIR)/maths.c \
-	$(SRC_DIR)/minmap.c \
-	$(SRC_DIR)/move.c \
-	$(SRC_DIR)/ray.c \
-	$(SRC_DIR)/wall.c \
+	$(SRC_DIR)/rendering/doublebuff.c \
+	$(SRC_DIR)/rendering/minimap.c \
+	$(SRC_DIR)/rendering/ray.c \
+	$(SRC_DIR)/rendering/wall.c \
+	$(SRC_DIR)/utils/color.c \
+	$(SRC_DIR)/utils/errors.c \
+	$(SRC_DIR)/utils/free.c \
+	$(SRC_DIR)/utils/math.c \
 	$(SRC_DIR)/main.c
 
 OBJ = $(SRC:.c=.o)
