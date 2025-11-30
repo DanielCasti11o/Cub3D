@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 20:40:31 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/06 20:43:45 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/30 01:02:47 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	perror_missingelements(uint8_t seen)
 {
-	write(2, "Error\nMissing elements in .cub file:", 36);
+	write(2, "Error\nMissing mandatory elements in .cub file:", 46);
 	if ((seen & E_NO) == 0)
 		write(2, " NO", 3);
 	if ((seen & E_SO) == 0)
@@ -54,6 +54,8 @@ int	perror_emptyarg(t_elemfile elem)
 		write(2, "F\n", 2);
 	else if (elem == E_C)
 		write(2, "C\n", 2);
+	else if (elem == E_DO)
+		write(2, "DO\n", 3);
 	return (1);
 }
 

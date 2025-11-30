@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 21:06:32 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/06 21:19:34 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/30 01:04:44 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,18 @@ static int	parse_textpath(t_game *game, t_elemfile elem, char *l, size_t strt)
 		len--;
 	if (len == 0)
 		return (perror_emptyarg(elem));
-	// TODO: must check if file is .xpm? Or let mlx handle it later? (for different formats)
 	path = ft_substr(l, strt, len);
 	if (path == NULL)
 		return (perror_malloc());
 	if (elem == E_NO)
-		game->infile.no = path;
+		return (game->infile.no = path, 0);
 	else if (elem == E_SO)
-		game->infile.so = path;
+		return (game->infile.so = path, 0);
 	else if (elem == E_WE)
-		game->infile.we = path;
+		return (game->infile.we = path, 0);
 	else if (elem == E_EA)
-		game->infile.ea = path;
-	return (0);
+		return (game->infile.ea = path, 0);
+	return (game->infile.door = path, 0);
 }
 
 static int	parse_color_component(char **str, uint8_t *component)
@@ -104,6 +103,8 @@ static t_elemfile	identify_header(char **line)
 		return (*line += 2, E_WE);
 	else if ((*line)[0] == 'E' && (*line)[1] == 'A')
 		return (*line += 2, E_EA);
+	else if ((*line)[0] == 'D' && (*line)[1] == 'O')
+		return (*line += 2, E_DO);
 	else if ((*line)[0] == 'F')
 		return (*line += 1, E_F);
 	else if ((*line)[0] == 'C')
@@ -127,7 +128,7 @@ int	parse_header(t_game *game, char	*line, t_parse	*parse)
 		return (0);
 	else if (type == E_MAP)
 	{
-		if (parse->seen != (E_NO | E_SO | E_WE | E_EA | E_F | E_C))
+		if ((parse->seen & parse->mandatory) != parse->mandatory)
 			return (parse->seen |= E_MAP, perror_missingelements(parse->seen));
 		parse->state = SP_MAP;
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/29 21:20:34 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/30 00:19:51 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int			perror_emptyarg(t_elemfile elem);
 int			perror_unclosedmap(void);
 int			perror_multipleplayerstart(void);
 int			perror_noplayerstart(void);
+int			perror_missingdoor(void);
 
 // parse
 

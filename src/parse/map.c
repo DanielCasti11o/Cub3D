@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:45:49 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/17 20:56:49 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/30 00:31:57 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ static int	map_charcheck(t_game *game, t_parse *parse, size_t row, size_t cur)
 		parse->player_start_y = row;
 		parse->player_start_x = col;
 	}
-	if (line[cur] == '0' || is_player_char(line[cur]))
-	{
-		if (row == 0 || is_void_char(game->map.grid[row - 1][col])
-			|| col == 0 || is_void_char(line[cur - 1])
-			|| col == game->map.width - 1 || is_void_char(line[cur + 1])
-			|| row == game->map.height - 1)
-			return (perror_unclosedmap());
-	}
+	if (line[cur] == 'D' && !(parse->seen & E_DO))
+		return (perror_missingdoor(), 1);
+	if ((line[cur] == '0' || line[cur] == 'D' || is_player_char(line[cur]))
+		&& (row == 0 || is_void_char(game->map.grid[row - 1][col])
+		|| col == 0 || is_void_char(line[cur - 1])
+		|| col == game->map.width - 1 || is_void_char(line[cur + 1])
+		|| row == game->map.height - 1))
+		return (perror_unclosedmap());
 	if (line[cur] == ' ' && check_mapspacechar(game, row, col) == 0)
 		return (perror_unclosedmap());
 	return (0);
