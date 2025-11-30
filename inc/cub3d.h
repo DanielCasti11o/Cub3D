@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/30 00:19:51 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/30 02:46:49 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,13 @@ int			perror_missingdoor(void);
 
 // parse
 
-void		preinit_parse(t_game *game, t_parse *parse);
-
 int			is_player_char(char c);
 int			is_map_char(char c);
 int			is_void_char(char c);
 
 int			check_mapspacechar(t_game *game, size_t row, size_t col);
+
+void		assign_doorvalue(t_game *game, size_t row, size_t col);
 
 int			parse_header(t_game *game, char	*line, t_parse	*parse);
 
