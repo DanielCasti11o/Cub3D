@@ -6,66 +6,52 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/29 17:25:13 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/01 20:20:18 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	fpredrawing(t_game *game, t_dda *dda)
+static void	dda_step(t_dda *dda)
 {
-	double	proj_cos;
-
-	if (dda->side == SIDE_VERTICAL)
+	if (dda->side_dist.x < dda->side_dist.y)
 	{
-		dda->ppdist_wall = (dda->map.x - game->player.pos.x + (1 - dda->step.x)
-				/ 2.0) / dda->rdir.x;
+		dda->side_dist.x += dda->delta.x;
+		dda->map.x += dda->step.x;
+		dda->side = SIDE_VERTICAL;
 	}
 	else
 	{
-		dda->ppdist_wall = (dda->map.y - game->player.pos.y + (1 - dda->step.y)
-				/ 2.0) / dda->rdir.y;
+		dda->side_dist.y += dda->delta.y;
+		dda->map.y += dda->step.y;
+		dda->side = SIDE_HORIZONTAL;
 	}
-	proj_cos = game->player.dir.x * dda->rdir.x + game->player.dir.y
-		* dda->rdir.y;
-	if (proj_cos != 0)
-		dda->ppdist_wall /= proj_cos;
-	if (dda->ppdist_wall < 0.0001)
-		dda->ppdist_wall = 0.0001;
-	dda->line_height = (int)(HEIGHT / dda->ppdist_wall);
 }
 
-int	check_hit(t_game *game, t_dda *dda)
+static void	dda_loop(t_game *game, t_dda *dda)
 {
-	if (dda->map.x < 0 || dda->map.x >= (int)game->map.width
-		|| dda->map.y < 0 || dda->map.y >= (int)game->map.height)
-		return (1);
-	if (game->map.grid[dda->map.y][dda->map.x] == '1')
-		return (1);
-	return (0);
-}
+	char	tile;
+	int		in_bounds;
 
-void	dda_loop(t_game *game, t_dda *dda)
-{
+	dda->hit = 0;
+	dda->hit_door = 0;
+	dda->hit_door_side = 0;
 	while (!dda->hit)
 	{
-		if (dda->side_dist.x < dda->side_dist.y)
+		dda_step(dda);
+		in_bounds = (dda->map.x >= 0 && dda->map.x < (int)game->map.width
+				&& dda->map.y >= 0 && dda->map.y < (int)game->map.height);
+		if (in_bounds)
 		{
-			dda->side_dist.x += dda->delta.x;
-			dda->map.x += dda->step.x;
-			dda->side = SIDE_VERTICAL;
-		}
-		else
-		{
-			dda->side_dist.y += dda->delta.y;
-			dda->map.y += dda->step.y;
-			dda->side = SIDE_HORIZONTAL;
+			tile = game->map.grid[dda->map.y][dda->map.x];
+			if (!dda->hit_door && !dda->hit_door_side && is_door_tile(tile))
+				check_door_tile(game, dda, tile);
 		}
 		dda->hit = check_hit(game, dda);
 	}
 }
 
-void	steps_init(t_game *game, t_dda *dda)
+static void	steps_init(t_game *game, t_dda *dda)
 {
 	if (dda->rdir.x < 0)
 	{
@@ -91,6 +77,23 @@ void	steps_init(t_game *game, t_dda *dda)
 	}
 }
 
+void	render_frame(t_game *game, t_dda *dda)
+{
+	dda->pdraw.y = 0;
+	while (dda->pdraw.y < dda->draw_start)
+	{
+		pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, game->map.tex.c);
+		dda->pdraw.y++;
+	}
+	render_wall_column(game, dda);
+	while (dda->pdraw.y < HEIGHT)
+	{
+		pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, game->map.tex.f);
+		dda->pdraw.y++;
+	}
+	render_door(game, dda);
+}
+
 void	raycasting(t_game *game)
 {
 	t_dda	dda;
@@ -103,16 +106,17 @@ void	raycasting(t_game *game)
 	while (dda.pdraw.x < WIDTH)
 	{
 		dda.camera_x = 2 * dda.pdraw.x / (double)WIDTH - 1;
-		dda.hit = 0;
-		dda.map.x = (size_t)game->player.pos.x;
-		dda.map.y = (size_t)game->player.pos.y;
+		dda.door_type = 0;
+		dda.map.x = (int)game->player.pos.x;
+		dda.map.y = (int)game->player.pos.y;
 		dda.rdir.x = game->player.dir.x + game->player.plane.x * dda.camera_x;
 		dda.rdir.y = game->player.dir.y + game->player.plane.y * dda.camera_x;
 		dda.delta.x = get_delta_dist(dda.rdir.x);
 		dda.delta.y = get_delta_dist(dda.rdir.y);
 		steps_init(game, &dda);
 		dda_loop(game, &dda);
-		fpredrawing(game, &dda);
+		calc_wall_draw(game, &dda);
+		calc_door_draw(game, &dda);
 		render_frame(game, &dda);
 		dda.pdraw.x++;
 	}

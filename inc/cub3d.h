@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/30 02:46:49 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/01 20:28:47 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define M_SIZE 200 // Mini map size
 # define M_PLAYER 5 // Mini map size
 # define MARGIN 0.25
+
+#define DOOR_THICK 0.1
 
 # define ANGLE_FOV 66.0
 
@@ -62,6 +64,12 @@ void		lateral_transition(int type, t_game *game);
 
 // RENDERING
 
+// utils
+
+int			check_hit(t_game *game, t_dda *dda);
+double		apply_fisheye_correction(t_game *game, t_dda *dda, double dist);
+int			is_door_tile(char c);
+
 // image
 
 uint32_t	get_pixel(t_buf *img, int x, int y);
@@ -70,18 +78,23 @@ void		clear_image(t_buf *img);
 
 // raycasting
 
-void		raycasting(t_game *game);
-void		steps_init(t_game *game, t_dda *dda);
-void		dda_loop(t_game *game, t_dda *dda);
-int			check_hit(t_game *game, t_dda *dda);
-void		fpredrawing(t_game *game, t_dda *dda);
 void		render_frame(t_game *game, t_dda *dda);
+void		raycasting(t_game *game);
+
+// wall
+
+void		calc_wall_draw(t_game *game, t_dda *dda);
+void		render_wall_column(t_game *game, t_dda *dda);
+
+// door
+
+void		check_door_tile(t_game *game, t_dda *dda, char tile);
+void		calc_door_draw(t_game *game, t_dda *dda);
+void		render_door(t_game *game, t_dda *dda);
 
 // minimap
 
-void		draw_square(t_game *game, int x, int y, uint32_t color); //1und grid
-void		render_minmap(t_game *game);
-void		mini_map(t_game *game);
+void		render_minimap(t_game *game);
 
 // PARSE
 

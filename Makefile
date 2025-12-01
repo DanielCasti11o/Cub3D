@@ -22,6 +22,9 @@ SRC = \
 	$(SRC_DIR)/rendering/minimap.c \
 	$(SRC_DIR)/rendering/ray.c \
 	$(SRC_DIR)/rendering/wall.c \
+	$(SRC_DIR)/rendering/door_dist.c \
+	$(SRC_DIR)/rendering/door.c \
+	$(SRC_DIR)/rendering/utils.c \
 	$(SRC_DIR)/utils/color.c \
 	$(SRC_DIR)/utils/errors.c \
 	$(SRC_DIR)/utils/free.c \
