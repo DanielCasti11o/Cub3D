@@ -6,55 +6,42 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 16:39:05 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:58:34 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	init_texture(t_game *game, t_buf *texture, char *path)
+static int	init_image_paths(t_game *game)
 {
-	texture->ptr = mlx_xpm_file_to_image(game->mlx,
-			path,
-			&texture->width,
-			&texture->height);
-	if (!texture->ptr)
-		return (perror_texture(path));
-	texture->addr = mlx_get_data_addr(texture->ptr,
-			&texture->bpp,
-			&texture->size_line,
-			&game->endian);
-	return (0);
-}
-
-static int	init_textures(t_game *game)
-{
+	game->map.tex.vm.frame_count = 0;
 	game->map.tex.c = pack_color(game->endian, game->infile.c);
 	game->map.tex.f = pack_color(game->endian, game->infile.f);
-	if (init_texture(game, &game->map.tex.no, game->infile.no) == 1)
+	if (init_image_path(game, &game->map.tex.no, game->infile.no) == 1)
 		return (1);
 	ft_freestr(&game->infile.no);
-	if (init_texture(game, &game->map.tex.so, game->infile.so) == 1)
+	if (init_image_path(game, &game->map.tex.so, game->infile.so) == 1)
 		return (1);
 	ft_freestr(&game->infile.so);
-	if (init_texture(game, &game->map.tex.we, game->infile.we) == 1)
+	if (init_image_path(game, &game->map.tex.we, game->infile.we) == 1)
 		return (1);
 	ft_freestr(&game->infile.we);
-	if (init_texture(game, &game->map.tex.ea, game->infile.ea) == 1)
+	if (init_image_path(game, &game->map.tex.ea, game->infile.ea) == 1)
 		return (1);
 	ft_freestr(&game->infile.ea);
 	if (game->infile.door)
 	{
-		if (init_texture(game, &game->map.tex.door, game->infile.door) == 1)
+		if (init_image_path(game, &game->map.tex.door, game->infile.door) == 1)
 			return (1);
 		ft_freestr(&game->infile.door);
 	}
+	if (init_vm_frames(game) == 1)
+		return (1);
 	return (0);
 }
 
 int	init_mlx(t_game *game)
 {
-	game->win = NULL;
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
 		return (1);
@@ -66,7 +53,7 @@ int	init_mlx(t_game *game)
 			&game->img.size_line, &game->endian);
 	game->img.width = WIDTH;
 	game->img.height = HEIGHT;
-	if (init_textures(game) == 1)
+	if (init_image_paths(game) == 1)
 		return (1);
 	return (0);
 }
@@ -98,8 +85,10 @@ void	init_events(t_game *game)
 		game);
 }
 
-int	init_game(t_game *game)
+static void	preinit(t_game *game)
 {
+	game->win = NULL;
+	game->mlx = NULL;
 	game->img.ptr = NULL;
 	game->img.addr = NULL;
 	game->map.tex.no.ptr = NULL;
@@ -112,6 +101,12 @@ int	init_game(t_game *game)
 	game->map.tex.ea.addr = NULL;
 	game->map.tex.door.ptr = NULL;
 	game->map.tex.door.addr = NULL;
+	game->map.tex.vm.frames = NULL;
+}
+
+int	init_game(t_game *game)
+{
+	preinit(game);
 	if (init_mlx(game) == 1)
 		return (1);
 	game->player.pitch = 0;

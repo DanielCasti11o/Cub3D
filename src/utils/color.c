@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 21:51:11 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/29 17:13:16 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:38:19 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,25 @@ uint32_t	pack_color(int endian, t_color color)
 		packed = ((color.a) | (color.r << 8) | (color.g << 16)
 				| ((uint32_t)color.b << 24));
 	return (packed);
+}
+
+t_color	unpack_color(int endian, uint32_t packed)
+{
+	t_color	color;
+
+	if (endian == 0)
+	{
+		color.a = (packed >> 24) & 0xFF;
+		color.r = (packed >> 16) & 0xFF;
+		color.g = (packed >> 8) & 0xFF;
+		color.b = packed & 0xFF;
+	}
+	else
+	{
+		color.a = packed & 0xFF;
+		color.r = (packed >> 8) & 0xFF;
+		color.g = (packed >> 16) & 0xFF;
+		color.b = (packed >> 24) & 0xFF;
+	}
+	return (color);
 }

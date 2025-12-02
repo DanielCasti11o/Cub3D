@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/02 16:24:15 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:10:16 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_color
 // be drawn on the screen, thus avoiding flickering.
 
 // < This concept is called "Double Buffering." >
-typedef struct s_img
+typedef struct s_buf
 {
 	void	*ptr;
 	char	*addr;
@@ -59,6 +59,15 @@ typedef struct s_img
 	int		width;
 	int		height;
 }	t_buf;
+
+typedef struct s_anim
+{
+	t_buf	*frames;
+	size_t	frame_count;
+	size_t	current_frame;
+	size_t	frame_delay; // in game loops
+	size_t	delay_counter;
+}	t_anim;
 
 typedef struct s_textures
 {
@@ -69,6 +78,7 @@ typedef struct s_textures
 	t_buf		we;
 	t_buf		ea;
 	t_buf		door;
+	t_anim		vm;
 }	t_textures;
 
 /*
