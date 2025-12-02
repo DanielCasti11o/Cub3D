@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/02 19:42:45 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/12/02 19:57:18 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,6 @@ typedef struct s_player
 	t_vec2f	dir;
 	t_vec2f	plane;
 	int		pitch;
-	// t_vec2f	ray; // Point on the map where the ray is drawn
-	// bool	is_inside; // algorithm bsp rectangle adaptation
-	// int		value; // key in map
 }	t_player;
 
 // Mouse events

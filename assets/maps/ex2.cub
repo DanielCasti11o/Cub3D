@@ -1,6 +1,6 @@
 EA ./assets/textures/east_sample.xpm
-NO ./assets/textures/north_sample.xpm
-SO ./assets/textures/south_sample.xpm
+NO ./assets/textures/madridd.xpm
+SO ./assets/textures/night_horizon.xpm
 WE ./assets/textures/west_sample.xpm
 
 DO ./assets/textures/door_sample.xpm
