@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/02 14:12:06 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/12/02 16:24:15 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,28 @@ typedef struct s_dda
 	int		draw_start;
 	int		draw_end;
 	double	camera_x;
+	int		hit_door;
+	double	door_dist;
+	int		door_line_height;
+	int		door_draw_start;
+	int		door_draw_end;
+	t_vec2i	door_map;
+	char	door_type;
+	int		hit_door_side;
+	double	door_side_dist;
+	int		door_side_line_height;
+	int		door_side_draw_start;
+	int		door_side_draw_end;
 }	t_dda;
+
+typedef struct s_column
+{
+	float	wall_x;
+	int		tex_x;
+	float	step;
+	float	tex_pos;
+	int		y;
+}	t_column;
 
 // * Parser state machine
 typedef enum e_stateparse

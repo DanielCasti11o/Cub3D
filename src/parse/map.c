@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 18:45:49 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/30 00:31:57 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/01 15:59:36 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ static int	map_buildrow(t_game *game, t_parse *parse, size_t row)
 			return (1);
 		col = cur - parse->first_v_char;
 		game->map.grid[row][col] = line[cur];
+		if (cur > 0 && line[cur - 1] == 'D')
+			assign_doorvalue(game, row, col - 1);
 		cur++;
 	}
 	while (cur < parse->last_v_char)

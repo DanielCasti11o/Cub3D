@@ -6,13 +6,13 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:37:18 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 13:47:46 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/12/02 16:35:54 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_minmap(t_minmap *map)
+static void	init_minmap(t_minmap *map)
 {
 	map->color_floor = 0xFFFF00;
 	map->color_wall = 0x0000FF;
@@ -40,7 +40,7 @@ void	draw_square(t_game *game, int x, int y, uint32_t color)
 	}
 }
 
-void	render_minmap(t_game *game)
+static void	render_minmap(t_game *game)
 {
 	t_vec2i	vec;
 	t_vec2i	px;
@@ -58,6 +58,9 @@ void	render_minmap(t_game *game)
 			{
 				if (game->map.grid[vec.y][vec.x] == '1')
 					draw_square(game, px.x, px.y, game->mp.color_wall);
+				else if (game->map.grid[vec.y][vec.x] == 'H'
+					|| game->map.grid[vec.y][vec.x] == 'V')
+					draw_square(game, px.x, px.y, 0xfff000);
 				else if (game->map.grid[vec.y][vec.x] == '0'
 					|| ft_strchr("NSEW", game->map.grid[vec.y][vec.x]))
 					draw_square(game, px.x, px.y, game->mp.color_floor);
@@ -68,7 +71,7 @@ void	render_minmap(t_game *game)
 	}
 }
 
-void	render_player(t_game *game)
+static void	render_player(t_game *game)
 {
 	t_vec2f	pos_float;
 	t_vec2i	player_px;
@@ -96,7 +99,7 @@ void	render_player(t_game *game)
 	}
 }
 
-void	mini_map(t_game *game)
+void	minimap(t_game *game)
 {
 	init_minmap(&game->mp);
 	if (game->map.height <= 20 && game->map.width <= 20)
