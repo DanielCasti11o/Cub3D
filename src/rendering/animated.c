@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:33:59 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/02 19:51:44 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 21:02:45 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,36 @@ static void	update_animation(t_game *game)
 	}
 }
 
+static void	draw_pixel(t_game *game, t_vec2i count, uint32_t packed)
+{
+	t_vec2i		base;
+	t_vec2i		offset;
+
+	base.x = (WIDTH / 2)
+		- (game->map.tex.vm.frames[game->map.tex.vm.current_frame].width
+			* VM_FACTOR) / 2 + (count.x * VM_FACTOR);
+	base.y = HEIGHT
+		- (game->map.tex.vm.frames[game->map.tex.vm.current_frame].height
+			* VM_FACTOR) + (count.y * VM_FACTOR);
+	offset.x = 0;
+	while (offset.x < (int)VM_FACTOR)
+	{
+		offset.y = 0;
+		while (offset.y < (int)VM_FACTOR)
+		{
+			pixel_image(&game->img, base.x + offset.x, base.y + offset.y,
+				packed);
+			offset.y++;
+		}
+		offset.x++;
+	}
+}
+
+
 void	animated_vm(t_game *game)
 {
-	t_vec2i		count;
-	t_color		color;
+	t_vec2i	count;
+	t_color	color;
 
 	if (game->map.tex.vm.frame_count == 0)
 		return ;
@@ -89,11 +115,8 @@ void	animated_vm(t_game *game)
 						game->map.tex.vm.frames
 						+ game->map.tex.vm.current_frame,
 						count.x, count.y));
-			if (color.a == 0)
-				pixel_image(&game->img,
-					WIDTH / 2 - game->map.tex.vm.frames[0].width / 2 + count.x,
-					HEIGHT - game->map.tex.vm.frames[0].height + count.y,
-					pack_color(game->endian, color));
+			if (color.a == 0x00) // TODO: for some reason is inverted
+				draw_pixel(game, count, pack_color(game->endian, color));
 			count.x++;
 		}
 		count.y++;

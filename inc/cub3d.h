@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 20:02:06 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:35:02 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 
 # ifndef VM_FILEBASE
 #  define VM_FILEBASE "./assets/textures/sample/vm_"
+# endif
+
+# ifndef VM_FACTOR
+#  define VM_FACTOR 2.0
 # endif
 
 # include "structs.h"
