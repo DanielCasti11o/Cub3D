@@ -1,0 +1,7 @@
+.vscode
+*.o
+*.out
+*.a
+cub3D
+.all_build
+.bonus_build

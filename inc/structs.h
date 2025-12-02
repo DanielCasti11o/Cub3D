@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/27 21:30:40 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:13:26 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,6 @@ typedef struct s_game
 	t_buf		img;
 	double		fov_tan;
 	int			endian;
-	int			frame_count;
 	t_minmap	mp; // estructura de mini mapa
 }	t_game;
 
