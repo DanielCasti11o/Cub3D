@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/02 17:10:16 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:02:22 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,16 @@ typedef struct s_player
 	// bool	is_inside; // algorithm bsp rectangle adaptation
 	// int		value; // key in map
 }	t_player;
+
+// Mouse events
+
+typedef struct s_mouse
+{
+	int		enabled;
+	double	sensitivity;
+	int		center_x;
+	int		center_y;
+}	t_mouse;
 
 typedef struct s_keys
 {

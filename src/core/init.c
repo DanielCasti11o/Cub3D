@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 18:58:34 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:02:38 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	init_events(t_game *game)
 	mlx_loop_hook(game->mlx,
 		ft_game_loop,
 		game);
+	mlx_hook(game->win, MotionNotify, PointerMotionMask, mouse_events, game);
 }
 
 static void	preinit(t_game *game)
