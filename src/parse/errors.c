@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 20:15:31 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/06 20:41:38 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/30 00:27:08 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	perror_alreadydefined(t_elemfile elem)
 		write(2, "C\n", 2);
 	else if (elem == E_MAP)
 		write(2, "MAP\n", 4);
+	else if (elem == E_DO)
+		write(2, "DO\n", 3);
 	return (1);
 }
 

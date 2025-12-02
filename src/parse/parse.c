@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 17:37:34 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/17 20:52:07 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/30 01:02:03 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	parse_game(t_game *game, int argc, char **argv)
 	close(fd);
 	if (parse_map(game, &parse) == 1)
 		return (free_parse(game, &parse), 1);
-	if (parse.seen != (E_NO | E_SO | E_WE | E_EA | E_F | E_C | E_MAP))
+	if ((parse.seen & parse.mandatory) != parse.mandatory)
 		return (perror_missingelements(parse.seen),
 			free_parse(game, &parse), 1);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/29 21:20:34 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 14:18:20 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ void		render_frame(t_game *game, t_dda *dda);
 void		draw_square(t_game *game, int x, int y, uint32_t color); //1und grid
 void		render_minmap(t_game *game);
 void		mini_map(t_game *game);
+t_playermap	p_init(t_game *game);
+void		big_render_player(t_game *game);
+void		draw_map(t_game *game, t_vec2i px, t_vec2i map); // For big map
+void		big_render_minmap(t_game *game);
 
 // PARSE
 
@@ -98,6 +102,7 @@ int			perror_emptyarg(t_elemfile elem);
 int			perror_unclosedmap(void);
 int			perror_multipleplayerstart(void);
 int			perror_noplayerstart(void);
+int			perror_missingdoor(void);
 
 // parse
 

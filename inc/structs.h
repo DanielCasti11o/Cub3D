@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/29 21:13:26 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 14:12:06 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,7 @@ typedef struct s_textures
 	t_buf		so;
 	t_buf		we;
 	t_buf		ea;
-	/*
-	void	*wall;
-	void	*flood;
-	void	*door;
-	void	*flash; // Is opcional.
-	void	*sphere; // Ray tracing
-	void	*mini_map;
-	*/
+	t_buf		door;
 }	t_textures;
 
 /*
@@ -132,6 +125,7 @@ typedef struct s_keys
  * - E_C: Ceiling color
  * - E_MAP: Map data
  * - E_EMPTY: Empty line (not marked in bitmask)
+ * - E_DO: Optional door texture
  * - E_INVALID: Invalid element (not marked in bitmask)
  */
 typedef enum e_elemfile
@@ -144,7 +138,8 @@ typedef enum e_elemfile
 	E_C = 1 << 5,
 	E_MAP = 1 << 6,
 	E_EMPTY = 1 << 7,
-	E_INVALID = 1 << 8
+	E_DO = 1 << 8,
+	E_INVALID
 }	t_elemfile;
 
 /*
@@ -170,6 +165,15 @@ typedef struct s_minmap
 	t_buf	player; //player
 }	t_minmap;
 
+typedef struct s_playermap
+{
+	t_vec2f	pos_float;
+	t_vec2i	player_px;
+	t_vec2i	center_px;
+	int		scale_player;
+	int		center;
+}	t_playermap;
+
 typedef struct s_infile
 {
 	t_color	f;
@@ -178,6 +182,7 @@ typedef struct s_infile
 	char	*so;
 	char	*we;
 	char	*ea;
+	char	*door;
 }	t_infile;
 
 // COLLISIONS
@@ -249,7 +254,8 @@ typedef struct s_parse
 {
 	t_list			*head_map;
 	t_list			*tail_map;
-	uint8_t			seen;
+	uint16_t			seen;
+	uint16_t			mandatory;
 	t_stateparse	state;
 	ssize_t			first_v_char;
 	ssize_t			last_v_char;

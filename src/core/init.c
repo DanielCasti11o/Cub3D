@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/29 21:14:02 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/11/30 00:44:43 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ static int	init_textures(t_game *game)
 	if (init_texture(game, &game->map.tex.ea, game->infile.ea) == 1)
 		return (1);
 	ft_freestr(&game->infile.ea);
+	if (game->infile.door)
+	{
+		if (init_texture(game, &game->map.tex.door, game->infile.door) == 1)
+			return (1);
+		ft_freestr(&game->infile.door);
+	}
 	return (0);
 }
 
