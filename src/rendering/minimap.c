@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:37:18 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/11/29 21:20:56 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:47:46 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,14 @@ void	render_player(t_game *game)
 void	mini_map(t_game *game)
 {
 	init_minmap(&game->mp);
-	render_minmap(game);
-	render_player(game);
+	if (game->map.height <= 20 && game->map.width <= 20)
+	{
+		render_minmap(game);
+		render_player(game);
+	}
+	else
+	{
+		big_render_minmap(game);
+		big_render_player(game);
+	}
 }

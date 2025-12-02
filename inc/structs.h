@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/30 01:00:45 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 14:12:06 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,15 @@ typedef struct s_minmap
 	t_buf	wall; // Wall
 	t_buf	player; //player
 }	t_minmap;
+
+typedef struct s_playermap
+{
+	t_vec2f	pos_float;
+	t_vec2i	player_px;
+	t_vec2i	center_px;
+	int		scale_player;
+	int		center;
+}	t_playermap;
 
 typedef struct s_infile
 {
