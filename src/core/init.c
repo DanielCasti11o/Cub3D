@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 16:28:27 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:39:05 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int	init_textures(t_game *game)
 
 int	init_mlx(t_game *game)
 {
+	game->win = NULL;
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
 		return (1);
@@ -99,7 +100,6 @@ void	init_events(t_game *game)
 
 int	init_game(t_game *game)
 {
-	game->win = NULL;
 	game->img.ptr = NULL;
 	game->img.addr = NULL;
 	game->map.tex.no.ptr = NULL;
@@ -110,6 +110,8 @@ int	init_game(t_game *game)
 	game->map.tex.we.addr = NULL;
 	game->map.tex.ea.ptr = NULL;
 	game->map.tex.ea.addr = NULL;
+	game->map.tex.door.ptr = NULL;
+	game->map.tex.door.addr = NULL;
 	if (init_mlx(game) == 1)
 		return (1);
 	game->player.pitch = 0;
