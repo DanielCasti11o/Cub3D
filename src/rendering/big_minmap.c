@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:47:53 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 16:38:13 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/12/02 17:33:53 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ void	draw_map(t_game *game, t_vec2i px, t_vec2i map)
 	{
 		if (game->map.grid[map.y][map.x] == '1')
 			draw_square(game, px.x, px.y, game->mp.color_wall);
-		else if (game->map.grid[map.y][map.x] == 'H'
-				|| game->map.grid[map.y][map.x] == 'V')
-			draw_square(game, px.x, px.y, 0xff00ff);
+		else if (game->map.grid[map.y][map.x] == 'H')
+			draw_door(game, px.x, px.y, 'H');
+		else if (game->map.grid[map.y][map.x] == 'V')
+			draw_door(game, px.x, px.y, 'V');
 		else if (game->map.grid[map.y][map.x] == '0'
 		|| ft_strchr("NSEW", game->map.grid[map.y][map.x]))
 			draw_square(game, px.x, px.y, game->mp.color_floor);

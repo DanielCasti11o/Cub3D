@@ -11,6 +11,7 @@ SRC = \
 	$(SRC_DIR)/core/loop.c \
 	$(SRC_DIR)/events/hooks.c \
 	$(SRC_DIR)/events/movement.c \
+	$(SRC_DIR)/events/mouse_hooks.c \
 	$(SRC_DIR)/parse/errors.c \
 	$(SRC_DIR)/parse/errors2.c \
 	$(SRC_DIR)/parse/errors3.c \

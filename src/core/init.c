@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 16:39:05 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:23:57 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	init_events(t_game *game)
 	mlx_loop_hook(game->mlx,
 		ft_game_loop,
 		game);
+	mlx_hook(game->win, MotionNotify, PointerMotionMask, mouse_events, game);
 }
 
 int	init_game(t_game *game)

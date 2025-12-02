@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 16:29:29 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:33:01 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ int			init_game(t_game *game);
 int			ft_close(t_game *game);
 int			ft_key_press(int keycode, t_game *game);
 int			ft_key_release(int keycode, t_game *game);
-
+int			mouse_events(int x, int y, t_game *game);
 int			ft_game_loop(t_game *game);
+t_mouse		init_mouse(void);
+int			mouse_events(int x, int y, t_game *game);
+
 
 // move
 
@@ -100,6 +103,7 @@ t_playermap	p_init(t_game *game);
 void		big_render_player(t_game *game);
 void		draw_map(t_game *game, t_vec2i px, t_vec2i map); // For big map
 void		big_render_minmap(t_game *game);
+void		draw_door(t_game *game, int x, int y, int type);
 
 // PARSE
 
