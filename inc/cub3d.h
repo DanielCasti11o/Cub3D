@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/01 20:28:47 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:29:29 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,12 @@ void		render_door(t_game *game, t_dda *dda);
 
 // minimap
 
-void		render_minimap(t_game *game);
+void		draw_square(t_game *game, int x, int y, uint32_t color);
+void		minimap(t_game *game);
+t_playermap	p_init(t_game *game);
+void		big_render_player(t_game *game);
+void		draw_map(t_game *game, t_vec2i px, t_vec2i map); // For big map
+void		big_render_minmap(t_game *game);
 
 // PARSE
 

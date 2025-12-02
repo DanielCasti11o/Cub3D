@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/01 19:40:38 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:24:15 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,15 @@ typedef struct s_minmap
 	t_buf	wall; // Wall
 	t_buf	player; //player
 }	t_minmap;
+
+typedef struct s_playermap
+{
+	t_vec2f	pos_float;
+	t_vec2i	player_px;
+	t_vec2i	center_px;
+	int		scale_player;
+	int		center;
+}	t_playermap;
 
 typedef struct s_infile
 {

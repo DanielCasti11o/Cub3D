@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:37:18 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/01 20:29:02 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:29:20 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	init_minmap(t_minmap *map)
 	map->scale = 10;
 }
 
-static void	draw_square(t_game *game, int x, int y, uint32_t color)
+void	draw_square(t_game *game, int x, int y, uint32_t color)
 {
 	int	i;
 	int	j;
@@ -40,7 +40,7 @@ static void	draw_square(t_game *game, int x, int y, uint32_t color)
 	}
 }
 
-static void	draw_minimap(t_game *game)
+static void	render_minmap(t_game *game)
 {
 	t_vec2i	vec;
 	t_vec2i	px;
@@ -68,7 +68,7 @@ static void	draw_minimap(t_game *game)
 	}
 }
 
-static void	draw_player(t_game *game)
+static void	render_player(t_game *game)
 {
 	t_vec2f	pos_float;
 	t_vec2i	player_px;
@@ -96,9 +96,17 @@ static void	draw_player(t_game *game)
 	}
 }
 
-void	render_minimap(t_game *game)
+void	minimap(t_game *game)
 {
 	init_minmap(&game->mp);
-	draw_minimap(game);
-	draw_player(game);
+	if (game->map.height <= 20 && game->map.width <= 20)
+	{
+		render_minmap(game);
+		render_player(game);
+	}
+	else
+	{
+		big_render_minmap(game);
+		big_render_player(game);
+	}
 }

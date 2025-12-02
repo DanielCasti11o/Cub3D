@@ -29,6 +29,7 @@ SRC = \
 	$(SRC_DIR)/utils/errors.c \
 	$(SRC_DIR)/utils/free.c \
 	$(SRC_DIR)/utils/math.c \
+	$(SRC_DIR)/rendering/big_minmap.c \
 	$(SRC_DIR)/main.c
 
 OBJ = $(SRC:.c=.o)

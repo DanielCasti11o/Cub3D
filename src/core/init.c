@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/01 20:29:33 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:28:27 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	init_game(t_game *game)
 	game->player.pitch = 0;
 	game->fov_tan = tan(degrees(ANGLE_FOV / 2));
 	raycasting(game);
-	render_minimap(game);
+	minimap(game);
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, WIN_TITLE);
 	if (game->win == NULL)
 		return (1);
