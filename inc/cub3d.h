@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 17:33:16 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/12/02 19:33:01 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ int			init_game(t_game *game);
 int			ft_close(t_game *game);
 int			ft_key_press(int keycode, t_game *game);
 int			ft_key_release(int keycode, t_game *game);
-
+int			mouse_events(int x, int y, t_game *game);
 int			ft_game_loop(t_game *game);
+t_mouse		init_mouse(void);
+int			mouse_events(int x, int y, t_game *game);
+
 
 // move
 

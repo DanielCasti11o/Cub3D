@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/02 16:24:15 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:42:45 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,16 @@ typedef struct s_player
 	// bool	is_inside; // algorithm bsp rectangle adaptation
 	// int		value; // key in map
 }	t_player;
+
+// Mouse events
+
+typedef struct s_mouse
+{
+	int		enabled;
+	double	sensitivity;
+	int		center_x;
+	int		center_y;
+}	t_mouse;
 
 typedef struct s_keys
 {
