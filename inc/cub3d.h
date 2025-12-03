@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/03 17:43:41 by dacastil         ###   ########.fr       */
+/*   Created: 2025/10/01 17:27:26 by dacastil          #+#    #+#             */
+/*   Updated: 2025/12/03 18:18:22 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 # define HEIGHT 600
 # define PI 3.1415926535
 
-# define M_SIZE 200 // Mini map size
-# define M_PLAYER 5 // Mini map size
+# define M_SIZE 200
+# define M_PLAYER 5
 # define MARGIN 0.25
 
 # define DOOR_THICK 0.1
 
 # define ANGLE_FOV 66.0
 
-# define WIN_TITLE "The best cub in the world"
+# define WIN_TITLE "Goat3D"
 
 # ifndef VM_COUNT
 #  define VM_COUNT 5
@@ -86,7 +86,6 @@ int			ft_game_loop(t_game *game);
 t_mouse		init_mouse(void);
 int			mouse_events(int x, int y, t_game *game);
 
-
 // move
 
 void		move_vector_view(int type, t_game *game);
@@ -132,11 +131,10 @@ void		render_door(t_game *game, t_dda *dda);
 
 void		draw_square(t_game *game, int x, int y, uint32_t color);
 void		minimap(t_game *game);
-t_playermap	p_init(t_game *game);
 void		big_render_player(t_game *game);
-void		draw_map(t_game *game, t_vec2i px, t_vec2i map); // For big map
+void		draw_map(t_game *game, t_vec2i px, t_vec2i map);
 void		big_render_minmap(t_game *game);
-void		draw_door(t_game *game, int x, int y, int type);
+void		draw_door(t_game *game, t_vec2i px, int type);
 
 // vm
 
