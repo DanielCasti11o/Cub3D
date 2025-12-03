@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 20:50:03 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/30 00:43:20 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:00:08 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,15 @@ void	free_end(t_game *game)
 	ft_destroy_image(game, &game->map.tex.we);
 	ft_destroy_image(game, &game->map.tex.ea);
 	ft_destroy_image(game, &game->map.tex.door);
+	while (game->map.tex.vm.frame_count-- > 0)
+		ft_destroy_image(game,
+			&game->map.tex.vm.frames[game->map.tex.vm.frame_count]);
+	if (game->map.tex.vm.frames)
+		ft_free((void **)&game->map.tex.vm.frames);
 	if (game->mlx)
 	{
 		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-		game->mlx = NULL;
+		ft_free((void **)&game->mlx);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:32:21 by dacastil          #+#    #+#             */
-/*   Updated: 2025/10/31 22:28:35 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:52:36 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 // No canonical libft functions
 # include "get_next_line.h"
 
+void	*ft_free(void **ptr);
 char	*ft_freestr(char **str);
 char	**ft_freestrarr(char ***arr);
 int		ft_isspace(int c);

@@ -19,6 +19,7 @@ SRC = \
 	$(SRC_DIR)/parse/map.c \
 	$(SRC_DIR)/parse/parse.c \
 	$(SRC_DIR)/parse/utils.c \
+	$(SRC_DIR)/rendering/animated.c \
 	$(SRC_DIR)/rendering/doublebuff.c \
 	$(SRC_DIR)/rendering/minimap.c \
 	$(SRC_DIR)/rendering/ray.c \
@@ -51,6 +52,7 @@ BONUS_FLAG = .bonus_build
 
 all: $(NORMAL_FLAG)
 
+bonus: CFLAGS += -DBONUS
 bonus: $(BONUS_FLAG)
 
 $(NAME): $(MLX) $(LIBFT) $(OBJ)

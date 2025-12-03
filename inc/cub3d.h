@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 19:33:01 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/12/03 15:45:19 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,35 @@
 # define M_PLAYER 5 // Mini map size
 # define MARGIN 0.25
 
-#define DOOR_THICK 0.1
+# define DOOR_THICK 0.1
 
 # define ANGLE_FOV 66.0
 
 # define WIN_TITLE "The best cub in the world"
+
+# ifndef VM_COUNT
+#  define VM_COUNT 5
+# endif
+
+# ifndef VM_DELAY
+#  define VM_DELAY 25
+# endif
+
+# ifndef VM_FILEBASE
+#  define VM_FILEBASE "./assets/textures/coffee_"
+# endif
+
+# ifndef VM_FACTOR
+#  define VM_FACTOR 4.0
+# endif
+
+# ifndef VM_X_OFFSET
+#  define VM_X_OFFSET 150.0
+# endif
+
+# ifndef VM_Y_OFFSET
+#  define VM_Y_OFFSET -25.0
+# endif
 
 # include "structs.h"
 
@@ -73,8 +97,14 @@ int			check_hit(t_game *game, t_dda *dda);
 double		apply_fisheye_correction(t_game *game, t_dda *dda, double dist);
 int			is_door_tile(char c);
 
+// vm
+
+int			init_vm_frames(t_game *game);
+void		animated_vm(t_game *game);
+
 // image
 
+int			init_image_path(t_game *game, t_buf *img, char *path);
 uint32_t	get_pixel(t_buf *img, int x, int y);
 void		pixel_image(t_buf *img, int x, int y, uint32_t color);
 void		clear_image(t_buf *img);
@@ -104,6 +134,10 @@ void		big_render_player(t_game *game);
 void		draw_map(t_game *game, t_vec2i px, t_vec2i map); // For big map
 void		big_render_minmap(t_game *game);
 void		draw_door(t_game *game, int x, int y, int type);
+
+// vm
+
+void		animated_vm(t_game *game);
 
 // PARSE
 
@@ -157,6 +191,7 @@ double		get_delta_dist(float rdir);
 
 t_color		color_rgba(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 uint32_t	pack_color(int endian, t_color color);
+t_color		unpack_color(int endian, uint32_t packed);
 
 // free
 
