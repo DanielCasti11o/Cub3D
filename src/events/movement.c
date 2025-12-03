@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 16:50:08 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/29 21:22:54 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:06:08 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	move_vector_view(int type, t_game *game)
 	double	speed;
 	double	margin;
 
-	speed = 0.03;
+	speed = 0.04;
 	if (type == FRONT)
 	{
 		mv.x = cosf(game->player.angle) * speed;

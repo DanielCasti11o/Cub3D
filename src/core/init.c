@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 20:02:38 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:50:41 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int	init_game(t_game *game)
 	if (game->win == NULL)
 		return (1);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
+	XFixesHideCursor(((t_xvar *)game->mlx)->display, ((t_win_list *)game->win)->window);
 	init_events(game);
 	mlx_loop(game->mlx);
 	return (0);

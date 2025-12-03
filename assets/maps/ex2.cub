@@ -1,7 +1,7 @@
-EA ./assets/textures/east_sample.xpm
+EA ./assets/textures/sample/east.xpm
 NO ./assets/textures/madridd.xpm
-SO ./assets/textures/night_horizon.xpm
-WE ./assets/textures/west_sample.xpm
+SO ./assets/textures/GemOv4.xpm
+WE ./assets/textures/sample/west.xpm
 
 DO ./assets/textures/door_sample.xpm
 
