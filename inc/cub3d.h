@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/03 17:04:24 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/03 18:13:34 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@
 # include "mlx.h"
 # include "libft.h"
 
+# include "mlx_int.h"
+
 # include <string.h>
 # include <stdlib.h>
 # include <stdbool.h>
@@ -63,8 +65,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-# include <X11/X.h>
-# include <X11/keysym.h>
+# include <X11/X.h> // X11 interface, events, masks
+# include <X11/extensions/Xfixes.h>
+# include <X11/keysym.h> // XK_* (keysyms)
 
 // CORE
 

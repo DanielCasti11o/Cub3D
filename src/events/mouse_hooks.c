@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
+/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:19:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 20:45:18 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/12/03 17:29:10 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	mouse_events(int x, int y, t_game *game)
 	t_vec2i		delta;
 
 	(void)y;
-	mlx_mouse_hide(game->mlx, game->win);
 	mouse = init_mouse();
 	if (mouse.enabled == 0)
 		return (0);
