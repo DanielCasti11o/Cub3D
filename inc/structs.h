@@ -6,17 +6,17 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/03 15:51:17 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:23:13 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include <stdbool.h> // bool
-# include <stdint.h> // int, uint types
-# include <stddef.h> // size_t
-# include "libft.h" // t_list
+# include <stdbool.h>
+# include <stdint.h>
+# include <stddef.h>
+# include "libft.h"
 
 typedef struct s_vec2f
 {

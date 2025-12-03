@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:33:59 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/02 21:16:12 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:40:48 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	animated_vm(t_game *game)
 						game->map.tex.vm.frames
 						+ game->map.tex.vm.current_frame,
 						count.x, count.y));
-			if (color.a == 0x00) // TODO: for some reason is inverted
+			if (color.a == 0x00)
 				draw_pixel(game, count, pack_color(game->endian, color));
 			count.x++;
 		}

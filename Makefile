@@ -75,6 +75,9 @@ $(LIBFT):
 $(MLX):
 	make -C $(MLX_DIR)
 
+norm:
+	norminette $(INC_DIR) $(SRC_DIR) $(LIBFT_DIR)
+
 clean:
 	$(RM) $(OBJ)
 	make fclean -C $(LIBFT_DIR)
