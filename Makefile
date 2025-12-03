@@ -1,6 +1,6 @@
 NAME = cub3D
 
-CC = clang
+CC = cc
 CFLAGS = -Wall -Werror -Wextra $(COPT)
 CPPFLAGS = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
 COPT ?= -O2
@@ -45,7 +45,7 @@ MLX_DIR = ./libs/minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
 
 LDFLAGS = -L$(MLX_DIR) -L$(LIBFT_DIR)
-LDLIBS = -lm -lmlx -lXext -lX11
+LDLIBS = -lm -lmlx -lXext -lX11 -lXfixes
 
 NORMAL_FLAG = .all_build
 BONUS_FLAG = .bonus_build
