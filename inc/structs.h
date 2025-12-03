@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:43:02 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/03 16:23:13 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/03 18:11:17 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,21 @@
 # include <stddef.h>
 # include "libft.h"
 
+// * 2D vector with float precision
 typedef struct s_vec2f
 {
 	float	x;
 	float	y;
 }	t_vec2f;
 
+// * 2D vector with integer precision
 typedef struct s_vec2i
 {
 	int	x;
 	int	y;
 }	t_vec2i;
 
+// * 2D vector with double precision
 typedef struct s_vec2d
 {
 	double	x;
@@ -45,11 +48,13 @@ typedef struct s_color
 	uint8_t	a;
 }	t_color;
 
-// This structure draws everything in an invisible buffer
-//  that stores all the information about everything that will later
-// be drawn on the screen, thus avoiding flickering.
-
-// < This concept is called "Double Buffering." >
+/*
+ * Double buffer image structure to avoid flickering
+ * - ptr: mlx image pointer
+ * - addr: pixel data address
+ * - bpp: bits per pixel
+ * - size_line: bytes per row
+ */
 typedef struct s_buf
 {
 	void	*ptr;
@@ -60,15 +65,27 @@ typedef struct s_buf
 	int		height;
 }	t_buf;
 
+/*
+ * Animation structure for sprite sequences
+ * - frames: array of frame buffers
+ * - frame_delay: delay between frames in game loops
+ */
 typedef struct s_anim
 {
 	t_buf	*frames;
 	size_t	frame_count;
 	size_t	current_frame;
-	size_t	frame_delay; // in game loops
+	size_t	frame_delay;
 	size_t	delay_counter;
 }	t_anim;
 
+/*
+ * Game textures container
+ * - c/f: ceiling and floor colors
+ * - no/so/we/ea: cardinal wall textures
+ * - door: door texture
+ * - vm: view model animation
+ */
 typedef struct s_textures
 {
 	uint32_t	c;
@@ -97,9 +114,11 @@ typedef struct s_map
 
 /*
  * Player position and direction in the game world
- * - map: the tile map
- *
- * // TODO
+ * - pos: world position
+ * - angle: viewing angle in radians
+ * - dir: normalized direction vector
+ * - plane: camera plane for FOV
+ * - pitch: vertical look offset
  */
 typedef struct s_player
 {
@@ -110,8 +129,7 @@ typedef struct s_player
 	int		pitch;
 }	t_player;
 
-// Mouse events
-
+// * Mouse input state and configuration
 typedef struct s_mouse
 {
 	int		enabled;
@@ -120,6 +138,7 @@ typedef struct s_mouse
 	int		center_y;
 }	t_mouse;
 
+// * Keyboard input state for movement and rotation
 typedef struct s_keys
 {
 	uint8_t	a;
@@ -160,28 +179,23 @@ typedef enum e_elemfile
 }	t_elemfile;
 
 /*
- * Input file data structure parsed
- * - f: floor color
- * - c: ceiling color
- * - no: path to north texture
- * - so: path to south texture
- * - we: path to west texture
- * - ea: path to east texture
+ * Minimap rendering configuration
+ * - scale: tile size in pixels
+ * - edge_x/edge_y: map boundary offsets
+ * - wall/player: minimap textures
  */
-
- // STRUCT FOR MINI_MAP
-
 typedef struct s_minmap
 {
-	int		scale; // Size of square
-	int		edge_x; // Size of edge X
-	int		edge_y; // Size of edge Y
+	int		scale;
+	int		edge_x;
+	int		edge_y;
 	int		color_floor;
-	int		color_wall; // Esta se eliminará
-	t_buf	wall; // Wall
-	t_buf	player; //player
+	int		color_wall;
+	t_buf	wall;
+	t_buf	player;
 }	t_minmap;
 
+// * Player position data for minimap rendering
 typedef struct s_playermap
 {
 	t_vec2f	pos_float;
@@ -191,6 +205,12 @@ typedef struct s_playermap
 	int		center;
 }	t_playermap;
 
+/*
+ * Parsed input file data
+ * - f/c: floor and ceiling colors
+ * - no/so/we/ea: paths to cardinal textures
+ * - door: path to door texture
+ */
 typedef struct s_infile
 {
 	t_color	f;
@@ -202,8 +222,7 @@ typedef struct s_infile
 	char	*door;
 }	t_infile;
 
-// COLLISIONS
-
+// * Movement direction for collision detection
 typedef enum type_move
 {
 	FRONT,
@@ -212,7 +231,15 @@ typedef enum type_move
 	LEFT
 }	t_type_move;
 
-// TODO
+/*
+ * Main game state container
+ * - mlx/win: minilibx display pointers
+ * - player: player state
+ * - map: world map data
+ * - keys: keyboard input state
+ * - fov_tan: precomputed FOV tangent
+ * - mp: minimap configuration
+ */
 typedef struct s_game
 {
 	void		*mlx;
@@ -224,26 +251,52 @@ typedef struct s_game
 	t_buf		img;
 	double		fov_tan;
 	int			endian;
-	t_minmap	mp; // estructura de mini mapa
+	t_minmap	mp;
 }	t_game;
 
+// * Wall hit side for texture selection (NS or EW)
 typedef enum e_side
 {
-	SIDE_VERTICAL, // 0 = {Norte, Sur}
-	SIDE_HORIZONTAL // 1 = {Este, Oeste}
+	SIDE_VERTICAL,
+	SIDE_HORIZONTAL
 }	t_side;
 
+/*
+ * DDA raycasting algorithm state
+ * - rdir: ray direction vector
+ * - map: current grid cell position
+ * - step: ray step direction (-1 or 1)
+ * - delta: distance to cross one grid unit
+ * - side_dist: distance to next grid line
+ * - pdraw: pixel draw position
+ * - hit: wall hit flag
+ * - side: which wall side was hit (NS or EW)
+ * - ppdist_wall: perpendicular wall distance (fisheye correction)
+ * - line_height: wall stripe height in pixels
+ * - draw_start/draw_end: vertical draw bounds
+ * - camera_x: x-coordinate on camera plane [-1, 1]
+ * - hit_door: door hit flag
+ * - door_dist: perpendicular distance to door
+ * - door_line_height: door stripe height in pixels
+ * - door_draw_start/end: door vertical draw bounds
+ * - door_map: grid position of the hit door
+ * - door_type: door character type from map
+ * - hit_door_side: side wall of door hit flag
+ * - door_side_dist: distance to door side wall
+ * - door_side_line_height: door side stripe height
+ * - door_side_draw_start/end: door side vertical bounds
+ */
 typedef struct s_dda
 {
 	t_vec2f	rdir;
-	t_vec2i	map; // punto dónde estamos parados sin float
-	t_vec2i	step; // Dirección
-	t_vec2d	delta; // deltas de x, y, Distancia para cruzar desde la posición dentro de la unidad en la que estoy hasta el fin de la unidad.
-	t_vec2f	side_dist; // Recta de la distancia IMPORTANTE el concepto = RECTA.
+	t_vec2i	map;
+	t_vec2i	step;
+	t_vec2d	delta;
+	t_vec2f	side_dist;
 	t_vec2i	pdraw;
 	int		hit;
 	t_side	side;
-	double	ppdist_wall; // Correción del ojo de pez (Distancia perpendicular)
+	double	ppdist_wall;
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
@@ -262,6 +315,14 @@ typedef struct s_dda
 	int		door_side_draw_end;
 }	t_dda;
 
+/*
+ * Column rendering data for texture mapping
+ * - wall_x: exact hit position on wall [0.0, 1.0]
+ * - tex_x: x-coordinate on texture
+ * - step: texture y increment per screen pixel
+ * - tex_pos: current texture y position (accumulator)
+ * - y: current screen y-coordinate being drawn
+ */
 typedef struct s_column
 {
 	float	wall_x;
@@ -290,15 +351,15 @@ typedef enum e_stateparse
  */
 typedef struct s_parse
 {
-	t_list			*head_map;
-	t_list			*tail_map;
+	t_list				*head_map;
+	t_list				*tail_map;
 	uint16_t			seen;
 	uint16_t			mandatory;
-	t_stateparse	state;
-	ssize_t			first_v_char;
-	ssize_t			last_v_char;
-	ssize_t			player_start_x;
-	ssize_t			player_start_y;
+	t_stateparse		state;
+	ssize_t				first_v_char;
+	ssize_t				last_v_char;
+	ssize_t				player_start_x;
+	ssize_t				player_start_y;
 }	t_parse;
 
 #endif
