@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 20:35:02 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/03 15:45:19 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,23 @@
 # endif
 
 # ifndef VM_DELAY
-#  define VM_DELAY 50
+#  define VM_DELAY 25
 # endif
 
 # ifndef VM_FILEBASE
-#  define VM_FILEBASE "./assets/textures/sample/vm_"
+#  define VM_FILEBASE "./assets/textures/coffee_"
 # endif
 
 # ifndef VM_FACTOR
-#  define VM_FACTOR 2.0
+#  define VM_FACTOR 4.0
+# endif
+
+# ifndef VM_X_OFFSET
+#  define VM_X_OFFSET 150.0
+# endif
+
+# ifndef VM_Y_OFFSET
+#  define VM_Y_OFFSET -25.0
 # endif
 
 # include "structs.h"

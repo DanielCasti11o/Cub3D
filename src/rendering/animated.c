@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:33:59 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/02 21:02:45 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/02 21:16:12 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ static void	draw_pixel(t_game *game, t_vec2i count, uint32_t packed)
 	t_vec2i		base;
 	t_vec2i		offset;
 
-	base.x = (WIDTH / 2)
+	base.x = (WIDTH / 2) + VM_X_OFFSET
 		- (game->map.tex.vm.frames[game->map.tex.vm.current_frame].width
 			* VM_FACTOR) / 2 + (count.x * VM_FACTOR);
-	base.y = HEIGHT
+	base.y = HEIGHT - VM_Y_OFFSET
 		- (game->map.tex.vm.frames[game->map.tex.vm.current_frame].height
 			* VM_FACTOR) + (count.y * VM_FACTOR);
 	offset.x = 0;
@@ -95,7 +95,6 @@ static void	draw_pixel(t_game *game, t_vec2i count, uint32_t packed)
 		offset.x++;
 	}
 }
-
 
 void	animated_vm(t_game *game)
 {
