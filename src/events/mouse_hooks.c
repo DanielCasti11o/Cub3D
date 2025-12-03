@@ -6,7 +6,7 @@
 /*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 14:19:45 by daniel-cast       #+#    #+#             */
-/*   Updated: 2025/12/02 19:47:32 by daniel-cast      ###   ########.fr       */
+/*   Updated: 2025/12/02 20:45:18 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,11 @@ int	mouse_events(int x, int y, t_game *game)
 	delta.x = x - mouse.center_x;
 	delta.y = y - mouse.center_y;
 	if (delta.x != 0)
-	{
-		if (delta.x < 0)
-			game->player.angle -= degrees(0.3);
-		else
-			game->player.angle += degrees(0.3);
-		if (delta.y < 0)
-			game->player.pitch += 3;
-		else
-			game->player.pitch -= 3;
+		game->player.angle += degrees(delta.x * 0.05);
+	if (delta.y != 0)
+		game->player.pitch -= delta.y * 0.5;
+	if (delta.y != 0 || delta.x != 0)
 		mlx_mouse_move(game->mlx, game->win,
 			mouse.center_x, mouse.center_y);
-	}
 	return (0);
 }
