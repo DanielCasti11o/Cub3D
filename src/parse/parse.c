@@ -91,7 +91,7 @@ static void	preinit_parse(t_game *game, t_parse *parse)
 	parse->tail_map = NULL;
 	parse->state = SP_HEADER;
 	parse->seen = 0;
-	parse->mandatory = E_NO | E_SO | E_WE | E_EA | E_F | E_C | E_MAP;
+	parse->mandatory = E_NO | E_SO | E_WE | E_EA | E_F | E_C;
 	game->infile.c = color_rgba(0, 0, 0, 0);
 	game->infile.f = color_rgba(0, 0, 0, 0);
 	game->infile.no = NULL;
@@ -121,6 +121,7 @@ int	parse_game(t_game *game, int argc, char **argv)
 	close(fd);
 	if (parse_map(game, &parse) == 1)
 		return (free_parse(game, &parse), 1);
+	parse.mandatory |= E_MAP;
 	if ((parse.seen & parse.mandatory) != parse.mandatory)
 		return (perror_missingelements(parse.seen),
 			free_parse(game, &parse), 1);

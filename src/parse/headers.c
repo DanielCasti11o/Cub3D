@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 21:06:32 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/30 01:04:44 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/04 20:49:10 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	parse_header(t_game *game, char	*line, t_parse	*parse)
 	else if (type == E_MAP)
 	{
 		if ((parse->seen & parse->mandatory) != parse->mandatory)
-			return (parse->seen |= E_MAP, perror_missingelements(parse->seen));
+			return (perror_missingelements(parse->seen));
 		parse->state = SP_MAP;
 		return (0);
 	}
