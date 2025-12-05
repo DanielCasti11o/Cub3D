@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC ?= cc
-CFLAGS = -Wall -Werror -Wextra $(COPT)
+CFLAGS = -Wall -Wextra $(COPT)
 CPPFLAGS = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
 COPT ?= -O2
 

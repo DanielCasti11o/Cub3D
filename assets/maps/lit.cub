@@ -1,0 +1,33 @@
+C 173, 216, 230
+F 44, 92, 36
+
+EA ./assets/textures/BrickOv.xpm
+NO ./assets/textures/BrickOv.xpm
+SO ./assets/textures/BrickOv.xpm
+WE ./assets/textures/BrickOv.xpm
+
+DO ./assets/textures/door_sample.xpm
+
+111111
+1001N1
+100001
+111111
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
