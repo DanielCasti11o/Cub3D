@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by dacastil          #+#    #+#             */
-/*   Updated: 2025/12/07 22:09:57 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/07 23:15:41 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@
 
 // inits
 
-int			init_mlx(t_game *game);
 int			init_game(t_game *game);
 
 // EVENTS

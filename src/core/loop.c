@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 21:07:59 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/02 17:44:40 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/07 22:10:25 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ int	ft_game_loop(t_game *game)
 	update_player(game);
 	clear_image(&game->img);
 	raycasting(game);
-	animated_vm(game);
-	minimap(game);
+	if (BONUS)
+	{
+		animated_vm(game);
+		minimap(game);
+	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
 	return (0);
 }

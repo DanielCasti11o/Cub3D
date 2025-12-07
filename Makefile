@@ -5,6 +5,11 @@ CFLAGS = -Wall -Werror -Wextra $(COPT)
 CPPFLAGS = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
 COPT ?= -O2
 
+DEBUG_CFLAGS = -g3 -fno-omit-frame-pointer
+DEBUG_COPT = -Og
+
+DEV_CFLAGS = -g3 -fno-omit-frame-pointer -fsanitize=address,undefined,leak
+
 SRC_DIR = ./src
 SRC = \
 	$(SRC_DIR)/core/init.c \
@@ -82,7 +87,7 @@ norm:
 	norminette $(INC_DIR) $(SRC_DIR) $(LIBFT_DIR)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(OBJ_BONUS)
 	make fclean -C $(LIBFT_DIR)
 	make clean -C $(MLX_DIR)
 	$(RM) $(NORMAL_FLAG) $(BONUS_FLAG)
@@ -92,12 +97,20 @@ fclean: clean
 
 re: fclean all
 
-debug: CFLAGS += -g3 -fno-omit-frame-pointer
-debug: COPT = -Og
+debug: CFLAGS += $(DEBUG_CFLAGS)
+debug: COPT = $(DEBUG_COPT)
 debug: all
 
-dev: CFLAGS += -g3 -fno-omit-frame-pointer -fsanitize=address,undefined,leak
-dev: COPT = -Og
+debug_bonus: CFLAGS += $(DEBUG_CFLAGS)
+debug_bonus: COPT = $(DEBUG_COPT)
+debug_bonus: bonus
+
+dev: CFLAGS += $(DEV_CFLAGS)
+dev: COPT = $(DEBUG_COPT)
 dev: all
 
-.PHONY: all bonus fclean clean re debug dev
+dev_bonus: CFLAGS += $(DEV_CFLAGS)
+dev_bonus: COPT = $(DEBUG_COPT)
+dev_bonus: bonus
+
+.PHONY: all bonus fclean clean re norm debug debug_bonus dev dev_bonus

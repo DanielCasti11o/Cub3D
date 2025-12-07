@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 20:35:50 by migugar2          #+#    #+#             */
-/*   Updated: 2025/11/30 02:45:13 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/07 22:41:02 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	is_player_char(char c)
 
 int	is_map_char(char c)
 {
-	return (c == ' ' || c == '0' || c == '1' || c == 'D' || is_player_char(c));
+	return (c == ' ' || c == '0' || c == '1' || (BONUS && c == 'D')
+		|| is_player_char(c));
 }
 
 int	is_void_char(char c)
