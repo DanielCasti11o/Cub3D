@@ -7,7 +7,7 @@ NO ./assets/textures/BrickOv.xpm
 SO ./assets/textures/BrickOv.xpm
 WE ./assets/textures/BrickOv.xpm
 
-DO ./assets/textures/door_sample.xpm
+DO ./assets/textures/sample/door.xpm
 
 11111111111111111111111111111111111111
 10010100111111111111111111110111111111

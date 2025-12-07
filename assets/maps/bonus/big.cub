@@ -3,7 +3,7 @@ NO ./assets/textures/madridd.xpm
 SO ./assets/textures/GemOv4.xpm
 WE ./assets/textures/sample/west.xpm
 
-DO ./assets/textures/door_sample.xpm
+DO ./assets/textures/sample/door.xpm
 
 F 28, 28, 28
 C 20,20,20

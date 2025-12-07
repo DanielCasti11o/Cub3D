@@ -1,4 +1,4 @@
-DO ./assets/textures/door.xpm
+DO ./assets/textures/sample/door.xpm
 
 C 173, 216, 230
 F 105, 105, 105
