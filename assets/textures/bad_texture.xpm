@@ -1,0 +1,9 @@
+/* XPM */
+static const char *bad_texture[] = {
+"32 32 3 1",
+" 	c None",
+".	c #FF0000",
+"+	c #00FF00",
+"                                ",
+"                                ",
+};
