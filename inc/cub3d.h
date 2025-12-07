@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 17:27:26 by dacastil          #+#    #+#             */
-/*   Updated: 2025/12/03 18:18:22 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/07 22:09:57 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # define ANGLE_FOV 66.0
 
 # define WIN_TITLE "Goat3D"
+
+# ifndef BONUS
+#  define BONUS 0
+# endif
 
 # ifndef VM_COUNT
 #  define VM_COUNT 5

@@ -35,6 +35,7 @@ SRC = \
 	$(SRC_DIR)/main.c
 
 OBJ = $(SRC:.c=.o)
+OBJ_BONUS = $(SRC:.c=_bonus.o)
 
 INC_DIR = ./inc
 
@@ -52,22 +53,24 @@ BONUS_FLAG = .bonus_build
 
 all: $(NORMAL_FLAG)
 
-bonus: CFLAGS += -DBONUS
+$(NORMAL_FLAG): $(MLX) $(LIBFT) $(OBJ)
+	$(RM) $(BONUS_FLAG)
+	$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+	touch $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
 bonus: $(BONUS_FLAG)
 
-$(NAME): $(MLX) $(LIBFT) $(OBJ)
-	$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
-
-$(NORMAL_FLAG): $(NAME)
-	$(RM) $(BONUS_FLAG)
-	touch $@
-
-$(BONUS_FLAG): $(NAME)
+$(BONUS_FLAG): $(MLX) $(LIBFT) $(OBJ_BONUS)
 	$(RM) $(NORMAL_FLAG)
+	$(CC) $(OBJ_BONUS) $(LIBFT) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	touch $@
 
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
-	 $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+%_bonus.o: CFLAGS += -DBONUS=1
+%_bonus.o: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
