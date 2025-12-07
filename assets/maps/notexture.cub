@@ -1,0 +1,14 @@
+
+
+C 0,0,0
+EA ./assets/textures/angel.xpm
+F 105, 105, 105
+
+NO ./assets/textures/colom.xpm
+WE ./assets/textures/daniel.xpm
+
+111111
+100101
+101001
+1100N1
+111111

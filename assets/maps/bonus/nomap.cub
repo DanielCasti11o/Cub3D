@@ -1,0 +1,8 @@
+EA ./assets/textures/sample/east.xpm
+NO ./assets/textures/sample/north.xpm
+SO ./assets/textures/sample/south.xpm
+WE ./assets/textures/sample/west.xpm
+F 28, 28, 28
+
+C 20,20,20
+
