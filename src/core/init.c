@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:53:45 by dacastil          #+#    #+#             */
-/*   Updated: 2025/12/03 18:18:22 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/07 23:15:53 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	init_image_paths(t_game *game)
 	return (0);
 }
 
-int	init_mlx(t_game *game)
+static int	init_mlx(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
@@ -58,7 +58,7 @@ int	init_mlx(t_game *game)
 	return (0);
 }
 
-void	init_events(t_game *game)
+static void	init_events(t_game *game)
 {
 	game->keys.s = 0;
 	game->keys.a = 0;
@@ -68,22 +68,22 @@ void	init_events(t_game *game)
 	game->keys.right = 0;
 	game->keys.up = 0;
 	game->keys.down = 0;
-	mlx_hook(game->win,
-		KeyPress, KeyPressMask,
+	mlx_hook(game->win, KeyPress, KeyPressMask,
 		ft_key_press,
 		game);
-	mlx_hook(game->win,
-		KeyRelease, KeyReleaseMask,
+	mlx_hook(game->win, KeyRelease, KeyReleaseMask,
 		ft_key_release,
 		game);
-	mlx_hook(game->win,
-		DestroyNotify, StructureNotifyMask,
+	mlx_hook(game->win, DestroyNotify, StructureNotifyMask,
 		ft_close,
 		game);
 	mlx_loop_hook(game->mlx,
 		ft_game_loop,
 		game);
-	mlx_hook(game->win, MotionNotify, PointerMotionMask, mouse_events, game);
+	if (BONUS)
+		mlx_hook(game->win, MotionNotify, PointerMotionMask,
+			mouse_events,
+			game);
 }
 
 static void	preinit(t_game *game)
@@ -113,13 +113,18 @@ int	init_game(t_game *game)
 	game->player.pitch = 0;
 	game->fov_tan = tan(degrees(ANGLE_FOV / 2));
 	raycasting(game);
-	minimap(game);
+	if (BONUS)
+	{
+		animated_vm(game);
+		minimap(game);
+	}
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, WIN_TITLE);
 	if (game->win == NULL)
 		return (1);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, 0, 0);
-	XFixesHideCursor(((t_xvar *)game->mlx)->display,
-		((t_win_list *)game->win)->window);
+	if (BONUS)
+		XFixesHideCursor(((t_xvar *)game->mlx)->display,
+			((t_win_list *)game->win)->window);
 	init_events(game);
 	mlx_loop(game->mlx);
 	return (0);

@@ -5,6 +5,11 @@ CFLAGS = -Wall -Werror -Wextra $(COPT)
 CPPFLAGS = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
 COPT ?= -O2
 
+DEBUG_CFLAGS = -g3 -fno-omit-frame-pointer
+DEBUG_COPT = -Og
+
+DEV_CFLAGS = -g3 -fno-omit-frame-pointer -fsanitize=address,undefined,leak
+
 SRC_DIR = ./src
 SRC = \
 	$(SRC_DIR)/core/init.c \
@@ -35,6 +40,7 @@ SRC = \
 	$(SRC_DIR)/main.c
 
 OBJ = $(SRC:.c=.o)
+OBJ_BONUS = $(SRC:.c=_bonus.o)
 
 INC_DIR = ./inc
 
@@ -52,22 +58,24 @@ BONUS_FLAG = .bonus_build
 
 all: $(NORMAL_FLAG)
 
-bonus: CFLAGS += -DBONUS
+$(NORMAL_FLAG): $(MLX) $(LIBFT) $(OBJ)
+	$(RM) $(BONUS_FLAG)
+	$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+	touch $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
 bonus: $(BONUS_FLAG)
 
-$(NAME): $(MLX) $(LIBFT) $(OBJ)
-	$(CC) $(OBJ) $(LIBFT) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
-
-$(NORMAL_FLAG): $(NAME)
-	$(RM) $(BONUS_FLAG)
-	touch $@
-
-$(BONUS_FLAG): $(NAME)
+$(BONUS_FLAG): $(MLX) $(LIBFT) $(OBJ_BONUS)
 	$(RM) $(NORMAL_FLAG)
+	$(CC) $(OBJ_BONUS) $(LIBFT) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 	touch $@
 
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
-	 $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+%_bonus.o: CFLAGS += -DBONUS=1
+%_bonus.o: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
@@ -79,7 +87,7 @@ norm:
 	norminette $(INC_DIR) $(SRC_DIR) $(LIBFT_DIR)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(OBJ_BONUS)
 	make fclean -C $(LIBFT_DIR)
 	make clean -C $(MLX_DIR)
 	$(RM) $(NORMAL_FLAG) $(BONUS_FLAG)
@@ -89,12 +97,20 @@ fclean: clean
 
 re: fclean all
 
-debug: CFLAGS += -g3 -fno-omit-frame-pointer
-debug: COPT = -Og
+debug: CFLAGS += $(DEBUG_CFLAGS)
+debug: COPT = $(DEBUG_COPT)
 debug: all
 
-dev: CFLAGS += -g3 -fno-omit-frame-pointer -fsanitize=address,undefined,leak
-dev: COPT = -Og
+debug_bonus: CFLAGS += $(DEBUG_CFLAGS)
+debug_bonus: COPT = $(DEBUG_COPT)
+debug_bonus: bonus
+
+dev: CFLAGS += $(DEV_CFLAGS)
+dev: COPT = $(DEBUG_COPT)
 dev: all
 
-.PHONY: all bonus fclean clean re debug dev
+dev_bonus: CFLAGS += $(DEV_CFLAGS)
+dev_bonus: COPT = $(DEBUG_COPT)
+dev_bonus: bonus
+
+.PHONY: all bonus fclean clean re norm debug debug_bonus dev dev_bonus

@@ -1,0 +1,13 @@
+
+111111
+100101
+101001
+1100N1
+111111
+
+NO ./assets/textures/sample/north.xpm
+SO ./assets/textures/sample/south.xpm
+WE ./assets/textures/sample/west.xpm
+EA ./assets/textures/sample/east.xpm
+F +210,200,0
+C 125,55,100

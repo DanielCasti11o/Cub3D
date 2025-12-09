@@ -6,7 +6,7 @@
 /*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 21:06:32 by migugar2          #+#    #+#             */
-/*   Updated: 2025/12/04 20:49:10 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/08 00:43:30 by migugar2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static t_elemfile	identify_header(char **line)
 		return (*line += 2, E_WE);
 	else if ((*line)[0] == 'E' && (*line)[1] == 'A')
 		return (*line += 2, E_EA);
-	else if ((*line)[0] == 'D' && (*line)[1] == 'O')
+	else if (BONUS && (*line)[0] == 'D' && (*line)[1] == 'O')
 		return (*line += 2, E_DO);
 	else if ((*line)[0] == 'F')
 		return (*line += 1, E_F);
@@ -129,7 +129,7 @@ int	parse_header(t_game *game, char	*line, t_parse	*parse)
 	else if (type == E_MAP)
 	{
 		if ((parse->seen & parse->mandatory) != parse->mandatory)
-			return (perror_missingelements(parse->seen));
+			return (parse->seen |= E_MAP, perror_missingelements(parse->seen));
 		parse->state = SP_MAP;
 		return (0);
 	}
