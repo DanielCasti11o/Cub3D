@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migugar2 <migugar2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: daniel-castillo <daniel-castillo@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:31:06 by dacastil          #+#    #+#             */
-/*   Updated: 2025/12/03 18:17:31 by migugar2         ###   ########.fr       */
+/*   Updated: 2025/12/09 15:09:57 by daniel-cast      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,11 @@ void	render_frame(t_game *game, t_dda *dda)
 	dda->pdraw.y = 0;
 	while (dda->pdraw.y < dda->draw_start)
 	{
-		pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, game->map.tex.c);
+		if ((dda->pdraw.y % 84 == 0) && (dda->pdraw.x % 84 == 0))
+			pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y, 0xFFFFFF);
+		else
+			pixel_image(&game->img, dda->pdraw.x, dda->pdraw.y,
+				game->map.tex.c);
 		dda->pdraw.y++;
 	}
 	render_wall_column(game, dda);
