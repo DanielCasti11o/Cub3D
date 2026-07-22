@@ -8,16 +8,11 @@
 
 **cub3D** is a project inspired by the world-famous 90s game *Wolfenstein 3D*, considered the first FPS ever created. The goal was to build a dynamic 3D graphic engine using the **RayCasting** technique from scratch, written entirely in **C** using the MinilibX library.
 
-This project was developed as a team effort with [AngelUrano](https://github.com/AngelUrano) (Replace with real GitHub link if available).
-
----
 
 ## 🎮 Gameplay Preview
 
-![Gameplay GIF](LINK_A_TU_GIF_O_IMAGEN_AQUI)
-*(Place here a gif showing the movement, doors opening, and sprites)*
+![Gameplay Video](./assets/preview/preview.gif)
 
----
 
 ## ✨ Features
 
@@ -36,7 +31,6 @@ We achieved a **125% score** by implementing the mandatory part plus all bonus f
 - **👾 Animated Sprites**: Rendering of objects/enemies with animation frames.
 - **💥 Wall Collisions**: Accurate collision detection to prevent walking through walls.
 
----
 
 ## ⚙️ Technical Highlights
 
@@ -44,11 +38,10 @@ The engine is built with performance and precision in mind:
 
 - **DDA Algorithm (Digital Differential Analyzer)**: Used to calculate the intersection of rays with the grid lines of the map for precise wall rendering.
 - **Double Buffering**: Implemented to render frames off-screen before displaying them, eliminating screen flickering.
-- **Bitwise Parsing**: Highly efficient map parsing logic using bitwise operations and custom structures (Credits to @AngelUrano).
+- **Bitwise Parsing**: Highly efficient map parsing logic using bitwise operations and custom structures.
 - **Endianness Handling**: Manual handling of pixel byte order to ensure correct RGBA color display across different architectures.
 - **MinilibX & X11**: Used for window management and event handling.
 
----
 
 ## 🛠️ Installation & Usage
 
@@ -61,14 +54,37 @@ The engine is built with performance and precision in mind:
 Clone the repository and compile the project:
 
 # Clone the repository AND initialize submodules (MinilibX)
-git clone --recursive https://github.com/your_username/cub3D.git
+```bash
+git clone --recursive https://github.com/DanielCasti11o/cub3D
 cd cub3D
+```
 
 # If you cloned without --recursive:
+```bash
+cd cub3D
 git submodule update --init --recursive 
+```
 
 # Compile
+
+### Normal compilation
+```bash
 make
+```
+
+### Cleanup
+```bash
+make clean
+#or
+make fclean
+```
+
+### Bonus compilation
+```bash
+make bonus
+```
 
 # RUN 
-./Cub3D ./assets/maps/a_map.cub
+```
+./Cub3D ./assets/maps/a_map.cub # or any map in ./assets/maps/ or ./assets/maps/bonus/
+```
